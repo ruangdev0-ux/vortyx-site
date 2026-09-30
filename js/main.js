@@ -49,8 +49,8 @@
 
   /* ---------- Header / menu ---------- */
   const hdr=d.getElementById('hdr'), burger=d.getElementById('burger'), mm=d.getElementById('mmenu');
-  function setMenu(open){burger.setAttribute('aria-expanded',open);burger.setAttribute('aria-label',open?'Fechar menu':'Abrir menu');mm.classList.toggle('open',open);mm.setAttribute('aria-hidden',!open);body.style.overflow=open?'hidden':'';if(open){totop.classList.remove('show');totop.tabIndex=-1}else if(typeof onScroll==='function')requestAnimationFrame(onScroll);if(open)mm.querySelector('a').focus()}
-  burger.addEventListener('click',()=>setMenu(burger.getAttribute('aria-expanded')!=='true'));
+  function setMenu(open,kb){burger.setAttribute('aria-expanded',open);burger.setAttribute('aria-label',open?'Fechar menu':'Abrir menu');mm.classList.toggle('open',open);mm.setAttribute('aria-hidden',!open);body.style.overflow=open?'hidden':'';if(open){totop.classList.remove('show');totop.tabIndex=-1}else if(typeof onScroll==='function')requestAnimationFrame(onScroll);if(open&&kb)setTimeout(()=>{const f=mm.querySelector('nav a');if(f&&mm.classList.contains('open'))f.focus()},60)} // aberto pelo teclado: foco vai para "Início"
+  burger.addEventListener('click',e=>setMenu(burger.getAttribute('aria-expanded')!=='true',e.detail===0)); // detail 0 = Enter/Space
   mm.querySelectorAll('a[href]').forEach(a=>a.addEventListener('click',()=>setMenu(false))); // links externos do menu (Instagram)
   addEventListener('keydown',e=>{if(e.key==='Escape'&&mm.classList.contains('open')){setMenu(false);burger.focus()}});
 

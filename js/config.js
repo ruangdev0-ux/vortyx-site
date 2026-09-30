@@ -6,7 +6,7 @@ const CONFIG = {
   // Espaços, parênteses e traços são removidos automaticamente.
   // Todos os botões de WhatsApp do site usam este mesmo número.
   // Enquanto estiver vazio, o WhatsApp abre com a mensagem pronta e pede para escolher o contato.
-  whatsappNumber: "",
+  whatsappNumber: "5535999348489", // +55 35 99934-8489 (WhatsApp Business oficial)
   whatsappMessage: "Olá! Vim pelo site da Vortyx e gostaria de conversar sobre um projeto.",
   founderName: "Ruan Gomes",
   founderRole: "Fundador da Vortyx"

@@ -10,154 +10,198 @@
     const n=(CONFIG.whatsappNumber||'').replace(/\D/g,'');
     return n?`https://wa.me/${n}?text=${text}`:`https://wa.me/?text=${text}`;
   }
-  function bindWa(scope){scope.querySelectorAll('.js-wa').forEach(a=>{a.href=waLink(a.dataset.msg)})}
+  function bindWa(scope){scope.querySelectorAll('.js-wa').forEach(a=>{a.href=waLink(a.dataset.msg);a.target='_blank';a.rel='noopener'})}
   bindWa(d);
 
-  /* ---------- Fundador ---------- */
+  /* ---------- Fundador / ano ---------- */
   if(CONFIG.founderName){d.getElementById('founderName').textContent=CONFIG.founderName;d.getElementById('founderRole').textContent=CONFIG.founderRole}
-
-  /* ---------- Ano ---------- */
   d.getElementById('year').textContent=new Date().getFullYear();
 
   /* ---------- Projetos ---------- */
-  const arrow='<svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 10L10 2M10 2H3.5M10 2V8.5" stroke="currentColor" stroke-width="1.5"/></svg>';
-  const arrowUp='<svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 10.5V1.5M2 5.5l4-4 4 4" stroke="currentColor" stroke-width="1.5"/></svg>';
   const esc=s=>String(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const ico=(id,s)=>`<svg width="${s}" height="${s}" aria-hidden="true"><use href="#${id}"/></svg>`;
   const symSrc=d.querySelector('.brand .sym').src;
-  function projectCard(p){
-    const ext=p.link&&!p.link.startsWith('#');
+  const TYPE_LABEL={cliente:'Projeto de cliente',proprio:'Projeto próprio',demo:'Demonstração Vortyx'};
+  function projectCard(p,feat){
+    const ext=p.link&&/^https?:/.test(p.link);
+    const type=TYPE_LABEL[p.type]?p.type:'cliente';
+    const badge=type==='demo'?'<span class="badge badge-demo">Demonstração Vortyx</span>':(type==='cliente'?'<span class="badge badge-client">Projeto de cliente</span>':'');
     const media=p.image
-      ?`<img class="cover" src="${esc(p.image)}" alt="Projeto ${esc(p.client)}" loading="lazy" decoding="async">`
+      ?`<div class="frame"><div class="frame-bar" aria-hidden="true"><i></i><i></i><i></i></div><img class="cover" src="${esc(p.image)}" alt="${esc(p.imageAlt||'Captura do projeto '+p.client)}" width="${p.imageWidth||1438}" height="${p.imageHeight||832}" loading="lazy" decoding="async"></div>`
       :(p.emblem?`<div class="emblem"><img src="${symSrc}" alt="" width="190" height="165"></div>`:'');
-    return `<article class="proj rv"><div class="media">${media}</div><div class="info">
-      <span class="cat">${esc(p.category)}</span><h3>${esc(p.client)}</h3><p>${esc(p.description)}</p>
-      <div class="links">${p.link?`<a href="${esc(p.link)}"${ext?' target="_blank" rel="noopener"':''}>${esc(p.linkLabel||'Ver projeto')} ${ext?arrow:arrowUp}</a>`:''}
-      ${p.caseStudy?`<a href="${esc(p.caseStudy)}">Estudo de caso ${arrow}</a>`:''}</div></div></article>`;
+    const link=p.link?`<a class="btn ${feat?'btn-primary':'btn-ghost'} btn-sm" href="${esc(p.link)}"${ext?' target="_blank" rel="noopener"':''}>${esc(p.linkLabel||'Ver site')} ${ico('i-arrow',12)}${ext?'<span class="sr">(abre em nova aba)</span>':''}</a>`:'';
+    return `<article class="proj rv proj-${type}${feat?' proj-feat':''}"><div class="media">${media}${badge}</div><div class="info">
+      <p class="cat"><span>${esc(p.category)}</span>${type==='proprio'?`<span class="tp">${TYPE_LABEL[type]}</span>`:''}</p><h3>${esc(p.client)}</h3><p class="dsc">${esc(p.description)}</p>
+      ${link?`<div class="links">${link}</div>`:''}</div></article>`;
   }
-  const soon=`<article class="proj soon rv"><div><div class="rings" aria-hidden="true"><span></span><span></span><span></span></div>
-      <h3>Novos projetos em desenvolvimento.</h3><p>Em breve, trabalhos reais publicados aqui com autorização de cada cliente.</p></div>
-      <a class="btn btn-ghost btn-sm js-wa" href="#contato" target="_blank" rel="noopener">Quero ser o próximo</a></article>`;
-  const grid=d.getElementById('projGrid');
-  grid.innerHTML=PROJECTS.map(projectCard).join('')+(PROJECTS.length<3?soon:'');
+  const ctaCard=`<article class="proj proj-cta rv"><div><div class="rings" aria-hidden="true"><span></span><span></span><span></span></div>
+      <h3>O próximo projeto pode ser o seu.</h3><p>Site, landing page, automação ou solução web: conte o que o seu negócio precisa.</p></div>
+      <a class="btn btn-primary btn-sm js-wa" data-msg="Olá! Vim pelo site da Vortyx, vi os projetos e gostaria de conversar sobre o meu." href="https://wa.me/5535999348489">${ico('i-wa',16)}Conversar sobre meu projeto</a></article>`;
+  const grid=d.getElementById('projGrid'), more=d.getElementById('projMore');
+  const list=[...PROJECTS].sort((a,b)=>(b.featured?1:0)-(a.featured?1:0));
+  const limit=Math.max(1,CONFIG.projectsOnHome||3);
+  const shown=list.slice(0,limit), rest=list.slice(limit);
+  // O primeiro projeto real de cliente com imagem ganha destaque (card maior)
+  const featIdx=shown.findIndex(p=>p.type==='cliente'&&p.image);
+  if(featIdx>-1){const fb=d.getElementById('projFeat');fb.innerHTML=projectCard(shown[featIdx],true);fb.hidden=false;d.getElementById('projWrap').classList.add('has-feat');bindWa(fb)}
+  grid.innerHTML=shown.filter((p,i)=>i!==featIdx).map(p=>projectCard(p,false)).join('')+(shown.length<limit?ctaCard:'');
+  if(rest.length){
+    more.hidden=false;
+    if(CONFIG.projectsPage){more.innerHTML=`<a class="btn btn-ghost" href="${esc(CONFIG.projectsPage)}">Ver todos os projetos ${ico('i-arrow',12)}</a>`}
+    else{
+      more.innerHTML=`<button class="btn btn-ghost" type="button" aria-expanded="false" aria-controls="projGrid">Ver todos os projetos (${list.length})</button>`;
+      more.querySelector('button').addEventListener('click',e=>{
+        grid.insertAdjacentHTML('beforeend',rest.map(p=>projectCard(p,false)).join(''));
+        grid.querySelectorAll('.proj.rv:not(.in)').forEach(el=>{io.observe(el)});bindWa(grid);
+        e.currentTarget.setAttribute('aria-expanded','true');more.hidden=true;
+      });
+    }
+  }
   bindWa(grid);
 
   /* ---------- Reveal + stagger ---------- */
-  d.querySelectorAll('[data-stagger]').forEach(g=>[...g.querySelectorAll('.rv')].forEach((el,i)=>el.style.setProperty('--i',i)));
-  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -8% 0px',threshold:.12});
+  d.querySelectorAll('[data-stagger]').forEach(g=>[...g.querySelectorAll('.rv')].forEach((el,i)=>el.style.setProperty('--i',Math.min(i,5))));
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -6% 0px',threshold:.08});
   d.querySelectorAll('.rv').forEach(el=>io.observe(el));
   requestAnimationFrame(()=>body.classList.add('loaded'));
 
   /* ---------- Header / menu ---------- */
   const hdr=d.getElementById('hdr'), burger=d.getElementById('burger'), mm=d.getElementById('mmenu');
-  function setMenu(open,kb){burger.setAttribute('aria-expanded',open);burger.setAttribute('aria-label',open?'Fechar menu':'Abrir menu');mm.classList.toggle('open',open);mm.setAttribute('aria-hidden',!open);body.style.overflow=open?'hidden':'';if(open){totop.classList.remove('show');totop.tabIndex=-1}else if(typeof onScroll==='function')requestAnimationFrame(onScroll);if(open&&kb)setTimeout(()=>{const f=mm.querySelector('nav a');if(f&&mm.classList.contains('open'))f.focus()},60)} // aberto pelo teclado: foco vai para "Início"
-  burger.addEventListener('click',e=>setMenu(burger.getAttribute('aria-expanded')!=='true',e.detail===0)); // detail 0 = Enter/Space
-  mm.querySelectorAll('a[href]').forEach(a=>a.addEventListener('click',()=>setMenu(false))); // links externos do menu (Instagram)
+  const totop=d.getElementById('totop'), fab=d.getElementById('fabWa');
+  function setFloats(show){
+    [totop,fab].forEach(b=>{if(show!==b.classList.contains('show')){b.classList.toggle('show',show);b.tabIndex=show?0:-1}});
+  }
+  function setMenu(open,kb){
+    burger.setAttribute('aria-expanded',open);burger.setAttribute('aria-label',open?'Fechar menu':'Abrir menu');
+    mm.classList.toggle('open',open);mm.setAttribute('aria-hidden',!open);mm.inert=!open;
+    body.style.overflow=open?'hidden':'';
+    if(open)setFloats(false);else requestAnimationFrame(onScroll);
+    if(open&&kb)setTimeout(()=>{const f=mm.querySelector('nav a');if(f&&mm.classList.contains('open'))f.focus()},60);
+  }
+  mm.inert=true;
+  burger.addEventListener('click',e=>setMenu(burger.getAttribute('aria-expanded')!=='true',e.detail===0));
+  mm.querySelectorAll('a[href^="http"]').forEach(a=>a.addEventListener('click',()=>setMenu(false)));
   addEventListener('keydown',e=>{if(e.key==='Escape'&&mm.classList.contains('open')){setMenu(false);burger.focus()}});
 
-  /* ---------- Card spotlight ---------- */
-  d.querySelectorAll('.svc').forEach(c=>c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect();c.style.setProperty('--mx',(e.clientX-r.left)+'px');c.style.setProperty('--my',(e.clientY-r.top)+'px')}));
+  /* ---------- Serviços: cards expansíveis (um aberto por vez) ---------- */
+  const cards=[...d.querySelectorAll('.svc')];
+  function setCard(card,open,scroll){
+    const btn=card.querySelector('.svc-top'), panel=card.querySelector('.svc-panel');
+    btn.setAttribute('aria-expanded',open);card.classList.toggle('open',open);panel.inert=!open;
+    if(open&&scroll){
+      const top=card.getBoundingClientRect().top, off=parseFloat(getComputedStyle(root).scrollPaddingTop)||80;
+      if(top<off||top>innerHeight*.55)scrollTo({top:scrollY+top-off-8,behavior:reduce?'auto':'smooth'});
+    }
+  }
+  function openCard(id,scroll){const c=d.getElementById(id);if(!c)return;cards.forEach(o=>{if(o!==c&&o.classList.contains('open'))setCard(o,false)});setCard(c,true,scroll)}
+  cards.forEach(c=>{
+    c.querySelector('.svc-panel').inert=true;
+    c.querySelector('.svc-top').addEventListener('click',()=>{
+      const open=!c.classList.contains('open');
+      if(open){cards.forEach(o=>{if(o!==c&&o.classList.contains('open'))setCard(o,false)});setTimeout(()=>setCard(c,true,true),0)}
+      else setCard(c,false);
+    });
+    c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect();c.style.setProperty('--mx',(e.clientX-r.left)+'px');c.style.setProperty('--my',(e.clientY-r.top)+'px')});
+  });
 
-  /* ---------- Scroll: header, processo, progresso, voltar ao topo ---------- */
-  const steps=[...d.querySelectorAll('.step')], fill=d.querySelector('.steps .fill'), stepsEl=d.getElementById('steps');
-  const hdrProg=d.querySelector('.hdr-prog'), totop=d.getElementById('totop'), heroEl=d.getElementById('inicio');
-  const finBlock=d.querySelector('.final .wrap > .rv:last-child');
-  let ticking=false;
+  /* ---------- Processo: etapas acendem ao entrar na tela ---------- */
+  const stepsEl=d.getElementById('steps'), steps=[...d.querySelectorAll('.step')];
+  const sio=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;stepsEl.classList.add('play');steps.forEach((s,i)=>setTimeout(()=>s.classList.add('on'),reduce?0:250+i*260));sio.disconnect()}),{threshold:.35});
+  sio.observe(stepsEl);
+
+  /* ---------- Rolagem: header, progresso, botões flutuantes ---------- */
+  const hdrProg=d.querySelector('.hdr-prog'), footer=d.querySelector('.ftr');
+  let avoid=[];
+  const collectAvoid=()=>{avoid=[...d.querySelectorAll('main .btn, .svc-more, .proj .links a, .contact-row a, .after a, details.choose summary, .chip')]};
+  collectAvoid();
+  let ticking=false, progress=0;
+  function overlapsFloats(vw,vh){ // a área dos botões flutuantes (canto inferior direito)
+    const zx=vw-96, zy=vh-(isMobile()?132:150);
+    for(const el of avoid){const r=el.getBoundingClientRect();if(r.width&&r.right>zx&&r.bottom>zy&&r.top<vh)return true}
+    return false;
+  }
   function onScroll(){
     ticking=false;
-    const y=scrollY, vh=innerHeight;
+    const y=scrollY, vh=innerHeight, vw=root.clientWidth;
     hdr.classList.toggle('scrolled',y>20);
-    const r=stepsEl.getBoundingClientRect(), mark=vh*.62;
-    const p=Math.min(1,Math.max(0,(mark-r.top)/r.height));
-    fill.style.setProperty('--p',p);
-    steps.forEach(s=>{const b=s.getBoundingClientRect();s.classList.toggle('on',b.top+24<mark)});
-    progress=Math.min(1,y/Math.max(1,(d.documentElement.scrollHeight-vh)));
-    hdrProg.style.setProperty('--p',progress.toFixed(4));
-    totop.style.setProperty('--p',progress.toFixed(4));
-    const fb=finBlock.getBoundingClientRect(), overFinal=fb.top<vh&&fb.bottom>vh-96; // não cobre o bloco do CTA final
-    const show=y>vh*1.1&&!mm.classList.contains('open')&&!overFinal;
-    if(show!==totop.classList.contains('show')){totop.classList.toggle('show',show);totop.tabIndex=show?0:-1}
+    progress=Math.min(1,y/Math.max(1,(root.scrollHeight-vh)));
+    hdrProg.style.setProperty('--p',progress.toFixed(4));totop.style.setProperty('--p',progress.toFixed(4));
+    const show=y>vh*.85&&!mm.classList.contains('open')&&footer.getBoundingClientRect().top>vh-40&&!overlapsFloats(vw,vh);
+    setFloats(show);
   }
-  let progress=0;
   addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(onScroll)}},{passive:true});
   addEventListener('resize',onScroll);
   onScroll();
 
-  /* ---------- Seção ativa (nav + 3D) ---------- */
+  /* ---------- Seção ativa (menu + 3D) ---------- */
   let active='inicio';
   const nav=d.querySelector('.nav'), navInd=d.querySelector('.nav-ind');
   const navLinks=d.querySelectorAll('.nav a, .mmenu nav a');
-  const navMap={problema:'inicio',presenca:'servicos',diferenciais:'servicos',processo:'projetos'};
-  let navKey='', navLock='';
-  function moveInd(){ // indicador deslizante (desktop)
+  // Seções que não estão no menu não acendem nenhum item (evita marcar a seção errada)
+  const navMap={digital:'',diferenciais:'',processo:''};
+  const navKeyOf=s=>s in navMap?navMap[s]:s;
+  let navKey=null, navLock='';
+  function moveInd(){
     const a=nav.querySelector('a.active');
     if(!a||!nav.offsetParent){navInd.classList.remove('on');return}
     navInd.style.setProperty('--x',a.offsetLeft+'px');navInd.style.setProperty('--w',a.offsetWidth+'px');navInd.classList.add('on');
   }
   function setNav(k){
     if(k===navKey)return;navKey=k;
-    navLinks.forEach(a=>{const on=a.dataset.link===k;a.classList.toggle('active',on);on?a.setAttribute('aria-current','true'):a.removeAttribute('aria-current')});
+    navLinks.forEach(a=>{const on=!!k&&a.dataset.link===k;a.classList.toggle('active',on);on?a.setAttribute('aria-current','true'):a.removeAttribute('aria-current')});
     moveInd();
   }
-  const so=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){active=e.target.dataset['3d'];if(!navLock)setNav(navMap[active]||active)}}),{rootMargin:'-48% 0px -48% 0px'});
+  const so=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){active=e.target.dataset['3d'];if(!navLock)setNav(navKeyOf(active))}}),{rootMargin:'-48% 0px -48% 0px'});
   d.querySelectorAll('[data-3d]').forEach(s=>so.observe(s));
   setNav('inicio');
   addEventListener('resize',moveInd);
   if(d.fonts&&d.fonts.ready)d.fonts.ready.then(moveInd);
 
-  /* ---------- Navegação interna animada ---------- */
+  /* ---------- Navegação interna animada (links mantêm href) ---------- */
   const ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
   let anim=0;
-  function stopAnim(){if(anim){cancelAnimationFrame(anim);anim=0;root.style.scrollBehavior='';body.classList.remove('navigating');navLock=''}}
+  function stopAnim(){if(anim){cancelAnimationFrame(anim);anim=0}root.style.scrollBehavior='';body.classList.remove('navigating');navLock=''}
   ['wheel','touchstart','keydown'].forEach(ev=>addEventListener(ev,()=>{if(anim)stopAnim()},{passive:true}));
-  function goTo(el,key){
+  function goTo(el,key,after){
     const off=el.id==='inicio'?0:(parseFloat(getComputedStyle(root).scrollPaddingTop)||80);
     const to=Math.max(0,Math.min(el.getBoundingClientRect().top+scrollY-off,root.scrollHeight-innerHeight));
     const from=scrollY,dist=to-from;
     dispatchEvent(new CustomEvent('vx:nav'));
-    const done=()=>{stopAnim();el.setAttribute('tabindex','-1');el.focus({preventScroll:true})};
-    if(reduce||Math.abs(dist)<2){scrollTo(0,to);done();return}
+    const done=()=>{stopAnim();if(!el.hasAttribute('tabindex'))el.setAttribute('tabindex','-1');el.focus({preventScroll:true});if(after)after()};
     stopAnim();
+    if(reduce||Math.abs(dist)<2){scrollTo(0,to);done();return}
     const dur=Math.min(1150,Math.max(520,Math.abs(dist)*.32)),t0=performance.now();
-    if(key){navLock=key;setNav(key)}
+    if(key!==undefined){navLock=key||'-';setNav(key)}
     root.style.scrollBehavior='auto';body.classList.add('navigating');
-    const step=now=>{const t=Math.min(1,(now-t0)/dur);scrollTo(0,from+dist*ease(t));if(t<1)anim=requestAnimationFrame(step);else{anim=0;done();if(active)setNav(navMap[active]||active)}};
+    const step=now=>{const t=Math.min(1,(now-t0)/dur);scrollTo(0,from+dist*ease(t));if(t<1)anim=requestAnimationFrame(step);else{anim=0;done();setNav(navKeyOf(active))}};
     anim=requestAnimationFrame(step);
   }
-  /* Links internos: viram navegação pura, sem URL.
-     Assim nenhum ambiente (prévia, iframe, <base>, interceptadores) consegue
-     resolvê-los como endereço externo nem abri-los em outra aba. */
-  function internalize(scope){
-    scope.querySelectorAll('a[href^="#"]:not(.js-wa)').forEach(a=>{
-      const id=a.getAttribute('href').slice(1);
-      if(!id||!d.getElementById(id))return;
-      a.dataset.target=id;a.removeAttribute('href');a.removeAttribute('target');a.removeAttribute('rel');
-      a.setAttribute('role','link');if(!a.hasAttribute('tabindex'))a.tabIndex=0;
-    });
-  }
-  internalize(d);
-  function navigate(a){
-    const el=d.getElementById(a.dataset.target);if(!el)return;
+  function navigate(id,push,after){
+    const el=d.getElementById(id);if(!el)return false;
     const sec=el.closest('[data-3d]');
-    const key=a.dataset.link||(sec?navMap[sec.dataset['3d']]||sec.dataset['3d']:'');
-    if(mm.classList.contains('open')){setMenu(false);setTimeout(()=>goTo(el,key),reduce?0:260)}else goTo(el,key);
+    const key=sec?navKeyOf(sec.dataset['3d']):'';
+    if(push&&location.hash!=='#'+id){try{history.pushState(null,'','#'+id)}catch(e){}}
+    if(mm.classList.contains('open')){setMenu(false);setTimeout(()=>goTo(el,key,after),reduce?0:260)}else goTo(el,key,after);
+    return true;
   }
-  // captura no window: roda antes de qualquer outro listener de clique
-  addEventListener('click',e=>{
-    const a=e.target.closest&&e.target.closest('[data-target]');
-    if(!a)return;
-    e.preventDefault();e.stopPropagation();
-    navigate(a);
-  },true);
-  addEventListener('keydown',e=>{
-    if(e.key!=='Enter')return;
-    const a=e.target.closest&&e.target.closest('[data-target]');
-    if(!a)return;e.preventDefault();e.stopPropagation();navigate(a);
-  },true);
-  totop.addEventListener('click',()=>{totop.classList.remove('fly');void totop.offsetWidth;totop.classList.add('fly');goTo(heroEl,'inicio')});
+  d.addEventListener('click',e=>{
+    if(e.defaultPrevented||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;
+    const a=e.target.closest&&e.target.closest('a[href^="#"]');
+    if(!a||a.classList.contains('js-wa'))return;
+    const id=decodeURIComponent(a.getAttribute('href').slice(1));
+    if(!id||!d.getElementById(id))return;
+    e.preventDefault();
+    const card=a.dataset.open;
+    if(card)navigate(id,true,()=>{openCard(card,false);const c=d.getElementById(card);if(c)setTimeout(()=>{const r=c.getBoundingClientRect();scrollTo({top:scrollY+r.top-90,behavior:reduce?'auto':'smooth'});c.querySelector('.svc-top').focus({preventScroll:true})},60)});
+    else navigate(id,true);
+  });
+  addEventListener('popstate',()=>{const id=location.hash.slice(1);navigate(id||'inicio',false)});
+  if(location.hash.length>1){const el=d.getElementById(decodeURIComponent(location.hash.slice(1)));if(el)addEventListener('load',()=>setTimeout(()=>{scrollTo(0,Math.max(0,el.getBoundingClientRect().top+scrollY-(el.id==='inicio'?0:80)))},50),{once:true})}
+  totop.addEventListener('click',()=>{totop.classList.remove('fly');void totop.offsetWidth;totop.classList.add('fly');try{history.replaceState(null,'',location.pathname+location.search)}catch(e){}goTo(d.getElementById('inicio'),'inicio')});
 
   /* ---------- Resposta visual ao toque/clique ---------- */
   d.addEventListener('pointerdown',e=>{
-    const b=e.target.closest('.btn,.totop');
+    const b=e.target.closest('.btn,.totop,.fab-wa');
     if(!b||reduce)return;
     const r=b.getBoundingClientRect(),rp=d.createElement('span');
     rp.className='rp';rp.style.left=(e.clientX-r.left)+'px';rp.style.top=(e.clientY-r.top)+'px';
@@ -288,13 +332,12 @@
     // Estados por seção: xf = posição relativa à largura visível (-1 esquerda, 1 direita)
     const S={
       inicio:     {xf:.6,  y:0,   s:1,   rx:.22, ry:-.18,i:1,   o:1},
-      problema:   {xf:-1.02,y:.2, s:.95, rx:.9,  ry:.4,  i:.6,  o:.5},
-      presenca:   {xf:1.02, y:-.2,s:.85, rx:.7,  ry:-.35,i:.6,  o:.3},
-      servicos:   {xf:1.02, y:.9, s:.8,  rx:1.1, ry:-.35,i:.45, o:.42},
-      diferenciais:{xf:-1.02,y:-.6,s:.85,rx:.5,  ry:.5,  i:.5,  o:.42},
-      projetos:   {xf:1.02, y:.5, s:.8,  rx:1.2, ry:-.4, i:.4,  o:.4},
-      processo:   {xf:1.02, y:-.3,s:.9,  rx:.85, ry:-.25,i:.5,  o:.45},
-      sobre:      {xf:-.95, y:0,  s:.95, rx:.55, ry:.45, i:.45, o:.5},
+      digital:    {xf:1.05,y:-.3, s:.85, rx:.8,  ry:-.4, i:.55, o:.3},
+      servicos:   {xf:1.08,y:1.1, s:.75, rx:1.1, ry:-.35,i:.45, o:.26},
+      diferenciais:{xf:-1.06,y:-.6,s:.8, rx:.5,  ry:.5,  i:.5,  o:.3},
+      projetos:   {xf:1.08, y:1.0,s:.75, rx:1.2, ry:-.4, i:.4,  o:.26},
+      processo:   {xf:1.05, y:-.5,s:.85, rx:.85, ry:-.25,i:.5,  o:.32},
+      sobre:      {xf:-.95, y:0,  s:.95, rx:.55, ry:.45, i:.45, o:.45},
       contato:    {xf:0,    y:0,  s:1.25,rx:.12, ry:0,   i:1.15,o:.55}
     };
     const cur={x:0,y:0,s:.6,rx:1.4,ry:0,i:0,o:0};
@@ -306,7 +349,7 @@
 
     // Tamanho a partir do próprio canvas (altura estável: não muda quando a barra do navegador mobile aparece/some)
     let time=0,raf=0,lost=false,last=performance.now();
-    let halfW=1,lastW=0,lastH=0,rq=0;
+    let halfW=1,lastW=0,lastH=0,rq=0,heroFree=.4;
     function resize(){
       rq=0;
       const w=Math.max(1,canvas.clientWidth||innerWidth),h=Math.max(1,canvas.clientHeight||innerHeight);
@@ -314,6 +357,7 @@
       lastW=w;lastH=h;
       renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();
       halfW=Math.tan(deg(20))*camera.position.z*camera.aspect;
+      const hw=d.querySelector('.hero .wrap');if(hw)heroFree=Math.min(.5,Math.max(0,(hw.getBoundingClientRect().top+scrollY-56)/h));
       note('canvas',w+'x'+h+' @'+DPR);
       if(reduce)draw(0);
     }
@@ -324,9 +368,12 @@
 
     function target(){
       const st=S[active]||S.inicio, m=isMobile();
-      if(m){ // mobile: centralizado, atrás do conteúdo e mais discreto
-        const top=active==='inicio';
-        return {x:top?0:Math.sign(st.xf)*halfW*.9,y:top?1.35:(active==='contato'?0:.9),s:top?.72:(active==='contato'?.85:.7),rx:st.rx,ry:st.ry*.5,i:st.i*.8,o:top?.95:(active==='contato'?.5:.32)};
+      if(m){ // mobile: atrás do conteúdo, mais discreto; no topo fica acima do título sem cobrir o texto
+        const top=active==='inicio', fin=active==='contato';
+        // no topo: encaixa o vórtice no espaço livre acima do texto (telas baixas, ex.: 320×640)
+        const halfH=Math.tan(deg(20))*camera.position.z, free=Math.max(.18,heroFree)*2*halfH;
+        const hy=halfH-free/2+.12, hs=Math.min(.6,free/2/1.75);
+        return {x:top?0:Math.sign(st.xf)*halfW*.95,y:top?hy:(fin?0:.95),s:top?hs:(fin?.85:.62),rx:st.rx,ry:st.ry*.5,i:st.i*.8,o:top?.9:(fin?.42:.2)};
       }
       return {x:st.xf*halfW,y:st.y,s:st.s,rx:st.rx,ry:st.ry,i:st.i,o:st.o};
     }

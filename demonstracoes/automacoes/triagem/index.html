@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Automação de triagem de atendimento — Demonstração Vortyx</title>
+<meta name="description" content="Demonstração Vortyx: simulação visual de uma automação que recebe mensagens, classifica, encaminha ao responsável e responde.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#05070F">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../demos-kit/kit.css?v=1">
+<link rel="stylesheet" href="../../../demos-kit/lab.css?v=1">
+<link rel="stylesheet" href="style.css?v=1">
+</head>
+<body data-root="../../../" data-cat="automacoes" data-demo="automação de triagem de atendimento">
+<main class="lab">
+  <header class="lab-head">
+    <span class="lab-eyebrow">Automação · Atendimento</span>
+    <h1>Triagem automática de <em>mensagens</em></h1>
+    <p class="lab-lead">Cada mensagem que chega é lida, ganha uma categoria, vai para a pessoa certa e recebe uma primeira resposta. Envie um exemplo e acompanhe o caminho.</p>
+    <span class="sim">Simulação local · nenhuma mensagem é enviada a lugar nenhum</span>
+  </header>
+
+  <section class="panel tr-flow" aria-label="Fluxo da automação">
+    <div class="panel-h">Fluxo <small id="flowState">aguardando mensagem</small></div>
+    <div id="flow"></div>
+  </section>
+
+  <div class="tr-grid">
+    <section class="panel" aria-label="Simular mensagem">
+      <div class="panel-h">Nova mensagem <small>canal: chat do site</small></div>
+      <div class="panel-b tr-compose">
+        <p class="muted tr-hint">Escolha um exemplo ou escreva a sua:</p>
+        <div class="chips" id="samples"></div>
+        <label class="field">Mensagem do cliente<textarea class="textarea" id="msg" maxlength="280" rows="3" placeholder="Ex.: Quero um orçamento para 20 camisetas"></textarea></label>
+        <div class="tr-actions"><button class="btn btn-p" type="button" id="send">Enviar e processar</button><button class="btn btn-g btn-s" type="button" id="auto">Simular 5 mensagens</button></div>
+        <div class="tr-result" id="result" aria-live="polite" hidden></div>
+      </div>
+    </section>
+
+    <section class="panel" aria-label="Fila de atendimento">
+      <div class="panel-h">Fila por responsável <small id="total">0 mensagens</small></div>
+      <div class="panel-b">
+        <div class="tr-counts" id="counts"></div>
+        <ul class="tr-queue" id="queue"><li class="tr-empty">A fila aparece aqui depois do primeiro envio.</li></ul>
+        <button class="btn btn-g btn-s" type="button" id="clear">Limpar fila</button>
+      </div>
+    </section>
+  </div>
+
+  <section class="panel tr-logp" aria-label="Registro">
+    <div class="panel-h">Registro da automação <small>log simulado</small></div>
+    <div class="log" id="log" role="log"><span>— nenhum evento ainda —</span></div>
+  </section>
+
+  <p class="foot-note">Equipe, categorias e respostas fictícias. Em um projeto real, as regras são definidas com a sua equipe e conectadas aos canais que você já usa.</p>
+</main>
+
+<script src="../../../js/config.js?v=2.1"></script>
+<script src="../../../demos-kit/kit.js?v=1"></script>
+<script src="../../../demos-kit/flow.js?v=1"></script>
+<script src="app.js?v=1"></script>
+</body>
+</html>

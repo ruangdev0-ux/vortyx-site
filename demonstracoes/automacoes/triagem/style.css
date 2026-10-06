@@ -1,0 +1,25 @@
+/* Triagem — acento ciano, fila por responsável */
+.tr-flow{margin-bottom:16px}
+.tr-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+@media(max-width:900px){.tr-grid{grid-template-columns:1fr}}
+.tr-compose{display:grid;gap:14px}
+.tr-hint{font-size:13px}
+.tr-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.tr-result{display:grid;gap:10px;padding:14px;border-radius:14px;border:1px solid var(--line2);background:rgba(4,6,13,.5);animation:tr-in .4s ease}
+.tr-result .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:13px;color:var(--mute)}
+.tr-bubble{justify-self:start;max-width:92%;padding:10px 14px;border-radius:14px 14px 14px 4px;background:linear-gradient(100deg,rgba(54,38,250,.35),rgba(116,98,245,.25));border:1px solid rgba(116,98,245,.4);font-size:14px}
+.tr-bubble small{display:block;font:400 11px var(--mono);color:var(--mute);margin-bottom:4px}
+@keyframes tr-in{from{opacity:0;transform:translateY(6px)}}
+.tr-counts{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
+.tr-counts div{padding:10px;border-radius:12px;border:1px solid var(--line);background:rgba(4,6,13,.45)}
+.tr-counts b{display:block;font:500 22px/1 var(--display)}
+.tr-counts span{font-size:11.5px;color:var(--mute)}
+.tr-counts i{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:5px}
+@media(max-width:420px){.tr-counts{grid-template-columns:1fr 1fr}}
+.tr-queue{list-style:none;display:grid;gap:8px;max-height:300px;overflow:auto;margin-bottom:12px}
+.tr-queue li{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:rgba(4,6,13,.45);animation:tr-in .35s ease}
+.tr-queue .av{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;font:600 12px var(--display);color:#05070F}
+.tr-queue p{font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.tr-queue small{display:block;font:400 11px var(--mono);color:var(--mute2)}
+.tr-queue .tr-empty{display:block;color:var(--mute2);font-size:13px;text-align:center;padding:18px;border-style:dashed}
+.tr-logp .log{max-height:180px}

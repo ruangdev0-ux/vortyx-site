@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Brasa & Miolo · Burger Bar — Demonstração Vortyx</title>
+<meta name="description" content="Demonstração Vortyx: site para restaurante/lanchonete fictício com cardápio interativo e carrinho.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#F6EFE4">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@400;500;700&family=Instrument+Sans:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../demos-kit/kit.css?v=1">
+<link rel="stylesheet" href="style.css?v=1">
+</head>
+<body data-root="../../../" data-cat="sites" data-demo="site para restaurante e lanchonete">
+
+<header class="bm-hdr">
+  <a class="bm-logo" href="#topo"><span class="bm-mark" aria-hidden="true">B&amp;M</span><span>Brasa &amp; Miolo <small>Burger Bar</small></span></a>
+  <nav class="bm-nav" aria-label="Seções"><a href="#cardapio">Cardápio</a><a href="#local">Onde estamos</a></nav>
+  <button class="bm-cartbtn" id="cartBtn" type="button" aria-controls="cart"><span class="vx-sr">Abrir pedido. Itens no pedido: </span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 7h14l-1.5 11h-11Z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg><span class="bm-count" id="count">0</span></button>
+</header>
+
+<main id="topo">
+  <section class="bm-hero">
+    <div class="bm-hero-txt">
+      <p class="bm-pill" data-reveal><span class="live" id="status">—</span> <span id="statusTxt"></span></p>
+      <h1 data-reveal style="--d:1">Smash na brasa,<br><span>pão na hora.</span></h1>
+      <p class="bm-lead" data-reveal style="--d:2">Hambúrgueres prensados na chapa, batatas cortadas na casa e molhos próprios. Monte seu pedido aqui e retire ou receba em casa.</p>
+      <div class="bm-ctas" data-reveal style="--d:3"><a class="bm-btn" href="#cardapio">Ver cardápio</a><button class="bm-btn bm-btn-o" type="button" id="heroCart">Meu pedido</button></div>
+    </div>
+    <div class="bm-burger" aria-hidden="true">
+      <div class="b bun-top"><i></i><i></i><i></i><i></i><i></i></div><div class="b lettuce"></div><div class="b cheese"></div><div class="b patty"></div><div class="b tomato"></div><div class="b patty p2"></div><div class="b bun-bottom"></div>
+      <span class="bm-sticker">Ilustração<br>demonstrativa</span>
+    </div>
+  </section>
+
+  <ul class="bm-strip">
+    <li><b>Hoje</b><span id="hoursToday">—</span></li>
+    <li><b>Entrega</b><span>35–50 min <em>(exemplo)</em></span></li>
+    <li><b>Retirada</b><span>15–20 min <em>(exemplo)</em></span></li>
+    <li><b>Pagamento</b><span>Pix, cartão e dinheiro</span></li>
+  </ul>
+
+  <section class="bm-sec" id="cardapio">
+    <div class="bm-sec-h">
+      <h2 data-reveal>Cardápio</h2>
+      <p class="bm-note">Produtos e preços fictícios, apenas para demonstração.</p>
+    </div>
+    <div class="bm-cats" role="tablist" aria-label="Categorias" id="cats"></div>
+    <div class="bm-grid" id="grid" role="tabpanel" aria-live="polite"></div>
+  </section>
+
+  <section class="bm-sec bm-local" id="local">
+    <div>
+      <h2 data-reveal>Onde estamos</h2>
+      <p class="bm-addr"><b>Av. Exemplo do Sabor, 450</b><br>Bairro Fictício · Cidade Exemplo<br><span class="bm-note">Endereço fictício</span></p>
+      <ul class="bm-hours" id="hours"></ul>
+    </div>
+    <div class="bm-map" role="img" aria-label="Mapa ilustrativo">
+      <svg viewBox="0 0 420 320" aria-hidden="true"><rect width="420" height="320" rx="24" fill="#EADFCD"/><g stroke="#FFFFFF" stroke-width="18" stroke-linecap="round"><path d="M-10 100 430 60M-10 250 430 230M100-10 140 330M300-10 280 330"/></g><g fill="#D8CBB4"><rect x="160" y="110" width="90" height="60" rx="10"/><rect x="20" y="140" width="60" height="70" rx="10"/><rect x="320" y="110" width="80" height="90" rx="10"/></g><circle cx="205" cy="200" r="40" fill="rgba(232,73,43,.15)"/><path d="M205 172c-11 0-20 9-20 20 0 15 20 34 20 34s20-19 20-34c0-11-9-20-20-20Z" fill="#E8492B"/><circle cx="205" cy="192" r="7" fill="#F6EFE4"/></svg>
+    </div>
+  </section>
+
+  <section class="bm-cta">
+    <h2>Fome não espera.</h2>
+    <p>Monte seu pedido em poucos toques.</p>
+    <a class="bm-btn" href="#cardapio">Pedir agora</a>
+  </section>
+</main>
+
+<footer class="bm-ftr"><span>Brasa &amp; Miolo · burger bar fictício</span><span>Site demonstrativo criado pela Vortyx</span></footer>
+
+<button class="bm-float" id="float" type="button" hidden><span id="floatQty">0 itens</span><b id="floatTotal">R$ 0,00</b><span>Ver pedido →</span></button>
+
+<div class="bm-cart" id="cart" role="dialog" aria-modal="true" aria-label="Seu pedido" aria-hidden="true" inert>
+  <div class="bm-cart-box">
+    <header><h3>Seu pedido</h3><button type="button" class="bm-x" id="cartClose" aria-label="Fechar carrinho">×</button></header>
+    <div class="bm-cart-body" id="cartBody"></div>
+    <div class="bm-cart-foot" id="cartFoot"></div>
+  </div>
+</div>
+<div class="bm-shade" id="shade" hidden></div>
+
+<script src="../../../js/config.js?v=2.1"></script>
+<script src="../../../demos-kit/kit.js?v=1"></script>
+<script src="app.js?v=1"></script>
+</body>
+</html>

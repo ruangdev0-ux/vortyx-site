@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ateliê Açúcar & Afeto · Confeitaria — Demonstração Vortyx</title>
+<meta name="description" content="Demonstração Vortyx: site para confeitaria fictícia com vitrine, galeria e encomendas.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#FBF3EE">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,400&family=Nunito:wght@400;600;700&family=Instrument+Sans:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../demos-kit/kit.css?v=1">
+<link rel="stylesheet" href="style.css?v=1">
+</head>
+<body data-root="../../../" data-cat="sites" data-demo="site para confeitaria">
+
+<header class="aa-hdr">
+  <a class="aa-logo" href="#topo"><svg viewBox="0 0 36 36" width="34" height="34" aria-hidden="true"><circle cx="18" cy="18" r="17" fill="#F2D3D6"/><path d="M10 22h16v4a2 2 0 0 1-2 2H12a2 2 0 0 1-2-2Z" fill="#4A2C2A"/><path d="M11 22c0-4 3-7 7-7s7 3 7 7" fill="#fff"/><circle cx="18" cy="12" r="2.4" fill="#C9475A"/></svg><span>Ateliê<br><i>Açúcar &amp; Afeto</i></span></a>
+  <nav class="aa-nav" aria-label="Seções"><a href="#vitrine">Vitrine</a><a href="#galeria">Galeria</a><a href="#encomendar" class="aa-pill">Encomendar</a></nav>
+</header>
+
+<main id="topo">
+  <section class="aa-hero">
+    <div class="aa-hero-txt">
+      <p class="aa-kick" data-reveal>Confeitaria artesanal · sob encomenda</p>
+      <h1 data-reveal style="--d:1">Bolos que viram <i>lembrança.</i></h1>
+      <p class="aa-lead" data-reveal style="--d:2">Receitas feitas em pequenas fornadas, com ingredientes escolhidos um a um. Do aniversário ao café da tarde, a gente prepara com calma.</p>
+      <div class="aa-ctas" data-reveal style="--d:3"><a class="aa-btn" href="#encomendar">Fazer uma encomenda</a><a class="aa-link" href="#vitrine">Ver a vitrine →</a></div>
+    </div>
+    <div class="aa-cake-wrap" aria-hidden="true">
+      <div class="aa-blob"></div>
+      <div class="aa-cake">
+        <div class="aa-cherry"></div>
+        <div class="aa-tier t3"><i></i></div>
+        <div class="aa-tier t2"><i></i></div>
+        <div class="aa-tier t1"><i></i></div>
+        <div class="aa-plate"></div>
+      </div>
+      <span class="aa-badge">Ilustração<br>demonstrativa</span>
+      <span class="aa-float f1"></span><span class="aa-float f2"></span><span class="aa-float f3"></span>
+    </div>
+  </section>
+
+  <section class="aa-sec" id="vitrine">
+    <div class="aa-sec-h">
+      <h2 data-reveal>Vitrine <i>da semana</i></h2>
+      <p class="aa-note">Produtos e preços fictícios, apenas para demonstração.</p>
+    </div>
+    <div class="aa-filters" role="group" aria-label="Filtrar vitrine" id="filters"></div>
+    <div class="aa-grid" id="grid" aria-live="polite"></div>
+  </section>
+
+  <section class="aa-how">
+    <h2 data-reveal>Como <i>encomendar</i></h2>
+    <ol>
+      <li data-reveal><b>1</b><h3>Escolha</h3><p>Tipo, tamanho, massa e recheio, aqui mesmo no site.</p></li>
+      <li data-reveal style="--d:1"><b>2</b><h3>Confirme</h3><p>Combinamos detalhes, decoração e data de retirada.</p></li>
+      <li data-reveal style="--d:2"><b>3</b><h3>Celebre</h3><p>Seu bolo fica pronto no dia, embalado com cuidado.</p></li>
+    </ol>
+  </section>
+
+  <section class="aa-sec" id="galeria">
+    <div class="aa-sec-h">
+      <h2 data-reveal>Galeria</h2>
+      <p class="aa-note">Ilustrações demonstrativas. No projeto real, entram as fotos dos próprios produtos.</p>
+    </div>
+    <div class="aa-gallery">
+      <figure data-reveal class="gx gx1"><div class="ill ill-layer"></div><figcaption>Bolo de camadas</figcaption></figure>
+      <figure data-reveal style="--d:1" class="gx gx2"><div class="ill ill-mac"></div><figcaption>Macarons</figcaption></figure>
+      <figure data-reveal style="--d:2" class="gx gx3"><div class="ill ill-tart"></div><figcaption>Torta de frutas</figcaption></figure>
+      <figure data-reveal style="--d:3" class="gx gx4"><div class="ill ill-brig"></div><figcaption>Brigadeiros</figcaption></figure>
+      <figure data-reveal style="--d:4" class="gx gx5"><div class="ill ill-cup"></div><figcaption>Cupcakes</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="aa-order" id="encomendar">
+    <div class="aa-order-txt">
+      <h2 data-reveal>Monte sua <i>encomenda</i></h2>
+      <p>Escolha as opções e veja uma estimativa na hora. Encomendas com pelo menos 2 dias de antecedência.</p>
+      <div class="aa-est" aria-live="polite"><span>Estimativa</span><b id="est">R$ 0,00</b><small id="estTxt">Escolha o tamanho para calcular.</small><em>Valores fictícios · demonstração</em></div>
+    </div>
+    <form class="aa-form" id="orderForm" data-demo-form>
+      <fieldset><legend>Tipo</legend><div class="aa-radios" id="types"></div></fieldset>
+      <fieldset><legend>Tamanho</legend><div class="aa-radios" id="sizes"></div></fieldset>
+      <div class="aa-row">
+        <label>Massa<select name="massa" id="massa"><option>Baunilha</option><option>Chocolate</option><option>Red velvet</option><option>Limão siciliano</option></select></label>
+        <label>Recheio<select name="recheio" id="recheio"><option value="0">Brigadeiro</option><option value="0">Doce de leite</option><option value="12">Frutas vermelhas (+R$ 12)</option><option value="15">Pistache (+R$ 15)</option></select></label>
+      </div>
+      <div class="aa-row">
+        <label>Data de retirada<input type="date" name="data" id="date" required></label>
+        <label>Seu nome<input name="nome" required placeholder="Como devemos chamar você?" autocomplete="off"></label>
+      </div>
+      <label>Observações<textarea name="obs" rows="3" placeholder="Ex.: escrever “Feliz aniversário, Ana”"></textarea></label>
+      <button class="aa-btn" type="submit">Enviar encomenda (simulação)</button>
+      <p class="aa-note">Nenhum dado é enviado. Esta é uma demonstração.</p>
+    </form>
+    <div class="aa-ok" id="ok" hidden tabindex="-1"><div class="aa-ok-ico" aria-hidden="true">♥</div><h3>Encomenda recebida <span>(simulação)</span></h3><p id="okTxt"></p><button class="aa-link" type="button" id="again">Fazer outra encomenda</button></div>
+  </section>
+</main>
+
+<footer class="aa-ftr"><div><b>Ateliê Açúcar &amp; Afeto</b><span>Confeitaria fictícia · Rua dos Confeitos, 88 · Cidade Exemplo</span></div><span>Site demonstrativo criado pela Vortyx</span></footer>
+
+<script src="../../../js/config.js?v=2.1"></script>
+<script src="../../../demos-kit/kit.js?v=1"></script>
+<script src="app.js?v=1"></script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Automação de captação de leads — Demonstração Vortyx</title>
+<meta name="description" content="Demonstração Vortyx: simulação de uma automação que recebe um formulário, valida os dados, registra no CRM e notifica a equipe.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#05070F">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../demos-kit/kit.css?v=1">
+<link rel="stylesheet" href="../../../demos-kit/lab.css?v=1">
+<link rel="stylesheet" href="style.css?v=1">
+</head>
+<body data-root="../../../" data-cat="automacoes" data-demo="automação de captação de leads">
+<main class="lab">
+  <header class="lab-head">
+    <span class="lab-eyebrow">Automação · Vendas</span>
+    <h1>Do formulário ao <em>CRM</em> em segundos</h1>
+    <p class="lab-lead">Quando alguém preenche o formulário do site, a automação confere os dados, cria o contato no CRM com uma prioridade e avisa a equipe. Teste com dados válidos e inválidos.</p>
+    <span class="sim">Simulação local · nada é enviado nem salvo fora do seu navegador</span>
+  </header>
+
+  <section class="panel cl-flow" aria-label="Fluxo da automação">
+    <div class="panel-h">Fluxo <small id="flowState">aguardando envio</small></div>
+    <div id="flow"></div>
+  </section>
+
+  <div class="cl-grid">
+    <section class="panel" aria-label="Formulário do site">
+      <div class="panel-h">Formulário do site <small>exemplo</small></div>
+      <form class="panel-b cl-form" id="form" novalidate>
+        <label class="field">Nome<input class="input" name="nome" autocomplete="off"></label>
+        <label class="field">E-mail<input class="input" name="email" autocomplete="off" inputmode="email"></label>
+        <label class="field">WhatsApp<input class="input" name="tel" autocomplete="off" inputmode="tel" placeholder="(00) 00000-0000"></label>
+        <div class="cl-row">
+          <label class="field">Interesse<select class="select" name="interesse"><option>Site institucional</option><option>Loja virtual</option><option>Automação</option><option>Sistema sob medida</option></select></label>
+          <label class="field">Orçamento previsto<select class="select" name="budget"><option value="1">Ainda não sei</option><option value="2">Até R$ 5 mil</option><option value="3">Acima de R$ 5 mil</option></select></label>
+        </div>
+        <label class="field">Origem<select class="select" name="origem"><option>Google</option><option>Instagram</option><option>Indicação</option><option>Outro</option></select></label>
+        <div class="cl-actions"><button class="btn btn-p" type="submit" id="send">Enviar formulário</button><button class="btn btn-g btn-s" type="button" id="fill">Preencher exemplo</button><button class="btn btn-g btn-s" type="button" id="bad">Exemplo com erro</button></div>
+        <p class="cl-err" id="err" role="alert" hidden></p>
+      </form>
+    </section>
+
+    <div class="cl-side">
+      <section class="panel" aria-label="CRM">
+        <div class="panel-h">CRM · novos contatos <small id="crmCount">0</small></div>
+        <div class="panel-b"><ul class="cl-crm" id="crm"><li class="cl-empty">Nenhum contato ainda.</li></ul><button class="btn btn-g btn-s" type="button" id="clear">Limpar CRM</button></div>
+      </section>
+      <section class="panel" aria-label="Notificações">
+        <div class="panel-h">Notificações da equipe <small>simuladas</small></div>
+        <div class="panel-b"><ul class="cl-notif" id="notif"><li class="cl-empty">As notificações aparecem aqui.</li></ul></div>
+      </section>
+    </div>
+  </div>
+
+  <p class="foot-note">Contatos e equipe fictícios. Em um projeto real, a automação se conecta ao CRM e aos canais que a empresa já usa.</p>
+</main>
+
+<script src="../../../js/config.js?v=2.1"></script>
+<script src="../../../demos-kit/kit.js?v=1"></script>
+<script src="../../../demos-kit/flow.js?v=1"></script>
+<script src="app.js?v=1"></script>
+</body>
+</html>

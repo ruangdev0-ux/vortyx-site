@@ -1,0 +1,27 @@
+/* IA (simulação) — camada visual comum às 3 demos de IA, sobre o lab.css */
+:root{--accent:#E879F9;--violet:#A78BFA;--pink:#F472B6;--bg:#07050F}
+body::before{background:radial-gradient(50% 45% at 80% 0%,rgba(167,139,250,.2),transparent 70%),radial-gradient(40% 35% at 5% 90%,rgba(244,114,182,.1),transparent 70%)}
+.lab h1 em{background:linear-gradient(100deg,var(--violet),var(--pink));-webkit-background-clip:text;background-clip:text}
+.btn-p{background:linear-gradient(100deg,#7C3AED,#DB2777);box-shadow:0 10px 26px -14px rgba(219,39,119,.9)}
+.input:focus,.select:focus,.textarea:focus{box-shadow:0 0 0 3px rgba(232,121,249,.15)}
+.chip:hover,.chip[aria-pressed="true"]{background:rgba(232,121,249,.1)}
+:focus-visible{outline-color:var(--accent)}
+.ia-banner{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border-radius:14px;border:1px dashed rgba(255,194,75,.55);background:rgba(255,194,75,.06);color:#FFE2A6;font-size:13.5px;line-height:1.5;margin-bottom:18px}
+.ia-banner b{color:var(--warn)}
+.ia-banner::before{content:"!";flex:none;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:var(--warn);color:#1a1205;font:700 13px var(--display)}
+mark{background:rgba(232,121,249,.22);color:#fff;border-radius:4px;padding:0 2px;box-shadow:inset 0 -2px 0 var(--accent)}
+mark.c-com{background:rgba(25,227,214,.18);box-shadow:inset 0 -2px 0 #19E3D6}
+mark.c-sup{background:rgba(167,139,250,.22);box-shadow:inset 0 -2px 0 #A78BFA}
+mark.c-fin{background:rgba(255,194,75,.18);box-shadow:inset 0 -2px 0 #FFC24B}
+mark.c-urg{background:rgba(255,92,122,.2);box-shadow:inset 0 -2px 0 #FF5C7A}
+.ia-think{display:inline-flex;gap:4px;align-items:center}
+.ia-think i{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:ia-dot 1s infinite ease-in-out}
+.ia-think i:nth-child(2){animation-delay:.15s}.ia-think i:nth-child(3){animation-delay:.3s}
+@keyframes ia-dot{0%,80%,100%{opacity:.25;transform:scale(.8)}40%{opacity:1;transform:none}}
+.ia-conf{display:grid;gap:6px}
+.ia-conf .row{display:grid;grid-template-columns:110px 1fr 46px;gap:10px;align-items:center;font-size:13px}
+.ia-conf .row span:last-child{font:500 12px var(--mono);text-align:right;color:var(--mute)}
+.ia-conf .bar{height:8px;border-radius:8px;background:rgba(255,255,255,.06);overflow:hidden}
+.ia-conf .bar i{display:block;height:100%;width:0;border-radius:8px;transition:width .7s cubic-bezier(.16,1,.3,1)}
+.ia-conf .row.win{color:var(--ink);font-weight:600}
+@media(max-width:400px){.ia-conf .row{grid-template-columns:86px 1fr 40px}}

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Integração entre site, API e sistema — Demonstração Vortyx</title>
+<meta name="description" content="Demonstração Vortyx: simulação de uma integração em que um pedido do site passa por uma API, atualiza o sistema, grava no banco e aparece no painel.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#05070F">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../demos-kit/kit.css?v=1">
+<link rel="stylesheet" href="../../../demos-kit/lab.css?v=1">
+<link rel="stylesheet" href="style.css?v=1">
+</head>
+<body data-root="../../../" data-cat="automacoes" data-demo="integração entre sistemas">
+<main class="lab">
+  <header class="lab-head">
+    <span class="lab-eyebrow">Automação · Integração</span>
+    <h1>Um pedido, <em>todos os sistemas</em> em dia</h1>
+    <p class="lab-lead">Quando um pedido é feito no site, a integração envia os dados para uma API, baixa o estoque no sistema, grava no banco e atualiza o painel. Sem ninguém digitando a mesma coisa duas vezes.</p>
+    <span class="sim">Simulação local · nenhuma API real é chamada</span>
+  </header>
+
+  <section class="panel in-flow" aria-label="Fluxo da integração">
+    <div class="panel-h">Fluxo <small id="flowState">aguardando pedido</small></div>
+    <div id="flow"></div>
+  </section>
+
+  <div class="in-grid">
+    <section class="panel" aria-label="Loja do site">
+      <div class="panel-h">1 · Pedido no site <small>loja fictícia</small></div>
+      <div class="panel-b in-shop">
+        <div class="in-prods" id="prods" role="radiogroup" aria-label="Produto"></div>
+        <div class="in-qty"><span>Quantidade</span><div class="in-step"><button type="button" id="minus" aria-label="Diminuir">−</button><output id="qty">1</output><button type="button" id="plus" aria-label="Aumentar">+</button></div></div>
+        <label class="in-toggle"><input type="checkbox" id="flaky"><span></span>Simular instabilidade na API</label>
+        <button class="btn btn-p" type="button" id="order">Finalizar pedido</button>
+      </div>
+    </section>
+
+    <section class="panel" aria-label="Requisição e resposta">
+      <div class="panel-h">2 · Chamada à API <small id="http">—</small></div>
+      <pre class="in-code" id="code" aria-live="polite"><span class="c">// a requisição aparece aqui</span></pre>
+    </section>
+
+    <section class="panel in-dash" aria-label="Painel">
+      <div class="panel-h">3 · Painel atualizado <small id="sync">—</small></div>
+      <div class="panel-b">
+        <div class="in-kpis"><div><span>Pedidos</span><b id="kOrders">0</b></div><div><span>Faturamento (fictício)</span><b id="kRev">R$ 0</b></div></div>
+        <div class="in-stock" id="stock"></div>
+        <div class="vxc in-chart" id="chart" data-label="Gráfico de barras: unidades vendidas por produto (simulação)"></div>
+        <button class="btn btn-g btn-s" type="button" id="reset">Zerar dados</button>
+      </div>
+    </section>
+  </div>
+
+  <section class="panel" aria-label="Registro">
+    <div class="panel-h">Registro <small>log simulado</small></div>
+    <div class="log" id="log" role="log"><span>— nenhum evento ainda —</span></div>
+  </section>
+
+  <p class="foot-note">Produtos, valores e endpoints fictícios. Em um projeto real, a integração conecta o seu site ao ERP, planilha ou sistema que a empresa usa.</p>
+</main>
+
+<script src="../../../js/config.js?v=2.1"></script>
+<script src="../../../demos-kit/kit.js?v=1"></script>
+<script src="../../../demos-kit/flow.js?v=1"></script>
+<script src="../../../demos-kit/charts.js?v=1"></script>
+<script src="app.js?v=1"></script>
+</body>
+</html>

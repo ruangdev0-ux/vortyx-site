@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Navalha Norte · Barbearia — Demonstração Vortyx</title>
+<meta name="description" content="Demonstração Vortyx: site para barbearia fictícia, com serviços, equipe, galeria, horários e agendamento simulado.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0C0A08">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700&family=Instrument+Sans:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../demos-kit/kit.css?v=1">
+<link rel="stylesheet" href="style.css?v=1">
+</head>
+<body data-root="../../../" data-cat="sites" data-demo="site para barbearia">
+
+<header class="nn-hdr" id="hdr">
+  <a class="nn-logo" href="#topo" aria-label="Navalha Norte, início"><svg viewBox="0 0 40 40" width="34" height="34" aria-hidden="true"><circle cx="20" cy="20" r="18.5" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M12 27 27 12M15 12h4M21 28h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="27" cy="12" r="2.2" fill="#C9A26B"/></svg><span>Navalha<br>Norte</span></a>
+  <nav class="nn-nav" id="nav" aria-label="Seções">
+    <a href="#servicos">Serviços</a><a href="#equipe">Equipe</a><a href="#galeria">Galeria</a><a href="#horarios">Horários</a>
+  </nav>
+  <button class="nn-btn nn-btn-s js-book" type="button">Agendar</button>
+  <button class="nn-burger" id="burger" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav"><span></span><span></span></button>
+</header>
+
+<main id="topo">
+  <section class="nn-hero">
+    <div class="nn-hero-txt">
+      <p class="nn-kicker" data-reveal>Barbearia · desde 2014 <span class="nn-fake">(história fictícia)</span></p>
+      <h1 data-reveal style="--d:1">Corte, barba<br>e tempo<br><em>para você.</em></h1>
+      <p class="nn-lead" data-reveal style="--d:2">Um espaço pensado para quem gosta de detalhe: tesoura, navalha, toalha quente e conversa boa. Agende em menos de um minuto.</p>
+      <div class="nn-ctas" data-reveal style="--d:3">
+        <button class="nn-btn js-book" type="button">Agendar horário</button>
+        <a class="nn-btn nn-btn-g" href="#servicos">Ver serviços e preços</a>
+      </div>
+      <ul class="nn-facts" data-reveal style="--d:4">
+        <li><b id="openNow">—</b><span>agora</span></li>
+        <li><b>3</b><span>barbeiros</span></li>
+        <li><b>4,9</b><span>nota demonstrativa</span></li>
+      </ul>
+    </div>
+    <div class="nn-hero-3d" aria-hidden="true">
+      <canvas id="pole"></canvas>
+      <div class="nn-pole-fallback"><i></i></div>
+    </div>
+  </section>
+
+  <div class="nn-marquee" aria-hidden="true"><div><span>Corte clássico</span><span>Degradê</span><span>Barba com toalha quente</span><span>Navalhado</span><span>Sobrancelha</span><span>Dia do noivo</span><span>Corte clássico</span><span>Degradê</span><span>Barba com toalha quente</span><span>Navalhado</span><span>Sobrancelha</span><span>Dia do noivo</span></div></div>
+
+  <section class="nn-sec" id="servicos">
+    <div class="nn-sec-h">
+      <p class="nn-kicker">Serviços</p>
+      <h2 data-reveal>Escolha o seu ritual.</h2>
+      <p class="nn-note">Preços e durações fictícios, apenas para demonstração.</p>
+    </div>
+    <div class="nn-tabs" role="tablist" aria-label="Categorias de serviço">
+      <button type="button" role="tab" aria-controls="menuPanel" aria-selected="true" data-tab="cabelo">Cabelo</button>
+      <button type="button" role="tab" aria-controls="menuPanel" aria-selected="false" data-tab="barba">Barba</button>
+      <button type="button" role="tab" aria-controls="menuPanel" aria-selected="false" data-tab="combos">Combos</button>
+    </div>
+    <div id="menuPanel" role="tabpanel" aria-label="Serviços e preços" aria-live="polite"><ul class="nn-menu" id="menu"></ul></div>
+  </section>
+
+  <section class="nn-sec nn-team" id="equipe">
+    <div class="nn-sec-h">
+      <p class="nn-kicker">Equipe</p>
+      <h2 data-reveal>Mãos que conhecem o ofício.</h2>
+    </div>
+    <div class="nn-cards" id="team"></div>
+  </section>
+
+  <section class="nn-sec" id="galeria">
+    <div class="nn-sec-h">
+      <p class="nn-kicker">Galeria</p>
+      <h2 data-reveal>O ambiente.</h2>
+      <p class="nn-note">Ilustrações demonstrativas. No projeto real, entram as fotos da própria barbearia.</p>
+    </div>
+    <div class="nn-gallery">
+      <figure class="g1" data-reveal><div class="art art-chair"></div><figcaption>Cadeiras clássicas</figcaption></figure>
+      <figure class="g2" data-reveal style="--d:1"><div class="art art-tools"></div><figcaption>Navalha e tesoura</figcaption></figure>
+      <figure class="g3" data-reveal style="--d:2"><div class="art art-towel"></div><figcaption>Toalha quente</figcaption></figure>
+      <figure class="g4" data-reveal style="--d:3"><div class="art art-light"></div><figcaption>Luz baixa, som bom</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="nn-sec nn-split" id="horarios">
+    <div>
+      <p class="nn-kicker">Horários</p>
+      <h2 data-reveal>Quando estamos abertos.</h2>
+      <ul class="nn-hours" id="hours"></ul>
+    </div>
+    <div class="nn-map" aria-label="Mapa ilustrativo">
+      <svg viewBox="0 0 400 300" role="img" aria-label="Mapa ilustrativo da localização"><rect width="400" height="300" fill="#15110D"/><g stroke="#2A221A" stroke-width="14" fill="none"><path d="M-10 90H410M-10 210H410M120-10V310M290-10V310"/></g><g stroke="#3A2E22" stroke-width="3" fill="none" stroke-dasharray="6 8"><path d="M-10 150H410M205-10V310"/></g><circle cx="205" cy="150" r="34" fill="rgba(201,162,107,.12)"/><path d="M205 128c-9 0-16 7-16 16 0 12 16 28 16 28s16-16 16-28c0-9-7-16-16-16Z" fill="#C9A26B"/><circle cx="205" cy="144" r="5" fill="#15110D"/></svg>
+      <p><b>Rua Fictícia das Navalhas, 120</b><br>Centro · Cidade Exemplo<br><span class="nn-note">Endereço fictício</span></p>
+    </div>
+  </section>
+
+  <section class="nn-sec" id="avaliacoes">
+    <div class="nn-sec-h">
+      <p class="nn-kicker">Avaliações</p>
+      <h2 data-reveal>Quem senta, volta.</h2>
+      <p class="nn-note">Avaliações demonstrativas, escritas para este exemplo.</p>
+    </div>
+    <div class="nn-reviews">
+      <blockquote data-reveal><p>“Atendimento no horário, ambiente tranquilo e o degradê ficou exatamente como pedi.”</p><footer>Cliente exemplo · <span aria-label="5 estrelas">★★★★★</span></footer></blockquote>
+      <blockquote data-reveal style="--d:1"><p>“A toalha quente na barba faz toda a diferença. Virou meu momento da semana.”</p><footer>Cliente exemplo · <span aria-label="5 estrelas">★★★★★</span></footer></blockquote>
+      <blockquote data-reveal style="--d:2"><p>“Agendei pelo site em um minuto e recebi tudo confirmado.”</p><footer>Cliente exemplo · <span aria-label="4 estrelas">★★★★☆</span></footer></blockquote>
+    </div>
+  </section>
+
+  <section class="nn-cta">
+    <h2>Sua cadeira está <em>esperando.</em></h2>
+    <button class="nn-btn js-book" type="button">Agendar horário</button>
+  </section>
+</main>
+
+<footer class="nn-ftr"><span>Navalha Norte · barbearia fictícia</span><span>Site demonstrativo criado pela Vortyx</span></footer>
+
+<!-- Agendamento (simulado) -->
+<div class="nn-modal" id="book" role="dialog" aria-modal="true" aria-labelledby="bookTitle" hidden>
+  <div class="nn-modal-box">
+    <button class="nn-x" type="button" data-close aria-label="Fechar">×</button>
+    <p class="nn-kicker">Agendamento · simulação</p>
+    <h3 id="bookTitle">Reserve seu horário</h3>
+    <ol class="nn-steps" id="steps" aria-label="Etapas"><li class="on">Serviço</li><li>Barbeiro</li><li>Dia e hora</li><li>Confirmar</li></ol>
+    <div class="nn-step" data-step="0"><div class="nn-opts" id="optSvc"></div></div>
+    <div class="nn-step" data-step="1" hidden><div class="nn-opts" id="optPro"></div></div>
+    <div class="nn-step" data-step="2" hidden><div class="nn-days" id="optDay"></div><div class="nn-slots" id="optSlot"></div></div>
+    <div class="nn-step" data-step="3" hidden><dl class="nn-sum" id="sum"></dl>
+      <form class="nn-form" data-demo-form id="bookForm"><label>Seu nome<input name="nome" required autocomplete="off" placeholder="Ex.: João"></label><button class="nn-btn" type="submit">Confirmar agendamento</button><p class="nn-note">Simulação: nenhum dado é enviado ou salvo.</p></form>
+    </div>
+    <div class="nn-step nn-done" data-step="4" hidden><div class="nn-check" aria-hidden="true">✓</div><h3>Horário reservado <span>(simulação)</span></h3><p id="doneTxt"></p><button class="nn-btn nn-btn-g" type="button" data-close>Fechar</button></div>
+    <div class="nn-nav-b"><button class="nn-btn nn-btn-g nn-btn-s" type="button" id="back" hidden>Voltar</button></div>
+  </div>
+</div>
+
+<script src="../../../js/config.js?v=2.1"></script>
+<script src="../../../demos-kit/kit.js?v=1"></script>
+<script src="app.js?v=1"></script>
+</body>
+</html>

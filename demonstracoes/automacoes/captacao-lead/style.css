@@ -1,0 +1,25 @@
+/* Captação de lead — acento verde, CRM + notificações */
+:root{--accent:#3EE08F}
+.input:focus,.select:focus{box-shadow:0 0 0 3px rgba(62,224,143,.15)}
+.vxf-node.on{background:rgba(62,224,143,.07);box-shadow:0 0 0 4px rgba(62,224,143,.08),0 18px 40px -24px rgba(62,224,143,.6)}
+.cl-flow{margin-bottom:16px}
+.cl-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:16px}
+@media(max-width:900px){.cl-grid{grid-template-columns:1fr}}
+.cl-form{display:grid;gap:12px}
+.cl-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:460px){.cl-row{grid-template-columns:1fr}}
+.cl-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.cl-err{padding:10px 12px;border-radius:12px;background:rgba(255,92,122,.08);border:1px solid rgba(255,92,122,.4);color:#ffb3c1;font-size:13.5px}
+.cl-side{display:grid;gap:16px;align-content:start}
+.cl-crm,.cl-notif{list-style:none;display:grid;gap:8px;max-height:260px;overflow:auto;margin-bottom:12px}
+.cl-notif{margin-bottom:0;max-height:200px}
+.cl-crm li{display:grid;grid-template-columns:1fr auto;gap:4px 10px;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:rgba(4,6,13,.45);animation:cl-in .4s ease}
+.cl-crm li.new{border-color:rgba(62,224,143,.6)}
+.cl-crm b{font:500 14px var(--display)}
+.cl-crm small{grid-column:1/-1;font:400 11.5px var(--mono);color:var(--mute2);overflow-wrap:anywhere}
+.cl-notif li{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:12px;background:rgba(62,224,143,.06);border:1px solid rgba(62,224,143,.25);font-size:13px;animation:cl-in .4s ease}
+.cl-notif li::before{content:"";flex:none;width:8px;height:8px;margin-top:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent)}
+.cl-notif small{display:block;color:var(--mute2);font:400 11px var(--mono)}
+.cl-empty{display:block!important;text-align:center;color:var(--mute2);font-size:13px;padding:16px;border:1px dashed var(--line);border-radius:12px;background:none!important}
+.cl-empty::before{display:none}
+@keyframes cl-in{from{opacity:0;transform:translateY(-6px)}}

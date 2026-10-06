@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Guia gratuito: Estoque em ordem — Demonstração Vortyx</title>
+<meta name="description" content="Demonstração Vortyx: landing page de captação de leads com material gratuito fictício e formulário em etapas.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#EAF6EE">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=Instrument+Sans:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../demos-kit/kit.css?v=1">
+<link rel="stylesheet" href="style.css?v=1">
+</head>
+<body data-root="../../../" data-cat="landing-pages" data-demo="landing page de captação de leads">
+
+<header class="re-hdr"><span class="re-logo"><i aria-hidden="true"></i>Rota Estoque</span><span class="re-free">Material gratuito</span></header>
+
+<main>
+  <section class="re-hero" id="topo">
+    <div class="re-hero-txt">
+      <p class="re-tag" data-reveal>Guia gratuito · PDF com 24 páginas</p>
+      <h1 data-reveal style="--d:1">Estoque em ordem em <mark>10 passos</mark> simples.</h1>
+      <p class="re-sub" data-reveal style="--d:2">Um guia prático para pequenas lojas e distribuidoras organizarem o estoque, evitarem ruptura e pararem de contar caixas no fim do mês.</p>
+      <ul class="re-inc" data-reveal style="--d:3"><li>Checklist para imprimir</li><li>Modelo de planilha</li><li>Exemplo de curva ABC</li></ul>
+      <div class="re-book-wrap" data-reveal style="--d:3" aria-hidden="true">
+        <div class="re-book"><div class="cv"><span>GUIA</span><b>Estoque<br>em ordem</b><small>10 passos</small><i></i></div></div>
+        <div class="re-pages"><div></div><div></div></div>
+      </div>
+    </div>
+
+    <div class="re-card" id="baixar" data-reveal style="--d:2">
+      <div class="re-progress" aria-hidden="true"><i id="bar"></i></div>
+      <p class="re-step" id="stepLbl">Passo 1 de 2</p>
+      <form id="lead" data-demo-form novalidate>
+        <fieldset class="re-fs" data-step="1">
+          <legend>Para onde enviamos o guia?</legend>
+          <label>Nome<input name="nome" required autocomplete="off"></label>
+          <label>E-mail<input name="email" type="email" required autocomplete="off" placeholder="voce@exemplo.com"></label>
+          <button class="re-btn" type="button" id="next">Continuar →</button>
+        </fieldset>
+        <fieldset class="re-fs" data-step="2" hidden>
+          <legend>Só mais duas perguntas</legend>
+          <div class="re-q"><span>Tipo de negócio</span><div class="re-opts">
+            <label><input type="radio" name="segmento" value="Loja física" required>Loja física</label><label><input type="radio" name="segmento" value="Loja online">Loja online</label><label><input type="radio" name="segmento" value="Distribuidora">Distribuidora</label><label><input type="radio" name="segmento" value="Outro">Outro</label></div></div>
+          <div class="re-q"><span>Quantos produtos diferentes?</span><div class="re-opts">
+            <label><input type="radio" name="itens" value="até 100" required>até 100</label><label><input type="radio" name="itens" value="100 a 1.000">100 a 1.000</label><label><input type="radio" name="itens" value="mais de 1.000">mais de 1.000</label></div></div>
+          <label class="re-ck"><input type="checkbox" name="ok" required>Aceito receber o guia e conteúdos por e-mail (simulação).</label>
+          <div class="re-row"><button class="re-back" type="button" id="back">← Voltar</button><button class="re-btn" type="submit">Quero o guia grátis</button></div>
+        </fieldset>
+      </form>
+      <div class="re-done" id="done" hidden tabindex="-1">
+        <div class="ico" aria-hidden="true">✓</div>
+        <h2>Guia liberado <small>(simulação)</small></h2>
+        <p id="doneTxt"></p>
+        <button class="re-btn" type="button" id="dl">Baixar o PDF</button>
+        <button class="re-back" type="button" id="again">Preencher de novo</button>
+      </div>
+      <p class="re-note">Simulação: nenhum dado é enviado e nenhum arquivo é baixado.</p>
+    </div>
+  </section>
+
+  <section class="re-sec">
+    <h2 data-reveal>O que você vai <mark>aprender</mark></h2>
+    <ol class="re-list" id="learn"></ol>
+    <button class="re-more" type="button" id="more" aria-expanded="false">Ver os 10 passos</button>
+  </section>
+
+  <section class="re-sec re-trust">
+    <div class="re-author" data-reveal><div class="av" aria-hidden="true">RE</div><div><b>Feito pela equipe Rota Estoque</b><p>Empresa fictícia de gestão de estoque, criada para esta demonstração.</p></div></div>
+    <div class="re-objs">
+      <article data-reveal><h3>É grátis mesmo?</h3><p>Sim. Você só informa nome e e-mail para receber o material.</p></article>
+      <article data-reveal style="--d:1"><h3>Vou receber spam?</h3><p>Não. Um e-mail com o guia e, se quiser, conteúdos ocasionais. Dá para sair quando quiser.</p></article>
+      <article data-reveal style="--d:2"><h3>Serve para o meu negócio?</h3><p>Os passos valem para lojas físicas, online e pequenas distribuidoras.</p></article>
+    </div>
+  </section>
+
+  <section class="re-sec re-faq">
+    <h2 data-reveal>Perguntas <mark>frequentes</mark></h2>
+    <details><summary>Em que formato vem o guia?</summary><p>PDF, para ler no celular ou imprimir.</p></details>
+    <details><summary>Preciso de algum sistema?</summary><p>Não. Os passos funcionam com planilha ou papel; o guia mostra quando vale migrar para um sistema.</p></details>
+    <details><summary>Quanto tempo leva para aplicar?</summary><p>Depende do tamanho do estoque. O guia sugere começar pelos produtos que mais vendem.</p></details>
+  </section>
+
+  <section class="re-final"><h2>Comece a organizar <mark>hoje.</mark></h2><a class="re-btn" href="#baixar">Baixar o guia grátis</a></section>
+</main>
+
+<aside aria-label="Atalho para o formulário"><a class="re-sticky" href="#baixar" id="sticky">Quero o guia grátis</a></aside>
+<footer class="re-ftr"><span>Rota Estoque · empresa fictícia</span><span>Landing page demonstrativa criada pela Vortyx</span></footer>
+
+<script src="../../../js/config.js?v=2.1"></script>
+<script src="../../../demos-kit/kit.js?v=1"></script>
+<script src="app.js?v=1"></script>
+</body>
+</html>

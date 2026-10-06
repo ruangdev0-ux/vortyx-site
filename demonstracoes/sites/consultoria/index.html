@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Marino Consultoria — Demonstração Vortyx</title>
+<meta name="description" content="Demonstração Vortyx: site para consultoria fictícia com serviços, metodologia, depoimentos demonstrativos, agenda e contato.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#F5F3EE">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=Instrument+Sans:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../demos-kit/kit.css?v=1">
+<link rel="stylesheet" href="style.css?v=1">
+</head>
+<body data-root="../../../" data-cat="sites" data-demo="site para consultoria">
+
+<header class="mc-hdr">
+  <a class="mc-logo" href="#topo"><span class="mk" aria-hidden="true">M</span><span>Marino<small>Consultoria</small></span></a>
+  <nav class="mc-nav" aria-label="Seções"><a href="#servicos">Serviços</a><a href="#metodo">Método</a><a href="#depoimentos">Depoimentos</a><a href="#agenda">Agenda</a></nav>
+  <a class="mc-btn mc-btn-s" href="#agenda">Agendar conversa</a>
+</header>
+
+<main id="topo">
+  <section class="mc-hero">
+    <div class="mc-hero-txt">
+      <p class="mc-eyebrow" data-reveal>Gestão e processos para pequenas e médias empresas</p>
+      <h1 data-reveal style="--d:1">Clareza para decidir.<br><em>Método para crescer.</em></h1>
+      <p class="mc-lead" data-reveal style="--d:2">Ajudamos empresas a organizar processos, indicadores e rotinas de gestão, para que o dono pare de apagar incêndios e volte a olhar para o negócio.</p>
+      <div class="mc-ctas" data-reveal style="--d:3"><a class="mc-btn" href="#agenda">Agendar diagnóstico inicial</a><a class="mc-link" href="#metodo">Conhecer o método →</a></div>
+    </div>
+    <aside class="mc-card" data-reveal style="--d:2" aria-label="Sobre a consultora">
+      <div class="mc-portrait" aria-hidden="true"><span>HM</span></div>
+      <div><b>Helena Marino</b><span>Consultora de gestão · perfil fictício</span></div>
+      <ul><li><b>Foco</b>Processos e indicadores</li><li><b>Formato</b>Presencial e online</li><li><b>Atendimento</b>Seg a sex, 9h–18h</li></ul>
+    </aside>
+  </section>
+
+  <section class="mc-areas" aria-label="Áreas de atuação"><span>Áreas</span><ul><li>Serviços</li><li>Varejo</li><li>Saúde</li><li>Indústria leve</li><li>Educação</li></ul></section>
+
+  <section class="mc-sec" id="servicos">
+    <div class="mc-sec-h"><p class="mc-eyebrow">Serviços</p><h2 data-reveal>Como podemos <em>ajudar</em></h2></div>
+    <div class="mc-services" id="services"></div>
+  </section>
+
+  <section class="mc-sec mc-method" id="metodo">
+    <div class="mc-sec-h"><p class="mc-eyebrow">Metodologia</p><h2 data-reveal>Quatro etapas, <em>sem atalhos</em></h2></div>
+    <div class="mc-steps">
+      <div class="mc-step-tabs" role="tablist" aria-label="Etapas do método" id="stepTabs"></div>
+      <div class="mc-step-panel" role="tabpanel" id="stepPanel" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section class="mc-sec" id="depoimentos">
+    <div class="mc-sec-h"><p class="mc-eyebrow">Depoimentos</p><h2 data-reveal>O que dizem <em>os clientes</em></h2><p class="mc-note">Depoimentos demonstrativos: pessoas e empresas fictícias, escritos para ilustrar o layout.</p></div>
+    <div class="mc-quotes">
+      <div class="mc-quote-track" id="quotes" aria-live="polite"></div>
+      <div class="mc-quote-nav"><button type="button" id="qPrev" aria-label="Depoimento anterior">←</button><span id="qPos">1 / 3</span><button type="button" id="qNext" aria-label="Próximo depoimento">→</button></div>
+    </div>
+  </section>
+
+  <section class="mc-sec mc-agenda" id="agenda">
+    <div class="mc-sec-h"><p class="mc-eyebrow">Agenda</p><h2 data-reveal>Diagnóstico inicial <em>de 30 minutos</em></h2><p class="mc-sub">Escolha um horário. Conversa sem custo para entender o momento da empresa.</p></div>
+    <div class="mc-agenda-grid">
+      <div class="mc-cal">
+        <div class="mc-cal-days" id="calDays" role="group" aria-label="Escolha o dia"></div>
+        <div class="mc-cal-slots" id="calSlots" role="group" aria-label="Escolha o horário"></div>
+        <p class="mc-note">Agenda fictícia · horários indisponíveis gerados para demonstração.</p>
+      </div>
+      <form class="mc-form" id="contact" data-demo-form>
+        <div class="mc-picked" id="picked">Nenhum horário escolhido.</div>
+        <label>Nome<input name="nome" required autocomplete="off"></label>
+        <label>Empresa<input name="empresa" required autocomplete="off"></label>
+        <label>Principal desafio hoje<select name="desafio"><option>Organizar processos</option><option>Definir indicadores</option><option>Planejamento do ano</option><option>Montar ou treinar a equipe</option><option>Outro</option></select></label>
+        <label>Mensagem (opcional)<textarea name="msg" rows="3"></textarea></label>
+        <input type="hidden" name="slot" id="slot">
+        <button class="mc-btn" type="submit">Confirmar agendamento (simulação)</button>
+        <p class="mc-note">Simulação: nenhum dado é enviado.</p>
+      </form>
+      <div class="mc-ok" id="ok" hidden tabindex="-1"><span class="mc-ok-ico" aria-hidden="true">✓</span><h3>Conversa agendada <small>(simulação)</small></h3><p id="okTxt"></p><button class="mc-link" type="button" id="again">Agendar outro horário</button></div>
+    </div>
+  </section>
+</main>
+
+<footer class="mc-ftr"><div><b>Marino Consultoria</b><span>Empresa fictícia · Av. Exemplo, 1000, sala 42 · Cidade Exemplo</span></div><span>Site demonstrativo criado pela Vortyx</span></footer>
+
+<script src="../../../js/config.js?v=2.1"></script>
+<script src="../../../demos-kit/kit.js?v=1"></script>
+<script src="app.js?v=1"></script>
+</body>
+</html>

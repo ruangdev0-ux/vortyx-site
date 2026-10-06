@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pulso Academia — Demonstração Vortyx</title>
+<meta name="description" content="Demonstração Vortyx: site para academia fictícia com planos, modalidades, professores, grade de horários e matrícula simulada.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0A0A0A">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,800;1,800&family=Barlow:wght@400;500;600&family=Instrument+Sans:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../demos-kit/kit.css?v=1">
+<link rel="stylesheet" href="style.css?v=1">
+</head>
+<body data-root="../../../" data-cat="sites" data-demo="site para academia">
+
+<header class="pa-hdr">
+  <a class="pa-logo" href="#topo" aria-label="Pulso Academia, início"><svg viewBox="0 0 48 24" width="48" height="24" aria-hidden="true"><path d="M1 13h10l4-10 6 18 5-12 3 4h18" fill="none" stroke="#D4FF3A" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></svg><span>PULSO</span></a>
+  <nav class="pa-nav" aria-label="Seções"><a href="#modalidades">Modalidades</a><a href="#planos">Planos</a><a href="#horarios">Horários</a><a href="#equipe">Professores</a></nav>
+  <button class="pa-btn pa-btn-s js-enroll" type="button">Matricule-se</button>
+</header>
+
+<main id="topo">
+  <section class="pa-hero">
+    <canvas id="pulse" aria-hidden="true"></canvas>
+    <div class="pa-hero-fb" aria-hidden="true"></div>
+    <div class="pa-hero-in">
+      <p class="pa-kick" data-reveal><span></span>Aberta 6h às 23h · todos os dias</p>
+      <h1 data-reveal style="--d:1">Treine no<br><em>seu ritmo.</em></h1>
+      <p class="pa-lead" data-reveal style="--d:2">Musculação, funcional, bike e lutas em um só lugar, com professores na sala o tempo todo. Primeira aula experimental sem compromisso.</p>
+      <div class="pa-ctas" data-reveal style="--d:3"><button class="pa-btn js-enroll" type="button">Agendar aula experimental</button><a class="pa-btn pa-btn-o" href="#planos">Ver planos</a></div>
+      <ul class="pa-stats" data-reveal style="--d:4"><li><b>1.200 m²</b>de área</li><li><b>6</b>modalidades</li><li><b>17h</b>por dia</li></ul>
+      <p class="pa-fake">Dados da academia fictícios · demonstração</p>
+    </div>
+  </section>
+
+  <div class="pa-slash" aria-hidden="true"><div><span>Força</span><span>Resistência</span><span>Mobilidade</span><span>Foco</span><span>Força</span><span>Resistência</span><span>Mobilidade</span><span>Foco</span></div></div>
+
+  <section class="pa-sec" id="modalidades">
+    <h2 data-reveal>Modalidades</h2>
+    <div class="pa-mods" id="mods"></div>
+  </section>
+
+  <section class="pa-sec pa-plans" id="planos">
+    <div class="pa-sec-h">
+      <h2 data-reveal>Planos</h2>
+      <div class="pa-toggle" role="group" aria-label="Período"><button type="button" data-per="m" aria-pressed="true">Mensal</button><button type="button" data-per="a" aria-pressed="false">Anual <small>−20%</small></button></div>
+    </div>
+    <div class="pa-plan-grid" id="plans"></div>
+    <p class="pa-fake">Preços fictícios, apenas para demonstração.</p>
+  </section>
+
+  <section class="pa-sec" id="horarios">
+    <h2 data-reveal>Grade de aulas</h2>
+    <div class="pa-days" role="tablist" aria-label="Dia da semana" id="days"></div>
+    <div class="pa-chips" role="group" aria-label="Filtrar por modalidade" id="modFilter"></div>
+    <div class="pa-table-wrap"><table class="pa-table"><thead><tr><th scope="col">Horário</th><th scope="col">Aula</th><th scope="col">Professor</th><th scope="col">Sala</th></tr></thead><tbody id="sched"></tbody></table></div>
+  </section>
+
+  <section class="pa-sec" id="equipe">
+    <h2 data-reveal>Professores</h2>
+    <div class="pa-team" id="team"></div>
+  </section>
+
+  <section class="pa-sec pa-benefits">
+    <h2 data-reveal>Por que a <em>Pulso</em></h2>
+    <ul>
+      <li data-reveal><b>01</b><h3>Avaliação física</h3><p>Ponto de partida claro antes do primeiro treino.</p></li>
+      <li data-reveal style="--d:1"><b>02</b><h3>Treino no app</h3><p>Sua ficha sempre à mão, atualizada pelo professor.</p></li>
+      <li data-reveal style="--d:2"><b>03</b><h3>Acompanhamento</h3><p>Reavaliação a cada 60 dias para ajustar o plano.</p></li>
+      <li data-reveal style="--d:3"><b>04</b><h3>Estacionamento</h3><p>Vagas para alunos durante o treino.</p></li>
+    </ul>
+  </section>
+
+  <section class="pa-cta">
+    <h2>Seu primeiro treino<br><em>é por nossa conta.</em></h2>
+    <button class="pa-btn js-enroll" type="button">Quero minha aula experimental</button>
+  </section>
+</main>
+
+<footer class="pa-ftr"><span>Pulso Academia · academia fictícia</span><span>Site demonstrativo criado pela Vortyx</span></footer>
+
+<div class="pa-modal" id="enroll" role="dialog" aria-modal="true" aria-labelledby="enTitle" hidden>
+  <div class="pa-modal-box">
+    <button class="pa-x" type="button" data-close aria-label="Fechar">×</button>
+    <div id="enStep">
+      <p class="pa-kick"><span></span>Matrícula · simulação</p>
+      <h3 id="enTitle">Aula experimental</h3>
+      <form class="pa-form" id="enForm" data-demo-form>
+        <label>Nome<input name="nome" required autocomplete="off"></label>
+        <label>Plano de interesse<select name="plano" id="enPlan"></select></label>
+        <fieldset><legend>Seu objetivo</legend><div class="pa-goals">
+          <label><input type="radio" name="obj" value="Ganhar força" required>Ganhar força</label><label><input type="radio" name="obj" value="Emagrecer">Emagrecer</label><label><input type="radio" name="obj" value="Condicionamento">Condicionamento</label><label><input type="radio" name="obj" value="Bem-estar">Bem-estar</label></div></fieldset>
+        <button class="pa-btn" type="submit">Agendar aula</button>
+        <p class="pa-fake">Simulação: nenhum dado é enviado.</p>
+      </form>
+    </div>
+    <div class="pa-done" id="enDone" hidden><div class="pa-done-ico" aria-hidden="true">✓</div><h3>Aula agendada <small>(simulação)</small></h3><p id="enTxt"></p><button class="pa-btn pa-btn-o" type="button" data-close>Fechar</button></div>
+  </div>
+</div>
+
+<script src="../../../js/config.js?v=2.1"></script>
+<script src="../../../demos-kit/kit.js?v=1"></script>
+<script src="app.js?v=1"></script>
+</body>
+</html>

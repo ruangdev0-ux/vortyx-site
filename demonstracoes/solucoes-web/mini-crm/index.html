@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mini CRM — Demonstração Vortyx</title>
+<meta name="description" content="Demonstração Vortyx: mini CRM com funil de vendas, contatos, anotações e indicadores. Dados fictícios salvos só no navegador.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#F4F5F9">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../demos-kit/kit.css?v=1">
+<link rel="stylesheet" href="../../../demos-kit/lab.css?v=1">
+<link rel="stylesheet" href="style.css?v=1">
+</head>
+<body data-root="../../../" data-cat="solucoes-web" data-demo="mini CRM">
+<div class="crm">
+  <aside class="crm-side" aria-label="Menu do sistema">
+    <div class="crm-brand"><span aria-hidden="true">◆</span>Funil<small>CRM demo</small></div>
+    <nav><a aria-current="page" href="#funil">Funil</a><a href="#contatos">Contatos</a></nav>
+    <p class="crm-side-note">Sistema demonstrativo. Os dados ficam só neste navegador.</p>
+  </aside>
+
+  <main class="crm-main">
+    <header class="crm-top">
+      <div><h1>Funil de vendas</h1><span class="sim">Dados fictícios · salvos localmente</span></div>
+      <div class="crm-top-act"><input class="input crm-search" id="q" type="search" placeholder="Buscar contato" aria-label="Buscar"><button class="btn btn-p" type="button" id="add">+ Novo contato</button></div>
+    </header>
+
+    <section class="crm-kpis" aria-label="Indicadores" id="kpis"></section>
+
+    <section id="funil" aria-label="Funil">
+      <p class="crm-tip"><span class="t-mouse">Arraste os cartões entre as colunas ou use as setas de cada cartão.</span><span class="t-touch">Use as setas ← → de cada cartão para mudar a etapa. Deslize para o lado para ver todas as colunas.</span></p>
+      <div class="crm-board" id="board"></div>
+    </section>
+
+    <section id="contatos" class="panel crm-list" aria-label="Contatos">
+      <div class="panel-h">Todos os contatos <small id="count"></small></div>
+      <div class="crm-table-wrap"><table class="crm-table"><thead><tr><th>Contato</th><th>Etapa</th><th>Valor</th><th>Próximo passo</th></tr></thead><tbody id="rows"></tbody></table></div>
+    </section>
+
+    <footer class="crm-foot"><button class="btn btn-g btn-s" type="button" id="reset">Restaurar dados de exemplo</button><span>Nomes, empresas e valores fictícios.</span></footer>
+  </main>
+</div>
+
+<div class="crm-drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="dTitle" hidden>
+  <div class="crm-drawer-box">
+    <button class="crm-x" type="button" data-close aria-label="Fechar">×</button>
+    <form id="cform">
+      <h2 id="dTitle">Novo contato</h2>
+      <label class="field">Nome<input class="input" name="n" required autocomplete="off"></label>
+      <label class="field">Empresa<input class="input" name="e" required autocomplete="off"></label>
+      <div class="crm-2"><label class="field">Valor estimado (R$)<input class="input" name="v" type="number" min="0" step="100" required></label>
+      <label class="field">Etapa<select class="select" name="s" id="stageSel"></select></label></div>
+      <label class="field">Próximo passo<input class="input" name="next" placeholder="Ex.: enviar proposta" autocomplete="off"></label>
+      <div class="crm-notes" id="notesWrap" hidden><h3>Anotações</h3><ul id="notes"></ul><div class="crm-2b"><input class="input" id="note" placeholder="Nova anotação" aria-label="Nova anotação"><button class="btn btn-g btn-s" type="button" id="addNote">Adicionar</button></div></div>
+      <div class="crm-dact"><button class="btn btn-p" type="submit">Salvar</button><button class="btn btn-g" type="button" id="del" hidden>Excluir</button></div>
+    </form>
+  </div>
+</div>
+
+<script src="../../../js/config.js?v=2.1"></script>
+<script src="../../../demos-kit/kit.js?v=1"></script>
+<script src="app.js?v=1"></script>
+</body>
+</html>

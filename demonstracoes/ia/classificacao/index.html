@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>IA de classificação de mensagens (simulação) — Demonstração Vortyx</title>
+<meta name="description" content="Demonstração Vortyx: simulação demonstrativa de classificação de mensagens em Comercial, Suporte, Financeiro e Outros, feita com regras em JavaScript.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#07050F">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../demos-kit/kit.css?v=1">
+<link rel="stylesheet" href="../../../demos-kit/lab.css?v=1">
+<link rel="stylesheet" href="../ia.css?v=1">
+<link rel="stylesheet" href="style.css?v=1">
+</head>
+<body data-root="../../../" data-cat="ia" data-demo="IA para classificação de mensagens (simulação)">
+<main class="lab">
+  <header class="lab-head">
+    <span class="lab-eyebrow">IA · Classificação</span>
+    <h1>Classificação de <em>mensagens</em></h1>
+    <p class="lab-lead">Escreva uma mensagem como se fosse um cliente. A simulação aponta o setor (Comercial, Suporte, Financeiro ou Outros), mostra as palavras que pesaram e o nível de confiança.</p>
+  </header>
+  <p class="ia-banner"><span><b>Simulação demonstrativa.</b> Não há inteligência artificial real nesta página: a classificação usa listas de palavras com pesos, em JavaScript, só para ilustrar a experiência. Em um projeto real, usamos um modelo de IA treinado ou configurado para o seu negócio.</span></p>
+
+  <div class="cl-grid">
+    <section class="panel" aria-label="Mensagem">
+      <div class="panel-h">Mensagem do cliente <small id="chars">0/300</small></div>
+      <div class="panel-b cl-in">
+        <textarea class="textarea" id="txt" maxlength="300" rows="4" aria-label="Mensagem para classificar" placeholder="Ex.: Meu boleto venceu, consigo uma segunda via?"></textarea>
+        <div class="chips" id="ex" aria-label="Exemplos"></div>
+        <div class="cl-act"><button class="btn btn-p" type="button" id="go">Classificar</button><label class="cl-live"><input type="checkbox" id="live"> Classificar enquanto digito</label></div>
+      </div>
+    </section>
+
+    <section class="panel cl-out" aria-label="Resultado" aria-live="polite">
+      <div class="panel-h">Resultado <small>simulação</small></div>
+      <div class="panel-b" id="out"><p class="cl-wait">O resultado aparece aqui.</p></div>
+    </section>
+  </div>
+
+  <section class="panel cl-batch" aria-label="Classificação em lote">
+    <div class="panel-h">Caixa de entrada · lote de exemplo <button class="btn btn-g btn-s" type="button" id="batch">Classificar todas</button></div>
+    <div class="cl-table-wrap"><table class="cl-table"><thead><tr><th>Mensagem</th><th>Setor</th><th>Confiança</th></tr></thead><tbody id="rows"></tbody></table></div>
+  </section>
+  <p class="foot-note">Mensagens fictícias. Nenhum texto sai do seu navegador.</p>
+</main>
+
+<script src="../../../js/config.js?v=2.1"></script>
+<script src="../../../demos-kit/kit.js?v=1"></script>
+<script src="../ia-sim.js?v=1"></script>
+<script src="app.js?v=1"></script>
+</body>
+</html>

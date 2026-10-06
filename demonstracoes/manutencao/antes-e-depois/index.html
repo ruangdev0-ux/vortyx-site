@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Manutenção de sites: antes e depois — Demonstração Vortyx</title>
+<meta name="description" content="Demonstração Vortyx: comparação antes e depois de um site fictício em responsividade, velocidade, organização, SEO, acessibilidade, correções e novas funcionalidades, com histórico de versões.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#F2F1EC">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../demos-kit/kit.css?v=1">
+<link rel="stylesheet" href="style.css?v=1">
+</head>
+<body data-root="../../../" data-cat="manutencao" data-demo="manutenção de site (antes e depois)">
+<main class="mt">
+  <header class="mt-head">
+    <span class="mt-eyebrow">Manutenção · Clínica Bem Viver (fictícia)</span>
+    <h1>O mesmo site, <span>antes</span> e <em>depois</em> da manutenção.</h1>
+    <p>Escolha um tema e arraste a barra para comparar. Os números são ilustrativos e servem para mostrar o tipo de melhoria, não resultados reais.</p>
+    <span class="mt-sim">Simulação demonstrativa · site e valores fictícios</span>
+  </header>
+
+  <nav class="mt-topics" role="tablist" aria-label="Tema da comparação" id="topics"></nav>
+
+  <section class="mt-stage" aria-label="Comparação">
+    <div class="mt-bar">
+      <div class="mt-view" role="group" aria-label="Tamanho de tela"><button type="button" data-v="desk" aria-pressed="true">Computador</button><button type="button" data-v="mob" aria-pressed="false">Celular</button></div>
+      <p class="mt-topic-lead" id="lead" aria-live="polite"></p>
+    </div>
+    <div class="mt-compare" id="cmp" data-v="desk">
+      <div class="mt-frame" id="frame">
+        <div class="mt-pane before" aria-hidden="true"><div class="mk old" id="mkOld"></div></div>
+        <div class="mt-pane after" id="after" aria-hidden="true"><div class="mk new" id="mkNew"></div></div>
+        <span class="mt-lbl l">Antes</span><span class="mt-lbl r">Depois</span>
+        <div class="mt-handle" id="handle" aria-hidden="true"><i></i></div>
+        <input class="mt-range" id="range" type="range" min="0" max="100" value="50" aria-label="Posição da comparação: antes à esquerda, depois à direita">
+      </div>
+    </div>
+    <div class="mt-cols">
+      <div class="mt-card bad"><h2>Antes</h2><ul id="listOld"></ul></div>
+      <div class="mt-card good"><h2>Depois</h2><ul id="listNew"></ul></div>
+      <div class="mt-card"><h2>Indicadores <small>ilustrativos</small></h2><div id="metrics"></div></div>
+    </div>
+  </section>
+
+  <section class="mt-hist" aria-labelledby="histT">
+    <h2 id="histT">Histórico de versões</h2>
+    <p class="mt-sub">Manutenção contínua: cada versão entra com melhorias planejadas e registradas.</p>
+    <ol class="mt-tl" id="tl" role="tablist" aria-label="Versões"></ol>
+    <div class="mt-ver" id="ver" role="tabpanel" aria-live="polite"></div>
+  </section>
+
+  <p class="mt-foot">Clínica, versões, datas e indicadores fictícios. Em um projeto real, cada melhoria é medida com ferramentas como Lighthouse e PageSpeed.</p>
+</main>
+
+<script src="../../../js/config.js?v=2.1"></script>
+<script src="../../../demos-kit/kit.js?v=1"></script>
+<script src="app.js?v=1"></script>
+</body>
+</html>

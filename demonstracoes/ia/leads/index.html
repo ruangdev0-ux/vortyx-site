@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>IA para organizar leads (simulação) — Demonstração Vortyx</title>
+<meta name="description" content="Demonstração Vortyx: simulação demonstrativa que organiza leads por interesse e prioridade a partir das mensagens, com explicação de cada decisão.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#07050F">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../demos-kit/kit.css?v=1">
+<link rel="stylesheet" href="../../../demos-kit/lab.css?v=1">
+<link rel="stylesheet" href="../ia.css?v=1">
+<link rel="stylesheet" href="style.css?v=1">
+</head>
+<body data-root="../../../" data-cat="ia" data-demo="IA para organização de leads (simulação)">
+<main class="lab">
+  <header class="lab-head">
+    <span class="lab-eyebrow">IA · Leads</span>
+    <h1>Leads organizados por <em>interesse e prioridade</em></h1>
+    <p class="lab-lead">Uma lista bagunçada de contatos vira um quadro com o que cada pessoa quer e quem deve ser atendido primeiro, com o motivo de cada decisão.</p>
+  </header>
+  <p class="ia-banner"><span><b>Simulação demonstrativa.</b> Não há IA real aqui: interesse e prioridade são calculados por regras em JavaScript (palavras-chave, prazo, orçamento e origem). Os leads são fictícios e nada sai do seu navegador.</span></p>
+
+  <section class="ld-bar" aria-label="Ações">
+    <div class="chips" role="group" aria-label="Visualização"><button class="chip" type="button" data-v="raw" aria-pressed="true">Lista bruta</button><button class="chip" type="button" data-v="org" aria-pressed="false">Organizada</button></div>
+    <button class="btn btn-p" type="button" id="org">Organizar com IA (simulação)</button>
+    <button class="btn btn-g btn-s" type="button" id="addBtn" aria-expanded="false" aria-controls="add">+ Adicionar lead</button>
+  </section>
+
+  <form class="panel ld-add" id="add" hidden>
+    <div class="panel-b ld-add-b">
+      <label class="field">Nome<input class="input" name="n" required autocomplete="off"></label>
+      <label class="field">Origem<select class="select" name="o"><option>Site</option><option>Instagram</option><option>Indicação</option><option>Google</option></select></label>
+      <label class="field ld-msg">Mensagem<input class="input" name="m" required autocomplete="off" placeholder="Ex.: Preciso de uma loja virtual ainda este mês, já tenho orçamento"></label>
+      <button class="btn btn-p" type="submit">Adicionar</button>
+    </div>
+  </form>
+
+  <section class="ld-stage" id="stage" aria-live="polite"></section>
+  <p class="foot-note">Pessoas, empresas e mensagens fictícias. Em um projeto real, a priorização é ajustada com a sua equipe de vendas.</p>
+</main>
+
+<script src="../../../js/config.js?v=2.1"></script>
+<script src="../../../demos-kit/kit.js?v=1"></script>
+<script src="../ia-sim.js?v=1"></script>
+<script src="app.js?v=1"></script>
+</body>
+</html>

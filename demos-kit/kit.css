@@ -1,0 +1,58 @@
+[hidden]{display:none!important}
+.vx-sr{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+/* =========================================================
+   Vortyx · Kit das demonstrações
+   Barra "Demonstração Vortyx", toasts e utilidades comuns.
+   Cada demo tem seu próprio visual; este arquivo só cuida do
+   que é igual em todas.
+   ========================================================= */
+:root{
+  --kit-h:44px;
+  --kit-void:#04060D;
+  --kit-ink:#F3F4FA;
+  --kit-mute:#9097B3;
+  --kit-indigo:#3626FA;
+  --kit-iris:#7462F5;
+  --kit-cyan:#19E3D6;
+  --kit-line:rgba(160,168,220,.18);
+}
+body.has-kit{padding-top:var(--kit-h)}
+.vx-kit{position:fixed;left:0;right:0;top:0;z-index:2147483000;height:var(--kit-h);padding:0 max(12px,env(safe-area-inset-right,0px)) 0 max(12px,env(safe-area-inset-left,0px));display:flex;align-items:center;justify-content:space-between;gap:10px;background:rgba(4,6,13,.9);backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%);border-bottom:1px solid var(--kit-line);color:var(--kit-ink);font:500 13px/1.2 "Instrument Sans","Helvetica Neue","Segoe UI",system-ui,sans-serif;letter-spacing:.005em;-webkit-font-smoothing:antialiased}
+.vx-kit *{box-sizing:border-box}
+.vx-kit a{color:inherit;text-decoration:none}
+.vx-kit-l,.vx-kit-r{display:flex;align-items:center;gap:10px;min-width:0}
+.vx-kit-back{display:inline-flex;align-items:center;gap:6px;padding:6px 10px 6px 6px;border-radius:999px;color:var(--kit-mute);transition:color .25s,background .25s;white-space:nowrap}
+.vx-kit-back:hover{color:var(--kit-ink);background:rgba(255,255,255,.06)}
+.vx-kit-tag{display:inline-flex;align-items:center;gap:8px;min-width:0;white-space:nowrap;overflow:hidden}
+.vx-kit-tag img{width:20px;height:auto;flex:none}
+.vx-kit-tag b{font-weight:600}
+.vx-kit-tag span{color:var(--kit-mute);overflow:hidden;text-overflow:ellipsis}
+.vx-kit-dot{width:6px;height:6px;border-radius:50%;background:var(--kit-cyan);box-shadow:0 0 10px var(--kit-cyan);flex:none}
+.vx-kit-cta{display:inline-flex;align-items:center;gap:7px;height:32px;padding:0 14px;border-radius:999px;background:linear-gradient(100deg,var(--kit-indigo),var(--kit-iris));color:#fff;font-weight:600;white-space:nowrap;box-shadow:0 8px 24px -12px rgba(116,98,245,.9);transition:filter .25s,transform .25s}
+.vx-kit-cta:hover{filter:brightness(1.12)}
+.vx-kit-cta:active{transform:scale(.97)}
+.vx-kit-cta svg{flex:none}
+.vx-kit :focus-visible{outline:2px solid var(--kit-cyan);outline-offset:2px}
+@media (max-width:720px){.vx-kit-tag span{display:none}}
+@media (max-width:520px){.vx-kit-back .t{display:none}.vx-kit-back{padding:6px}.vx-kit-cta .t-long{display:none}}
+@media (max-width:359px){.vx-kit-tag b{display:none}}
+@media (min-width:521px){.vx-kit-cta .t-short{display:none}}
+
+/* Selo reutilizável para avisos dentro das demos */
+.vx-note{display:inline-flex;align-items:center;gap:6px;font-size:12px;line-height:1.3;font-weight:600;letter-spacing:.02em;padding:5px 10px;border-radius:999px;border:1px dashed currentColor;opacity:.85}
+
+/* Toast */
+.vx-toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:2147483001;transform:translate(-50%,20px);opacity:0;pointer-events:none;max-width:min(92vw,440px);padding:12px 16px;border-radius:14px;background:rgba(10,13,26,.95);border:1px solid var(--kit-line);color:var(--kit-ink);font:500 14px/1.4 "Instrument Sans","Helvetica Neue",system-ui,sans-serif;box-shadow:0 20px 50px -20px rgba(0,0,0,.8);transition:opacity .35s,transform .45s cubic-bezier(.16,1,.3,1)}
+.vx-toast.on{opacity:1;transform:translate(-50%,0)}
+.vx-toast b{color:var(--kit-cyan);font-weight:600}
+
+/* Reveal genérico (as demos podem usar data-reveal) */
+[data-reveal]{opacity:0;transform:translateY(22px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);transition-delay:calc(var(--d,0) * 80ms)}
+[data-reveal].in{opacity:1;transform:none}
+.no-js [data-reveal],.vx-reduce [data-reveal]{opacity:1;transform:none}
+
+@media (prefers-reduced-motion:reduce){
+  .vx-toast,[data-reveal]{transition:none}
+}
+
+@media print{[data-reveal]{opacity:1!important;transform:none!important}.vx-kit,.vx-toast{display:none!important}body.has-kit{padding-top:0}}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>IA de triagem de atendimento (simulação) — Demonstração Vortyx</title>
+<meta name="description" content="Demonstração Vortyx: simulação demonstrativa de triagem com etapas Recebida, Analisada, Classificada e Direcionada, com urgência e destino.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#07050F">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../demos-kit/kit.css?v=1">
+<link rel="stylesheet" href="../../../demos-kit/lab.css?v=1">
+<link rel="stylesheet" href="../ia.css?v=1">
+<link rel="stylesheet" href="style.css?v=1">
+</head>
+<body data-root="../../../" data-cat="ia" data-demo="IA para triagem de atendimento (simulação)">
+<main class="lab">
+  <header class="lab-head">
+    <span class="lab-eyebrow">IA · Triagem</span>
+    <h1>Triagem inteligente, <em>etapa por etapa</em></h1>
+    <p class="lab-lead">Cada mensagem passa por quatro etapas: é recebida, analisada, classificada por assunto e urgência e, por fim, direcionada à fila certa. Veja o caminho acontecer.</p>
+  </header>
+  <p class="ia-banner"><span><b>Simulação demonstrativa.</b> Esta página não usa IA real: a análise é feita com regras simples em JavaScript para mostrar como a triagem funcionaria. Nenhuma mensagem sai do seu navegador.</span></p>
+
+  <section class="panel tg-ctrl" aria-label="Controles">
+    <div class="panel-b tg-ctrl-b">
+      <button class="btn btn-p" type="button" id="feed">Receber 4 mensagens</button>
+      <form class="tg-own" id="own"><input class="input" id="ownTxt" maxlength="200" placeholder="Ou escreva uma mensagem…" aria-label="Escreva uma mensagem"><button class="btn btn-g" type="submit">Enviar</button></form>
+      <button class="btn btn-g btn-s" type="button" id="clear">Limpar</button>
+    </div>
+  </section>
+
+  <section class="tg-board" aria-label="Etapas da triagem">
+    <div class="tg-col" data-s="0"><h2><span>1</span>Recebida</h2><div class="tg-list"></div></div>
+    <div class="tg-col" data-s="1"><h2><span>2</span>Analisada</h2><div class="tg-list"></div></div>
+    <div class="tg-col" data-s="2"><h2><span>3</span>Classificada</h2><div class="tg-list"></div></div>
+    <div class="tg-col" data-s="3"><h2><span>4</span>Direcionada</h2><div class="tg-list"></div></div>
+  </section>
+
+  <div class="tg-grid">
+    <section class="panel" aria-label="Filas"><div class="panel-h">Filas de destino <small>simulação</small></div><div class="panel-b tg-queues" id="queues"></div></section>
+    <section class="panel" aria-label="Decisões"><div class="panel-h">Por que cada decisão</div><div class="log tg-log" id="log" role="log"><span>— as explicações aparecem aqui —</span></div></section>
+  </div>
+  <p class="foot-note">Mensagens, filas e prazos fictícios.</p>
+</main>
+
+<script src="../../../js/config.js?v=2.1"></script>
+<script src="../../../demos-kit/kit.js?v=1"></script>
+<script src="../ia-sim.js?v=1"></script>
+<script src="app.js?v=1"></script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dashboard empresarial — Demonstração Vortyx</title>
+<meta name="description" content="Demonstração Vortyx: dashboard empresarial com indicadores, metas, gráficos e filtros por unidade e período. Dados fictícios.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#05070F">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../demos-kit/kit.css?v=1">
+<link rel="stylesheet" href="../../../demos-kit/lab.css?v=1">
+<link rel="stylesheet" href="style.css?v=1">
+</head>
+<body data-root="../../../" data-cat="solucoes-web" data-demo="dashboard empresarial">
+<main class="lab db">
+  <header class="db-top">
+    <div>
+      <span class="lab-eyebrow">Grupo Exemplo · visão geral</span>
+      <h1>Dashboard <em>empresarial</em></h1>
+      <span class="sim">Dados fictícios gerados para demonstração</span>
+    </div>
+    <div class="db-ctrl">
+      <label class="db-l">Unidade<select class="select" id="unit"><option value="all">Todas</option><option value="centro">Loja Centro</option><option value="shopping">Loja Shopping</option><option value="online">Online</option></select></label>
+      <div class="chips" role="group" aria-label="Período" id="per"><button class="chip" type="button" data-p="7" aria-pressed="false">7d</button><button class="chip" type="button" data-p="30" aria-pressed="true">30d</button><button class="chip" type="button" data-p="90" aria-pressed="false">90d</button></div>
+      <button class="btn btn-g btn-s" type="button" id="refresh"><span aria-hidden="true">↻</span> Atualizar</button>
+    </div>
+  </header>
+  <p class="db-upd" id="upd" aria-live="polite"></p>
+
+  <section class="db-kpis" id="kpis" aria-label="Indicadores"></section>
+
+  <div class="db-grid">
+    <section class="panel db-main"><div class="panel-h">Receita × meta <small id="lineSub"></small></div><div class="panel-b"><div class="db-legend"><span><i style="background:#19E3D6"></i>Receita</span><span><i class="dash"></i>Meta</span></div><div class="vxc db-line" id="line" data-label="Gráfico de linha: receita diária comparada à meta (dados fictícios)"></div></div></section>
+    <section class="panel"><div class="panel-h">Meta do período</div><div class="panel-b db-goal" id="goal"></div></section>
+    <section class="panel"><div class="panel-h">Receita por canal</div><div class="panel-b"><div class="vxc" id="bars" data-label="Gráfico de barras: receita por canal (dados fictícios)"></div></div></section>
+    <section class="panel"><div class="panel-h">Mix por categoria</div><div class="panel-b db-donut"><div class="vxc" id="donut" data-label="Gráfico de rosca: mix de receita por categoria (dados fictícios)"></div><ul id="mix"></ul></div></section>
+    <section class="panel"><div class="panel-h">Produtos mais vendidos</div><div class="panel-b db-prods" id="top"></div></section>
+  </div>
+  <p class="foot-note">Empresa, unidades e números fictícios. Em um projeto real, o painel lê os dados do seu sistema, planilha ou banco de dados.</p>
+</main>
+
+<script src="../../../js/config.js?v=2.1"></script>
+<script src="../../../demos-kit/kit.js?v=1"></script>
+<script src="../../../demos-kit/charts.js?v=1"></script>
+<script src="app.js?v=1"></script>
+</body>
+</html>

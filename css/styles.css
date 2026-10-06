@@ -493,3 +493,11 @@ section{position:relative;padding:clamp(60px,11vw,150px) 0}
   .rv{opacity:1;transform:none}
   .hero h1 .ln>span{transform:none}
 }
+
+/* Acesso às Demonstrações (seção Projetos) */
+.proj-demos{margin-top:clamp(40px,6vw,72px);display:grid;gap:22px;align-items:center;padding:clamp(22px,3.5vw,36px);border:1px solid var(--line);border-radius:24px;background:linear-gradient(120deg,rgba(54,38,250,.10),rgba(25,227,214,.05)),var(--deep)}
+.proj-demos h3{font:500 clamp(22px,2.6vw,30px)/1.2 var(--display);letter-spacing:-.02em;margin-bottom:10px}
+.proj-demos p{color:var(--mute);max-width:62ch}
+.proj-demos .btn{justify-self:start}
+@media (min-width:800px){.proj-demos{grid-template-columns:1fr auto;gap:40px}}
+@media (max-width:480px){.proj-demos .btn{justify-self:stretch;padding:0 18px}}

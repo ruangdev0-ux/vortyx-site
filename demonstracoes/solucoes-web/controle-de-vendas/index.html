@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Controle de vendas — Demonstração Vortyx</title>
+<meta name="description" content="Demonstração Vortyx: sistema simples de controle de vendas com lançamentos, filtros, totais, gráficos e exportação CSV. Dados fictícios salvos só no navegador.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0D0B08">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../demos-kit/kit.css?v=1">
+<link rel="stylesheet" href="../../../demos-kit/lab.css?v=1">
+<link rel="stylesheet" href="style.css?v=1">
+</head>
+<body data-root="../../../" data-cat="solucoes-web" data-demo="sistema de controle de vendas">
+<main class="lab cv">
+  <header class="cv-top">
+    <div>
+      <span class="lab-eyebrow">Loja Exemplo · painel de vendas</span>
+      <h1>Controle de <em>vendas</em></h1>
+      <span class="sim">Dados fictícios · salvos apenas neste navegador</span>
+    </div>
+    <div class="cv-actions"><button class="btn btn-p" type="button" id="newBtn" aria-expanded="false" aria-controls="newSale">+ Nova venda</button><button class="btn btn-g" type="button" id="csv">Exportar CSV</button></div>
+  </header>
+
+  <section class="panel cv-new" id="newSale" hidden aria-label="Nova venda">
+    <div class="panel-h">Lançar venda <small>simulação</small></div>
+    <form class="panel-b cv-form" id="form">
+      <label class="field">Data<input class="input" type="date" name="dt" required></label>
+      <label class="field">Cliente<input class="input" name="cli" required autocomplete="off" placeholder="Nome do cliente"></label>
+      <label class="field">Produto<select class="select" name="prod" id="prodSel"></select></label>
+      <label class="field">Qtd.<input class="input" type="number" name="q" min="1" max="99" value="1" required></label>
+      <label class="field">Pagamento<select class="select" name="pg" id="pgSel"></select></label>
+      <label class="field">Desconto %<input class="input" type="number" name="ds" min="0" max="50" value="0"></label>
+      <div class="cv-sum"><span>Total</span><b id="sum">R$ 0,00</b></div>
+      <button class="btn btn-p" type="submit">Salvar venda</button>
+    </form>
+  </section>
+
+  <section class="cv-filters" aria-label="Filtros">
+    <div class="chips" role="group" aria-label="Período" id="per"><button type="button" class="chip" data-p="1" aria-pressed="false">Hoje</button><button type="button" class="chip" data-p="7" aria-pressed="true">7 dias</button><button type="button" class="chip" data-p="30" aria-pressed="false">30 dias</button></div>
+    <select class="select cv-sel" id="fPg" aria-label="Forma de pagamento"><option value="">Todas as formas</option></select>
+    <input class="input cv-q" id="fQ" type="search" placeholder="Buscar cliente ou produto" aria-label="Buscar">
+  </section>
+
+  <section class="cv-kpis" id="kpis" aria-label="Totais do período"></section>
+
+  <div class="cv-grid">
+    <section class="panel"><div class="panel-h">Vendas por dia <small id="lineSub"></small></div><div class="panel-b"><div class="vxc" id="line" data-label="Gráfico de linha: vendas por dia (dados fictícios)"></div></div></section>
+    <section class="panel"><div class="panel-h">Por forma de pagamento</div><div class="panel-b cv-donut"><div class="vxc" id="donut" data-label="Gráfico de rosca: vendas por forma de pagamento (dados fictícios)"></div><ul id="legend"></ul></div></section>
+  </div>
+
+  <section class="panel cv-list" aria-label="Lançamentos">
+    <div class="panel-h">Lançamentos <small id="cnt"></small></div>
+    <div class="cv-table-wrap"><table class="cv-table"><thead><tr><th>Data</th><th>Cliente</th><th>Produto</th><th>Pagamento</th><th class="r">Total</th><th><span class="vx-sr">Ações</span></th></tr></thead><tbody id="rows"></tbody></table></div>
+  </section>
+  <p class="foot-note"><button class="btn btn-g btn-s" type="button" id="reset">Restaurar dados de exemplo</button><br><br>Clientes, produtos e valores fictícios, gerados para demonstração.</p>
+</main>
+
+<script src="../../../js/config.js?v=2.1"></script>
+<script src="../../../demos-kit/kit.js?v=1"></script>
+<script src="../../../demos-kit/charts.js?v=1"></script>
+<script src="app.js?v=1"></script>
+</body>
+</html>

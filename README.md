@@ -40,7 +40,7 @@ vortyx-site/
 │   ├── styles.css              # estilos da Home
 │   └── demos.css               # estilos do hub de demonstrações
 ├── js/
-│   ├── config.js               # WhatsApp, fundador e lista de projetos (editar aqui)
+│   ├── config.js               # WhatsApp e lista de projetos (editar aqui)
 │   ├── main.js                 # Home: navegação, serviços, vitrine animada e vórtice 3D
 │   ├── demos.js                # catálogo das demonstrações (título, descrição, tags, miniatura)
 │   ├── demos-hub.js            # hub de demonstrações (abas por categoria e fundo 3D)
@@ -62,7 +62,6 @@ vortyx-site/
 │   ├── demos/                  # miniaturas do hub e dos cards da Home (960×600, WebP)
 │   ├── vitrine/                # telas da vitrine animada: {cena}-d (notebook), -t (tablet), -m (celular)
 │   ├── og-vortyx-v3.jpg        # imagem de compartilhamento (1200×630)
-│   ├── ruan-gomes-fundador.webp  # sem uso no site (reservada)
 │   ├── vortyx-logotipo.webp / vortyx-simbolo.webp
 │   └── favicons e ícones
 ├── robots.txt
@@ -93,7 +92,6 @@ Para incluir uma demo no hub, cadastre-a em `js/demos.js` e gere a miniatura em 
 
 - `whatsappNumber`: número oficial no formato `55 + DDD + número`.
 - `whatsappMessage`: mensagem padrão. Botões podem ter mensagem própria com `data-msg="..."`.
-- `founderName` / `founderRole`: reservados; hoje não há bloco de fundador exibido no site.
 - `PROJECTS`: lista de projetos para uma futura seção de projetos (hoje não exibida na Home).
   Cadastre apenas projetos, clientes e informações reais e autorizados.
 

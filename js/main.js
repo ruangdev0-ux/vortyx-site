@@ -13,9 +13,7 @@
   function bindWa(scope){scope.querySelectorAll('.js-wa').forEach(a=>{a.href=waLink(a.dataset.msg);a.target='_blank';a.rel='noopener'})}
   bindWa(d);
 
-  /* ---------- Fundador / ano ---------- */
-  const fN=d.getElementById('founderName'),fR=d.getElementById('founderRole'); // bloco do fundador não é exibido na Home; mantido para reuso
-  if(CONFIG.founderName&&fN&&fR){fN.textContent=CONFIG.founderName;fR.textContent=CONFIG.founderRole}
+  /* ---------- Ano ---------- */
   d.getElementById('year').textContent=new Date().getFullYear();
 
   /* ---------- Projetos ---------- */

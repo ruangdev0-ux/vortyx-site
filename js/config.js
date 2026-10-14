@@ -6,8 +6,6 @@ const CONFIG = {
   // Todos os botões de WhatsApp do site usam este número.
   whatsappNumber: "5535999348489", // +55 35 99934-8489 (WhatsApp Business oficial)
   whatsappMessage: "Olá! Vim pelo site da Vortyx e gostaria de conversar sobre um projeto.",
-  founderName: "Ruan Gomes",
-  founderRole: "Fundador da Vortyx",
 
   // Projetos na home: quantos destaques aparecem antes do botão "Ver todos os projetos".
   projectsOnHome: 3,
@@ -36,19 +34,6 @@ const CONFIG = {
    Não cadastre clientes, resultados ou números que não sejam reais.
    ========================================================= */
 const PROJECTS = [
-  {
-    type: "cliente",
-    client: "SRJ Business",
-    category: "Site institucional",
-    description: "Site institucional para uma empresa de estruturação de negócios: apresentação da marca, das soluções e contato direto pelo WhatsApp.",
-    image: "images/projeto-srj-business.webp",
-    imageWidth: 1438,
-    imageHeight: 832,
-    imageAlt: "Página inicial do site da SRJ Business, com o título “Construindo negócios mais preparados para o futuro”",
-    link: "https://srjbusiness.github.io/srj-business/",
-    linkLabel: "Ver site",
-    featured: true
-  },
   {
     type: "proprio",
     client: "Vortyx",

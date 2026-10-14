@@ -23,28 +23,28 @@ const DEMOS = [
   /* ---------- Sites ---------- */
   {id:"barbearia", cat:"sites", title:"Barbearia Navalha Norte", segment:"Barbearia", path:"sites/barbearia/", thumb:"barbearia.webp", fx:"3D",
    desc:"Visual escuro e premium, serviços com preços, equipe, galeria, horários e agendamento simulado.", tags:["Agendamento","Galeria","3D no topo"]},
-  {id:"restaurante", cat:"sites", title:"Brasa & Miolo Burger Bar", segment:"Restaurante / Lanchonete", path:"sites/restaurante/", thumb:"restaurante.webp", fx:"Interativo",
-   desc:"Cardápio por categorias, carrinho com total em tempo real, horários e localização.", tags:["Cardápio","Carrinho","Pedido"]},
+  {id:"restaurante", cat:"sites", title:"Brasa & Miolo Burger Bar", segment:"Hamburgueria", path:"sites/restaurante/", thumb:"restaurante.webp", fx:"Interativo",
+   desc:"Cardápio visual, combos, monte o seu burger camada por camada e pedido com entrega ou retirada.", tags:["Cardápio visual","Monte o seu","Pedido"]},
   {id:"confeitaria", cat:"sites", title:"Ateliê Açúcar & Afeto", segment:"Confeitaria", path:"sites/confeitaria/", thumb:"confeitaria.webp", fx:"Interativo",
-   desc:"Vitrine delicada de bolos e doces, galeria e encomenda com estimativa de valor.", tags:["Encomendas","Vitrine","Galeria"]},
+   desc:"Confeitaria autoral com coleções, encomendas por ocasião e pedido em 4 etapas com estimativa de valor.", tags:["Encomendas","Coleções","Ocasiões"]},
   {id:"academia", cat:"sites", title:"Pulso Academia", segment:"Academia", path:"sites/academia/", thumb:"academia.webp", fx:"3D",
    desc:"Planos mensais e anuais, modalidades, professores, grade de horários e matrícula.", tags:["Planos","Grade de horários","3D"]},
   {id:"consultoria", cat:"sites", title:"Marino Consultoria", segment:"Consultoria / Profissional", path:"sites/consultoria/", thumb:"consultoria.webp", fx:"Interativo",
-   desc:"Site corporativo: autoridade, serviços, metodologia, depoimentos demonstrativos e agenda.", tags:["Autoridade","Metodologia","Agenda"]},
+   desc:"Consultoria de gestão com raio-X interativo da operação, priorização de gargalos e plano de ação estruturado.", tags:["Diagnóstico","Processos","Planejamento"]},
 
   /* ---------- Landing Pages ---------- */
   {id:"lp-servico", cat:"landing-pages", title:"LP de serviço · Arquitetura de interiores", segment:"Serviço", path:"landing-pages/servico/", thumb:"lp-servico.webp", fx:"Interativo",
    desc:"Para profissionais que vendem um serviço: proposta clara, processo, objeções e contato.", tags:["Headline","Objeções","FAQ"]},
   {id:"lp-produto", cat:"landing-pages", title:"LP de produto digital · Curso online", segment:"Produto digital", path:"landing-pages/produto-digital/", thumb:"lp-produto.webp", fx:"Interativo",
-   desc:"Conversão direta: prévia de aula, módulos, para quem é, garantia, oferta e FAQ.", tags:["Oferta","Módulos","Garantia"]},
+   desc:"Landing page de curso online com prévia interativa de aula, módulos em sanfona e inscrição demonstrativa.", tags:["Curso online","Prévia interativa","Inscrição"]},
   {id:"lp-captacao", cat:"landing-pages", title:"LP de captação · Guia gratuito", segment:"Captação de leads", path:"landing-pages/captacao/", thumb:"lp-captacao.webp", fx:"Interativo",
-   desc:"Página focada no formulário em 2 etapas: benefícios, validação e confirmação.", tags:["Formulário","Validação","Benefícios"]},
+   desc:"Landing page de captação com guia gratuito, formulário em duas etapas e conteúdo expansível.", tags:["Captação","Guia gratuito","Formulário"]},
 
   /* ---------- Automações e Integrações ---------- */
   {id:"auto-triagem", cat:"automacoes", title:"Triagem de atendimento", segment:"Atendimento", path:"automacoes/triagem/", thumb:"auto-triagem.webp", fx:"Simulação",
-   desc:"Digite uma mensagem e veja: cliente → triagem → categoria → responsável → resposta.", tags:["Regras","Roteamento","Resposta"]},
+   desc:"Automação que classifica mensagens por regras, aplica prioridades e encaminha cada caso para a fila certa.", tags:["Triagem","Regras","Encaminhamento"]},
   {id:"auto-lead", cat:"automacoes", title:"Captação de lead", segment:"Comercial", path:"automacoes/captacao-lead/", thumb:"auto-lead.webp", fx:"Simulação",
-   desc:"Formulário → validação → CRM → notificação, com o registro aparecendo no CRM.", tags:["Validação","CRM","Notificação"]},
+   desc:"Automação que valida leads, calcula prioridade, registra no CRM e encaminha cada contato para um responsável.", tags:["Leads","Prioridade","CRM"]},
   {id:"auto-integracao", cat:"automacoes", title:"Integração entre sistemas", segment:"Integração", path:"automacoes/integracao/", thumb:"auto-integracao.webp", fx:"Simulação",
    desc:"Um pedido no site percorre API, sistema e banco até atualizar o painel.", tags:["API","JSON","Painel"]},
 
@@ -62,9 +62,9 @@ const DEMOS = [
 
   /* ---------- IA ---------- */
   {id:"ia-classificacao", cat:"ia", title:"Classificação de mensagens", segment:"Atendimento", path:"ia/classificacao/", thumb:"ia-classificacao.webp", fx:"Simulação",
-   desc:"Mensagens entram e são separadas em Comercial, Suporte, Financeiro ou Outros.", tags:["Classificação","Confiança","Filas"]},
+   desc:"Classificação demonstrativa que compara sinais, avalia a certeza e envia casos ambíguos para revisão humana.", tags:["Sinais","Certeza","Revisão humana"]},
   {id:"ia-triagem", cat:"ia", title:"Triagem inteligente", segment:"Atendimento", path:"ia/triagem/", thumb:"ia-triagem.webp", fx:"Simulação",
-   desc:"Recebida → analisada → classificada → direcionada, mostrando o que foi identificado.", tags:["Análise","Urgência","Direcionamento"]},
+   desc:"Triagem demonstrativa que extrai dados da mensagem, percebe o que falta e só encaminha quando a ficha está pronta.", tags:["Extração","Complemento","Ficha"]},
   {id:"ia-leads", cat:"ia", title:"Organização de leads", segment:"Comercial", path:"ia/leads/", thumb:"ia-leads.webp", fx:"Simulação",
    desc:"Leads organizados por interesse e prioridade, com o motivo de cada decisão.", tags:["Prioridade","Interesse","Motivos"]}
 ];

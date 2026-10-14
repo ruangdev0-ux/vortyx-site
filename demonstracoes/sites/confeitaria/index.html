@@ -4,106 +4,174 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Ateliê Açúcar & Afeto · Confeitaria — Demonstração Vortyx</title>
-<meta name="description" content="Demonstração Vortyx: site para confeitaria fictícia com vitrine, galeria e encomendas.">
+<meta name="description" content="Demonstração Vortyx: site para confeitaria fictícia com coleções, encomendas por ocasião e fluxo de encomenda em etapas.">
 <meta name="robots" content="noindex">
-<meta name="theme-color" content="#FBF3EE">
+<meta name="theme-color" content="#FAF6F0">
 <link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,400&family=Nunito:wght@400;600;700&family=Instrument+Sans:wght@500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../../demos-kit/kit.css?v=1">
-<link rel="stylesheet" href="style.css?v=1">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="img/hero-640.webp" imagesrcset="img/hero-640.webp 640w, img/hero-1000.webp 1000w" imagesizes="(min-width:900px) 46vw, 100vw">
+<script>/* herói animado: só com JS, sem movimento reduzido e com container queries */try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&window.CSS&&CSS.supports('width','1cqw')){document.documentElement.classList.add('aa-fx-wait');var l=document.createElement('link');l.rel='preload';l.as='image';l.href='img/hero-base-640.webp';l.setAttribute('imagesrcset','img/hero-base-640.webp 640w, img/hero-base-1000.webp 1000w');l.setAttribute('imagesizes','(min-width:900px) 46vw, 100vw');document.head.appendChild(l)}}catch(e){}</script>
+<link rel="stylesheet" href="../../../demos-kit/kit.css?v=2">
+<link rel="stylesheet" href="style.css?v=2">
 </head>
 <body data-root="../../../" data-cat="sites" data-demo="site para confeitaria">
 
-<header class="aa-hdr">
-  <a class="aa-logo" href="#topo"><svg viewBox="0 0 36 36" width="34" height="34" aria-hidden="true"><circle cx="18" cy="18" r="17" fill="#F2D3D6"/><path d="M10 22h16v4a2 2 0 0 1-2 2H12a2 2 0 0 1-2-2Z" fill="#4A2C2A"/><path d="M11 22c0-4 3-7 7-7s7 3 7 7" fill="#fff"/><circle cx="18" cy="12" r="2.4" fill="#C9475A"/></svg><span>Ateliê<br><i>Açúcar &amp; Afeto</i></span></a>
-  <nav class="aa-nav" aria-label="Seções"><a href="#vitrine">Vitrine</a><a href="#galeria">Galeria</a><a href="#encomendar" class="aa-pill">Encomendar</a></nav>
+<header class="aa-hdr" id="hdr">
+  <a class="aa-logo" href="#topo"><span class="aa-logo-k">Ateliê</span><span class="aa-logo-n">Açúcar <em>&amp;</em> Afeto</span></a>
+  <nav class="aa-nav" aria-label="Seções">
+    <a href="#colecoes">Coleções</a><a href="#ocasioes">Ocasiões</a><a href="#atelie">O ateliê</a><a href="#bom-saber">Bom saber</a>
+  </nav>
+  <a class="aa-btn aa-btn-sm" href="#encomenda">Fazer encomenda</a>
 </header>
 
 <main id="topo">
-  <section class="aa-hero">
+  <!-- HERO -->
+  <section class="aa-hero" aria-labelledby="heroTitle">
+    <figure class="aa-hero-ph">
+      <img class="aa-hero-img" src="img/hero-640.webp" srcset="img/hero-640.webp 640w, img/hero-1000.webp 1000w" sizes="(min-width:900px) 46vw, 100vw" width="1000" height="1250" alt="Bolo alto de cobertura branca com lâminas de chocolate rosé, sobre suporte branco e tecido de linho." fetchpriority="high" decoding="async">
+    </figure>
     <div class="aa-hero-txt">
-      <p class="aa-kick" data-reveal>Confeitaria artesanal · sob encomenda</p>
-      <h1 data-reveal style="--d:1">Bolos que viram <i>lembrança.</i></h1>
-      <p class="aa-lead" data-reveal style="--d:2">Receitas feitas em pequenas fornadas, com ingredientes escolhidos um a um. Do aniversário ao café da tarde, a gente prepara com calma.</p>
-      <div class="aa-ctas" data-reveal style="--d:3"><a class="aa-btn" href="#encomendar">Fazer uma encomenda</a><a class="aa-link" href="#vitrine">Ver a vitrine →</a></div>
-    </div>
-    <div class="aa-cake-wrap" aria-hidden="true">
-      <div class="aa-blob"></div>
-      <div class="aa-cake">
-        <div class="aa-cherry"></div>
-        <div class="aa-tier t3"><i></i></div>
-        <div class="aa-tier t2"><i></i></div>
-        <div class="aa-tier t1"><i></i></div>
-        <div class="aa-plate"></div>
+      <p class="aa-k" data-reveal>Confeitaria autoral</p>
+      <h1 id="heroTitle" data-reveal style="--d:1">Feito à mão, <em>para ficar na memória.</em></h1>
+      <p class="aa-lead" data-reveal style="--d:2">Bolos e doces finos produzidos em pequenas quantidades, com acabamento pensado para cada ocasião.</p>
+      <div class="aa-ctas" data-reveal style="--d:3">
+        <a class="aa-btn" href="#encomenda">Fazer encomenda</a>
+        <a class="aa-link" href="#colecoes">Ver coleções</a>
       </div>
-      <span class="aa-badge">Ilustração<br>demonstrativa</span>
-      <span class="aa-float f1"></span><span class="aa-float f2"></span><span class="aa-float f3"></span>
+      <p class="aa-meta" data-reveal style="--d:4">Sob encomenda <span aria-hidden="true">·</span> Retirada ou entrega</p>
     </div>
   </section>
 
-  <section class="aa-sec" id="vitrine">
+  <!-- COLEÇÕES -->
+  <section class="aa-sec" id="colecoes" aria-labelledby="colTitle">
     <div class="aa-sec-h">
-      <h2 data-reveal>Vitrine <i>da semana</i></h2>
-      <p class="aa-note">Produtos e preços fictícios, apenas para demonstração.</p>
+      <p class="aa-k" data-reveal>Coleções</p>
+      <h2 id="colTitle" data-reveal style="--d:1">Cinco formas de <em>celebrar.</em></h2>
+      <p class="aa-sub" data-reveal style="--d:2">Cada peça é feita para a sua data. Valores fictícios, apenas para demonstração.</p>
     </div>
-    <div class="aa-filters" role="group" aria-label="Filtrar vitrine" id="filters"></div>
-    <div class="aa-grid" id="grid" aria-live="polite"></div>
+    <div class="aa-col" id="colList" tabindex="0" role="region" aria-label="Coleções, role para o lado para ver todas"></div>
+    <p class="aa-swipe" aria-hidden="true">Deslize para ver as cinco coleções</p>
   </section>
 
-  <section class="aa-how">
-    <h2 data-reveal>Como <i>encomendar</i></h2>
-    <ol>
-      <li data-reveal><b>1</b><h3>Escolha</h3><p>Tipo, tamanho, massa e recheio, aqui mesmo no site.</p></li>
-      <li data-reveal style="--d:1"><b>2</b><h3>Confirme</h3><p>Combinamos detalhes, decoração e data de retirada.</p></li>
-      <li data-reveal style="--d:2"><b>3</b><h3>Celebre</h3><p>Seu bolo fica pronto no dia, embalado com cuidado.</p></li>
-    </ol>
+  <!-- OCASIÕES -->
+  <section class="aa-occ" id="ocasioes" aria-labelledby="occTitle">
+    <div class="aa-occ-in">
+      <figure class="aa-occ-ph" data-reveal>
+        <img src="img/casamento.webp" width="800" height="1200" loading="lazy" decoding="async" alt="Bolo de casamento branco de três andares com rosas e ramos de oliveira, sobre suporte de madeira, à luz de velas.">
+      </figure>
+      <div class="aa-occ-txt">
+        <p class="aa-k" data-reveal>Encomende para sua ocasião</p>
+        <h2 id="occTitle" data-reveal style="--d:1">Para cada data, <em>a medida certa.</em></h2>
+        <ul class="aa-occ-list" id="occList"></ul>
+        <a class="aa-btn aa-btn-light" href="#encomenda" id="occGo">Montar minha encomenda</a>
+        <p class="aa-occ-live" id="occLive" aria-live="polite"></p>
+      </div>
+    </div>
   </section>
 
-  <section class="aa-sec" id="galeria">
+  <!-- O ATELIÊ -->
+  <section class="aa-sec aa-atelie" id="atelie" aria-labelledby="atTitle">
+    <figure class="aa-at-ph" data-reveal>
+      <img src="img/atelie.webp" width="1050" height="700" loading="lazy" decoding="async" alt="Mãos alisando o creme na lateral de um bolo de camadas, sobre uma base giratória de madeira.">
+    </figure>
+    <div class="aa-at-txt">
+      <p class="aa-k" data-reveal>O ateliê</p>
+      <h2 id="atTitle" data-reveal style="--d:1">Pequenas quantidades, <em>acabamento sem pressa.</em></h2>
+      <p data-reveal style="--d:2">Cada encomenda é produzida para uma data, com ingredientes escolhidos e finalização feita à mão. Por isso trabalhamos com agenda e antecedência.</p>
+      <ul class="aa-at-pts" data-reveal style="--d:3"><li>Produção sob encomenda</li><li>Ingredientes selecionados</li><li>Acabamento manual</li></ul>
+    </div>
+  </section>
+
+  <!-- ENCOMENDA -->
+  <section class="aa-sec aa-order" id="encomenda" aria-labelledby="ordTitle">
     <div class="aa-sec-h">
-      <h2 data-reveal>Galeria</h2>
-      <p class="aa-note">Ilustrações demonstrativas. No projeto real, entram as fotos dos próprios produtos.</p>
+      <p class="aa-k" data-reveal>Faça sua encomenda</p>
+      <h2 id="ordTitle" data-reveal style="--d:1">Quatro passos, <em>sem complicação.</em></h2>
     </div>
-    <div class="aa-gallery">
-      <figure data-reveal class="gx gx1"><div class="ill ill-layer"></div><figcaption>Bolo de camadas</figcaption></figure>
-      <figure data-reveal style="--d:1" class="gx gx2"><div class="ill ill-mac"></div><figcaption>Macarons</figcaption></figure>
-      <figure data-reveal style="--d:2" class="gx gx3"><div class="ill ill-tart"></div><figcaption>Torta de frutas</figcaption></figure>
-      <figure data-reveal style="--d:3" class="gx gx4"><div class="ill ill-brig"></div><figcaption>Brigadeiros</figcaption></figure>
-      <figure data-reveal style="--d:4" class="gx gx5"><div class="ill ill-cup"></div><figcaption>Cupcakes</figcaption></figure>
+    <div class="aa-order-in">
+      <div class="aa-flow">
+        <ol class="aa-steps" id="steps">
+          <li><span>1</span>Produto</li><li><span>2</span>Tamanho e sabor</li><li><span>3</span>Data e ocasião</li><li><span>4</span>Seus dados</li>
+        </ol>
+        <form class="aa-form" id="orderForm" data-demo-form="<b>Simulação:</b> nenhum dado foi enviado." novalidate>
+          <fieldset class="aa-step" data-step="0">
+            <legend tabindex="-1">Que tipo de encomenda?</legend>
+            <div class="aa-choices aa-choices-prod" id="prodOpts"></div>
+          </fieldset>
+          <fieldset class="aa-step" data-step="1" hidden>
+            <legend tabindex="-1">Tamanho e sabor</legend>
+            <p class="aa-lbl" id="sizeLbl">Tamanho</p>
+            <div class="aa-choices" id="sizeOpts" role="radiogroup" aria-labelledby="sizeLbl"></div>
+            <label class="aa-field">Sabor<select name="sabor" id="flavor"></select></label>
+          </fieldset>
+          <fieldset class="aa-step" data-step="2" hidden>
+            <legend tabindex="-1">Data e ocasião</legend>
+            <label class="aa-field">Data da retirada ou entrega<input type="date" name="data" id="date" required aria-describedby="dateHelp"><small id="dateHelp"></small></label>
+            <p class="aa-lbl" id="occLbl">Ocasião</p>
+            <div class="aa-chips" id="occOpts" role="radiogroup" aria-labelledby="occLbl"></div>
+            <p class="aa-lbl" id="recLbl">Como prefere receber</p>
+            <div class="aa-chips" role="radiogroup" aria-labelledby="recLbl">
+              <label><input type="radio" name="receber" value="Retirada no ateliê" checked><span>Retirada no ateliê</span></label>
+              <label><input type="radio" name="receber" value="Entrega"><span>Entrega</span></label>
+            </div>
+          </fieldset>
+          <fieldset class="aa-step" data-step="3" hidden>
+            <legend tabindex="-1">Seus dados</legend>
+            <label class="aa-field">Seu nome<input name="nome" id="nome" required autocomplete="off" placeholder="Como podemos chamar você?"></label>
+            <label class="aa-field">Observações <span class="opt">(opcional)</span><textarea name="obs" rows="3" placeholder="Cores, escrita no bolo, referência de decoração…"></textarea></label>
+          </fieldset>
+          <div class="aa-nav-btns">
+            <button type="button" class="aa-link" id="back" hidden>Voltar</button>
+            <button type="button" class="aa-btn" id="next">Continuar</button>
+            <button type="submit" class="aa-btn" id="send" hidden>Enviar encomenda (simulação)</button>
+          </div>
+        </form>
+        <div class="aa-done" id="done" hidden tabindex="-1">
+          <p class="aa-k">Resumo pronto</p>
+          <h3>Obrigada<span id="doneName"></span>.</h3>
+          <p id="doneTxt"></p>
+          <p class="aa-done-note">Nada foi enviado: esta é uma demonstração. Em um site real, este resumo seguiria para o WhatsApp ou o atendimento do ateliê, que confirmaria detalhes, disponibilidade e valor final.</p>
+          <button type="button" class="aa-link" id="again">Fazer outra encomenda</button>
+        </div>
+      </div>
+      <aside class="aa-sum" aria-labelledby="sumTitle">
+        <h3 id="sumTitle">Sua encomenda</h3>
+        <dl id="sumList"></dl>
+        <div class="aa-est"><span>Estimativa</span><b id="est" aria-live="polite">R$ 0,00</b></div>
+        <p class="aa-sum-note">Valor de referência, fictício. Entrega combinada no atendimento.</p>
+      </aside>
     </div>
   </section>
 
-  <section class="aa-order" id="encomendar">
-    <div class="aa-order-txt">
-      <h2 data-reveal>Monte sua <i>encomenda</i></h2>
-      <p>Escolha as opções e veja uma estimativa na hora. Encomendas com pelo menos 2 dias de antecedência.</p>
-      <div class="aa-est" aria-live="polite"><span>Estimativa</span><b id="est">R$ 0,00</b><small id="estTxt">Escolha o tamanho para calcular.</small><em>Valores fictícios · demonstração</em></div>
+  <!-- BOM SABER -->
+  <section class="aa-sec aa-faq" id="bom-saber" aria-labelledby="faqTitle">
+    <div class="aa-sec-h">
+      <p class="aa-k" data-reveal>Bom saber</p>
+      <h2 id="faqTitle" data-reveal style="--d:1">Antes de <em>encomendar.</em></h2>
     </div>
-    <form class="aa-form" id="orderForm" data-demo-form>
-      <fieldset><legend>Tipo</legend><div class="aa-radios" id="types"></div></fieldset>
-      <fieldset><legend>Tamanho</legend><div class="aa-radios" id="sizes"></div></fieldset>
-      <div class="aa-row">
-        <label>Massa<select name="massa" id="massa"><option>Baunilha</option><option>Chocolate</option><option>Red velvet</option><option>Limão siciliano</option></select></label>
-        <label>Recheio<select name="recheio" id="recheio"><option value="0">Brigadeiro</option><option value="0">Doce de leite</option><option value="12">Frutas vermelhas (+R$ 12)</option><option value="15">Pistache (+R$ 15)</option></select></label>
-      </div>
-      <div class="aa-row">
-        <label>Data de retirada<input type="date" name="data" id="date" required></label>
-        <label>Seu nome<input name="nome" required placeholder="Como devemos chamar você?" autocomplete="off"></label>
-      </div>
-      <label>Observações<textarea name="obs" rows="3" placeholder="Ex.: escrever “Feliz aniversário, Ana”"></textarea></label>
-      <button class="aa-btn" type="submit">Enviar encomenda (simulação)</button>
-      <p class="aa-note">Nenhum dado é enviado. Esta é uma demonstração.</p>
-    </form>
-    <div class="aa-ok" id="ok" hidden tabindex="-1"><div class="aa-ok-ico" aria-hidden="true">♥</div><h3>Encomenda recebida <span>(simulação)</span></h3><p id="okTxt"></p><button class="aa-link" type="button" id="again">Fazer outra encomenda</button></div>
+    <dl class="aa-faq-g">
+      <div data-reveal><dt><span>01</span>Antecedência mínima</dt><dd>Doces e sobremesas: 2 dias. Bolos: 3 a 5 dias. Bolos de andares: 30 dias.</dd></div>
+      <div data-reveal style="--d:1"><dt><span>02</span>Retirada ou entrega</dt><dd>Retire no ateliê ou receba em casa. O valor da entrega é combinado conforme o endereço.</dd></div>
+      <div data-reveal style="--d:2"><dt><span>03</span>Conservação</dt><dd>Bolos e tortas na geladeira, fora dela 30 minutos antes de servir. Doces finos em local fresco.</dd></div>
+      <div data-reveal style="--d:3"><dt><span>04</span>Personalização</dt><dd>Cores, flores, escrita e tema são combinados no atendimento, a partir da sua referência.</dd></div>
+    </dl>
   </section>
 </main>
 
-<footer class="aa-ftr"><div><b>Ateliê Açúcar &amp; Afeto</b><span>Confeitaria fictícia · Rua dos Confeitos, 88 · Cidade Exemplo</span></div><span>Site demonstrativo criado pela Vortyx</span></footer>
+<footer class="aa-ftr">
+  <div class="aa-ftr-top">
+    <div><p class="aa-logo aa-logo-f"><span class="aa-logo-k">Ateliê</span><span class="aa-logo-n">Açúcar <em>&amp;</em> Afeto</span></p>
+      <p>Rua dos Confeitos, 88 · Bairro Exemplo · Cidade Exemplo<br>Atendimento de terça a sábado, das 9h às 18h</p></div>
+    <nav aria-label="Rodapé"><a href="#colecoes">Coleções</a><a href="#ocasioes">Ocasiões</a><a href="#atelie">O ateliê</a><a href="#encomenda">Encomendar</a></nav>
+  </div>
+  <p class="aa-ftr-note">Confeitaria fictícia. Produtos, preços, prazos, horários e endereço são ilustrativos. Site demonstrativo criado pela Vortyx.</p>
+  <p class="aa-ftr-cred">Fotos: Katie Rosario, Jonathan Borba, lo lindo, Nico Wijaya, Max Griss, Fernando Andrade, Stephen Wheeler e Joanna Stołowicz, via Unsplash (Licença Unsplash).</p>
+</footer>
 
 <script src="../../../js/config.js?v=2.1"></script>
-<script src="../../../demos-kit/kit.js?v=1"></script>
-<script src="app.js?v=1"></script>
+<script src="../../../demos-kit/kit.js?v=2"></script>
+<script src="app.js?v=2"></script>
 </body>
 </html>

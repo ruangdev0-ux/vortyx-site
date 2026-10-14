@@ -14,7 +14,8 @@
   bindWa(d);
 
   /* ---------- Fundador / ano ---------- */
-  if(CONFIG.founderName){d.getElementById('founderName').textContent=CONFIG.founderName;d.getElementById('founderRole').textContent=CONFIG.founderRole}
+  const fN=d.getElementById('founderName'),fR=d.getElementById('founderRole'); // bloco do fundador não é exibido na Home; mantido para reuso
+  if(CONFIG.founderName&&fN&&fR){fN.textContent=CONFIG.founderName;fR.textContent=CONFIG.founderRole}
   d.getElementById('year').textContent=new Date().getFullYear();
 
   /* ---------- Projetos ---------- */
@@ -37,7 +38,9 @@
   const ctaCard=`<article class="proj proj-cta rv"><div><div class="rings" aria-hidden="true"><span></span><span></span><span></span></div>
       <h3>O próximo projeto pode ser o seu.</h3><p>Site, landing page, automação ou solução web: conte o que o seu negócio precisa.</p></div>
       <a class="btn btn-primary btn-sm js-wa" data-msg="Olá! Vim pelo site da Vortyx, vi os projetos e gostaria de conversar sobre o meu." href="https://wa.me/5535999348489">${ico('i-wa',16)}Conversar sobre meu projeto</a></article>`;
+  // A seção Projetos saiu da Home na v3 (PROJECTS continua em config.js para uso futuro)
   const grid=d.getElementById('projGrid'), more=d.getElementById('projMore');
+  if(grid&&more){
   const list=[...PROJECTS].sort((a,b)=>(b.featured?1:0)-(a.featured?1:0));
   const limit=Math.max(1,CONFIG.projectsOnHome||3);
   const shown=list.slice(0,limit), rest=list.slice(limit);
@@ -58,6 +61,55 @@
     }
   }
   bindWa(grid);
+  }
+
+  /* ---------- Vitrine: projetos em loop dentro dos dispositivos ---------- */
+  const vit=d.getElementById('vitrine');
+  if(vit){
+    const stage=d.getElementById('scStage'),items=[...d.querySelectorAll('#scProg li')];
+    const SC=items.map(li=>({k:li.dataset.k,type:li.dataset.type,name:li.querySelector('span').innerHTML,href:li.dataset.href,msg:li.dataset.msg,concept:li.dataset.kind==='conceito'}));
+    const DUR=5600;vit.style.setProperty('--sc-t',DUR+'ms');
+    const DEV=[{el:stage.querySelector('.sc-laptop .sc-scr'),kind:'d',off:0},{el:stage.querySelector('.sc-phone .sc-scr'),kind:'m',off:0},{el:stage.querySelector('.sc-tablet .sc-scr'),kind:'t',off:0}] // os três aparelhos mostram sempre a mesma cena do rótulo;
+    const src=(i,kind)=>`images/vitrine/${SC[(i+SC.length)%SC.length].k}-${kind}.webp`;
+    // botões de progresso (também servem para escolher a cena)
+    items.forEach((li,i)=>{li.innerHTML=`<button type="button" aria-label="Mostrar ${SC[i].name.replace(/&amp;/g,'&')}"></button>`});
+    const bars=items.map(li=>li.firstChild);d.getElementById('scProg').removeAttribute('aria-hidden');
+    const nowEl=vit.querySelector('.sc-now'),typeEl=d.getElementById('scType'),nameEl=d.getElementById('scName'),kindEl=d.getElementById('scKind'),open=d.getElementById('scOpen'),openT=d.getElementById('scOpenT'),pause=d.getElementById('scPause');
+    let cur=0,timer=0,paused=false,visible=false,started=false;
+    const isTablet=()=>getComputedStyle(stage.querySelector('.sc-tablet')).display!=='none';
+    function fit(img,box){const h=img.naturalHeight*box.clientWidth/img.naturalWidth;if(!h)return;img.style.setProperty('--sy',(-Math.max(0,Math.min(.5,1-box.clientHeight/h))*100).toFixed(1)+'%')}
+    function put(dev,i){
+      if(dev.kind==='t'&&!isTablet())return;
+      const box=dev.el,old=[...box.querySelectorAll('.sc-shot, :scope > img')];
+      const shot=d.createElement('span');shot.className='sc-shot';const img=new Image();img.alt='';img.decoding='async';
+      img.onload=()=>{fit(img,box);old.forEach(o=>{o.classList.remove('on');o.classList.add('out');setTimeout(()=>o.remove(),1200)});box.appendChild(shot);requestAnimationFrame(()=>shot.classList.add('on'))};
+      img.src=src(i+dev.off,dev.kind);shot.appendChild(img);
+    }
+    function show(n,user){
+      cur=(n+SC.length)%SC.length;
+      DEV.forEach(dv=>put(dv,cur));
+      if(!reduce){const rig=d.getElementById('scRig');rig.classList.toggle('cam-a',cur%2===0);rig.classList.toggle('cam-b',cur%2===1)}
+      const sc=SC[cur],plain=sc.name.replace(/&amp;/g,'&');
+      nowEl.classList.add('swap');setTimeout(()=>{typeEl.textContent=sc.type;nameEl.innerHTML=sc.name;kindEl.textContent=sc.concept?'Conceito Vortyx':'Demonstração';nowEl.classList.remove('swap')},260);
+      // demonstração abre a demo; conceito (sem demo publicada) leva à conversa no WhatsApp
+      if(sc.concept){open.href=waLink(sc.msg);open.target='_blank';open.rel='noopener';openT.textContent='Conversar sobre algo assim';open.setAttribute('aria-label','Conversar sobre algo assim: '+plain+' (conceito, abre o WhatsApp)')}
+      else{open.href=sc.href;open.removeAttribute('target');open.removeAttribute('rel');openT.textContent='Abrir esta demonstração';open.setAttribute('aria-label','Abrir esta demonstração: '+plain)}
+      bars.forEach((b,i)=>{b.classList.toggle('done',i<cur);if(i===cur){b.removeAttribute('aria-current');void b.offsetWidth;b.setAttribute('aria-current','true')}else b.removeAttribute('aria-current')});
+      // pré-carrega a próxima cena
+      [src(cur+1,'d'),src(cur+1,'m'),src(cur+1,'t')].forEach(u=>{const im=new Image();im.src=u});
+      if(user)setPaused(true);
+      scheduleNext();
+    }
+    function scheduleNext(){clearTimeout(timer);if(!paused&&visible&&!reduce&&!d.hidden)timer=setTimeout(()=>show(cur+1),DUR)}
+    function setPaused(p){paused=p;pause.setAttribute('aria-pressed',p);vit.classList.toggle('sc-paused',p);if(!p)show(cur);else clearTimeout(timer)}
+    bars.forEach((b,i)=>b.addEventListener('click',()=>show(i,true)));
+    pause.addEventListener('click',()=>setPaused(!paused));
+    if(reduce)vit.classList.add('sc-static');
+    new IntersectionObserver(es=>{visible=es[0].isIntersecting;if(visible&&!started){started=true;show(0)}else if(visible)scheduleNext();else clearTimeout(timer)},{threshold:.2}).observe(stage);
+    d.addEventListener('visibilitychange',scheduleNext);
+    // profundidade: cada aparelho acompanha a rolagem em velocidade diferente
+    if(!reduce){let tk=false;addEventListener('scroll',()=>{if(tk||!visible)return;tk=true;requestAnimationFrame(()=>{tk=false;const r=stage.getBoundingClientRect();stage.style.setProperty('--par',Math.max(-1,Math.min(1,(r.top+r.height/2-innerHeight/2)/innerHeight)).toFixed(3))})},{passive:true})}
+  }
 
   /* ---------- Reveal + stagger ---------- */
   d.querySelectorAll('[data-stagger]').forEach(g=>[...g.querySelectorAll('.rv')].forEach((el,i)=>el.style.setProperty('--i',Math.min(i,5))));
@@ -112,7 +164,7 @@
   /* ---------- Rolagem: header, progresso, botões flutuantes ---------- */
   const hdrProg=d.querySelector('.hdr-prog'), footer=d.querySelector('.ftr');
   let avoid=[];
-  const collectAvoid=()=>{avoid=[...d.querySelectorAll('main .btn, .svc-more, .proj .links a, .contact-row a, .after a, details.choose summary, .chip')]};
+  const collectAvoid=()=>{avoid=[...d.querySelectorAll('main .btn, .svc-more, .sc-open, .sc-pause, .proj .links a, .contact-row a, .after a, details.choose summary, .chip, .prob-link, .demo-card')]};
   collectAvoid();
   let ticking=false, progress=0;
   function overlapsFloats(vw,vh){ // a área dos botões flutuantes (canto inferior direito)
@@ -128,7 +180,12 @@
     hdrProg.style.setProperty('--p',progress.toFixed(4));totop.style.setProperty('--p',progress.toFixed(4));
     const show=y>vh*.85&&!mm.classList.contains('open')&&footer.getBoundingClientRect().top>vh-40&&!overlapsFloats(vw,vh);
     setFloats(show);
+    // celular: os botões flutuantes recolhem enquanto a pessoa rola para baixo lendo e voltam ao subir ou parar
+    if(isMobile()){const dy=y-lastY;if(dy>6)tuck(true);else if(dy<-6)tuck(false);clearTimeout(tuckT);tuckT=setTimeout(()=>tuck(false),1100)}else tuck(false);
+    lastY=y;
   }
+  let lastY=scrollY,tuckT=0,tucked=false;
+  function tuck(v){if(v===tucked)return;tucked=v;[totop,fab].forEach(b=>b.classList.toggle('tuck',v))}
   addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(onScroll)}},{passive:true});
   addEventListener('resize',onScroll);
   onScroll();
@@ -138,7 +195,7 @@
   const nav=d.querySelector('.nav'), navInd=d.querySelector('.nav-ind');
   const navLinks=d.querySelectorAll('.nav a, .mmenu nav a');
   // Seções que não estão no menu não acendem nenhum item (evita marcar a seção errada)
-  const navMap={digital:'',diferenciais:'',processo:''};
+  const navMap={problemas:'',digital:'',diferenciais:'',vitrine:'demonstracoes'};
   const navKeyOf=s=>s in navMap?navMap[s]:s;
   let navKey=null, navLock='';
   function moveInd(){
@@ -223,9 +280,11 @@
   function fail(motivo){note('etapa','fallback');note('motivo',motivo);root.classList.add('no-webgl');canvas.classList.remove('ready')}
   note('etapa','aguardando');
   if(!('WebGLRenderingContext' in window)){fail('navegador sem WebGL');return}
+  // WebGL só em software (GPU bloqueada, máquina virtual, aparelho fraco): fica a imagem de reserva, sem baixar o Three.js
+  try{const tc=d.createElement('canvas'),o={failIfMajorPerformanceCaveat:true},g=tc.getContext('webgl',o)||tc.getContext('experimental-webgl',o);if(!g){fail('WebGL sem aceleração de hardware');return}const ri=g.getExtension('WEBGL_debug_renderer_info'),rn=String(g.getParameter(ri?ri.UNMASKED_RENDERER_WEBGL:g.RENDERER)||'');const lx=g.getExtension('WEBGL_lose_context');if(lx)lx.loseContext();if(/swiftshader|llvmpipe|softpipe|software|basic render/i.test(rn)){fail('WebGL em software: '+rn.slice(0,60));return}}catch(e){fail('WebGL indisponível');return}
 
-  // 1º cópia local (js/vendor), depois CDNs como reserva — mesma versão (r128) em todas
-  const SOURCES=['js/vendor/three.min.js','https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js','https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js'];
+  // Three.js r128 só da cópia local (js/vendor)
+  const SOURCES=['js/vendor/three.min.js']; // só a cópia local (r128): o site não depende de CDN externo
   function loadThree(i){
     i=i||0;
     if(window.THREE){initVortex();return}
@@ -238,8 +297,8 @@
     s.onerror=()=>{if(done)return;done=true;clearTimeout(timer);loadThree(i+1)};
     d.head.appendChild(s);
   }
-  function schedule(){if(window.requestIdleCallback)requestIdleCallback(()=>loadThree(0),{timeout:1500});else setTimeout(()=>loadThree(0),300)}
-  if(d.readyState==='complete')schedule();else addEventListener('load',schedule,{once:true});
+  function scheduleVortex(){if(window.requestIdleCallback)requestIdleCallback(()=>loadThree(0),{timeout:1500});else setTimeout(()=>loadThree(0),300)}
+  if(d.readyState==='complete')scheduleVortex();else addEventListener('load',scheduleVortex,{once:true});
 
   function initVortex(){
     const T=window.THREE;
@@ -247,7 +306,7 @@
     const mobile=isMobile()||coarse;
     const lowPower=mobile||(navigator.hardwareConcurrency||4)<=4||(navigator.deviceMemory||8)<=4;
     let renderer;
-    try{renderer=new T.WebGLRenderer({canvas,antialias:false,alpha:true,powerPreference:mobile?'default':'high-performance'})}
+    try{renderer=new T.WebGLRenderer({canvas,antialias:false,alpha:true,powerPreference:mobile?'default':'high-performance',failIfMajorPerformanceCaveat:true})} // sem aceleração de hardware → imagem de reserva
     catch(e){fail('contexto WebGL recusado');return}
     const gl=renderer.getContext();
     note('webgl',renderer.capabilities.isWebGL2?'WebGL 2':'WebGL 1');
@@ -333,6 +392,9 @@
     const S={
       inicio:     {xf:.6,  y:0,   s:1,   rx:.22, ry:-.18,i:1,   o:1},
       digital:    {xf:1.05,y:-.3, s:.85, rx:.8,  ry:-.4, i:.55, o:.3},
+      problemas:  {xf:1.05,y:-.3, s:.85, rx:.8,  ry:-.4, i:.55, o:.3},
+      demonstracoes:{xf:-1.06,y:.9,s:.75, rx:1.1, ry:.4,  i:.4,  o:.22},
+      vitrine:    {xf:0,    y:1.2, s:.6,  rx:1.2, ry:0,   i:.25, o:.08},
       servicos:   {xf:1.08,y:1.1, s:.75, rx:1.1, ry:-.35,i:.45, o:.26},
       diferenciais:{xf:-1.06,y:-.6,s:.8, rx:.5,  ry:.5,  i:.5,  o:.3},
       projetos:   {xf:1.08, y:1.0,s:.75, rx:1.2, ry:-.4, i:.4,  o:.26},
@@ -402,6 +464,8 @@
       const fps=frames/acc;acc=0;frames=0;note('fps',fps.toFixed(0));
       if(warm){warm=false;return} // ignora a primeira janela (pico do carregamento)
       slow=fps<40?slow+1:0;
+      // Último recurso: já no nível mais leve e ainda muito lento (ex.: WebGL em software que o navegador não informa) → imagem de reserva
+      if(fps<12||(tier>=tiers.length&&fps<20&&slow>=2)){lost=true;if(raf){cancelAnimationFrame(raf);raf=0}fail('desempenho insuficiente ('+fps.toFixed(0)+' fps)');return}
       if(slow>=2&&tier<tiers.length){slow=0;
         const q=tiers[tier++];
         DPR=q.dpr;renderer.setPixelRatio(DPR);uniforms.uPR.value=DPR;lastW=0;resize();

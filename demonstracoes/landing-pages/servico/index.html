@@ -11,8 +11,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@400;500;700&family=Instrument+Sans:wght@500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../../demos-kit/kit.css?v=1">
-<link rel="stylesheet" href="style.css?v=1">
+<link rel="stylesheet" href="../../../demos-kit/kit.css?v=2">
+<link rel="stylesheet" href="style.css?v=2">
 </head>
 <body data-root="../../../" data-cat="landing-pages" data-demo="landing page de serviço">
 
@@ -26,9 +26,9 @@
     <div class="ll-hero-txt">
       <p class="ll-kick" data-reveal>Projeto de interiores para apartamentos e casas</p>
       <h1 data-reveal style="--d:1">Sua casa do jeito que você <em>vive nela.</em></h1>
-      <p class="ll-sub" data-reveal style="--d:2">Projeto completo de um ou mais ambientes, com layout, marcenaria, iluminação e lista de compras. Você acompanha cada etapa e aprova tudo antes da obra.</p>
-      <ul class="ll-checks" data-reveal style="--d:3"><li>Projeto 3D para aprovar antes de comprar</li><li>Atendimento presencial ou online</li><li>Detalhamento pronto para a marcenaria</li></ul>
-      <a class="ll-btn" href="#orcamento" data-reveal style="--d:4">Quero um orçamento</a>
+      <p class="ll-sub" data-reveal style="--d:2">Layout, marcenaria, iluminação e lista de compras em um só projeto, aprovado por você antes da obra.</p>
+      <div class="ll-ctas" data-reveal style="--d:3"><a class="ll-btn" href="#orcamento">Quero um orçamento</a><a class="ll-link-2" href="#como-funciona">Ver como funciona</a></div>
+      <ul class="ll-checks" data-reveal style="--d:4"><li>Projeto 3D para aprovar antes de comprar</li><li>Atendimento presencial ou online</li><li>Detalhamento pronto para a marcenaria</li></ul>
     </div>
     <div class="ll-room-wrap" data-reveal style="--d:2">
       <div class="ll-room" id="room" data-style="natural" aria-hidden="true">
@@ -43,16 +43,16 @@
     </div>
   </section>
 
-  <section class="ll-sec ll-benefits">
-    <h2 data-reveal>O que você <em>ganha</em></h2>
-    <div class="ll-grid3">
-      <article data-reveal><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg></span><h3>Decisões mais seguras</h3><p>Você vê o ambiente pronto antes de comprar qualquer móvel e evita escolhas que não combinam.</p></article>
-      <article data-reveal style="--d:1"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M3 3h18v18H3zM3 12h9V3M12 21v-5h9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></span><h3>Espaço bem aproveitado</h3><p>Layout pensado para a sua rotina: circulação, armazenamento e luz no lugar certo.</p></article>
-      <article data-reveal style="--d:2"><span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M4 20h4L19 9l-4-4L4 16v4ZM14 6l4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></span><h3>Obra com menos surpresa</h3><p>Detalhamento técnico para marceneiro, eletricista e pintor seguirem o mesmo projeto.</p></article>
-    </div>
+  <section class="ll-sec ll-benefits" aria-labelledby="benTitle">
+    <h2 id="benTitle" data-reveal>Por que fazer <em>um projeto</em></h2>
+    <ol class="ll-ben">
+      <li data-reveal><span class="n" aria-hidden="true">01</span><h3>Decisões mais seguras</h3><p>Você vê o ambiente pronto antes de comprar qualquer móvel.</p></li>
+      <li data-reveal style="--d:1"><span class="n" aria-hidden="true">02</span><h3>Espaço bem aproveitado</h3><p>Circulação, armazenamento e luz pensados para a sua rotina.</p></li>
+      <li data-reveal style="--d:2"><span class="n" aria-hidden="true">03</span><h3>Obra com menos surpresa</h3><p>Marceneiro, eletricista e pintor seguem o mesmo projeto detalhado.</p></li>
+    </ol>
   </section>
 
-  <section class="ll-sec ll-proof">
+  <section class="ll-sec ll-proof" id="como-funciona">
     <div class="ll-proof-h"><h2 data-reveal>Como <em>funciona</em></h2><p>Um processo claro, do primeiro contato à entrega.</p></div>
     <ol class="ll-steps">
       <li data-reveal><b>01</b><h3>Conversa inicial</h3><p>Entendemos rotina, gosto e orçamento.</p></li>
@@ -60,16 +60,11 @@
       <li data-reveal style="--d:2"><b>03</b><h3>Projeto 3D</h3><p>Ambiente com cores, materiais e móveis.</p></li>
       <li data-reveal style="--d:3"><b>04</b><h3>Detalhamento</h3><p>Pranchas técnicas e lista de compras.</p></li>
     </ol>
-    <div class="ll-quotes">
-      <figure data-reveal><blockquote>Conseguimos ver a sala pronta antes de gastar com qualquer coisa. Isso mudou nossas escolhas.</blockquote><figcaption>Mariana e Tiago · apartamento (cliente fictício)</figcaption></figure>
-      <figure data-reveal style="--d:1"><blockquote>O detalhamento facilitou muito a conversa com o marceneiro.</blockquote><figcaption>Sérgio · home office (cliente fictício)</figcaption></figure>
-    </div>
-    <p class="ll-note">Depoimentos demonstrativos, escritos para ilustrar o layout.</p>
   </section>
 
   <section class="ll-sec ll-obj">
     <h2 data-reveal>“Mas e se…” <em>— a gente responde</em></h2>
-    <div class="ll-grid3">
+    <div class="ll-grid3 ll-objs">
       <article data-reveal><h3>…eu não quiser reformar tudo?</h3><p>Dá para começar por um ambiente e aproveitar móveis que você já tem.</p></article>
       <article data-reveal style="--d:1"><h3>…eu morar em outra cidade?</h3><p>O projeto pode ser feito todo online, com reuniões por vídeo e entregas digitais.</p></article>
       <article data-reveal style="--d:2"><h3>…eu não gostar da proposta?</h3><p>Cada etapa tem rodada de ajustes antes de seguir para a próxima.</p></article>
@@ -105,7 +100,7 @@
   </section>
 
   <section class="ll-final">
-    <h2>Vamos desenhar o seu <em>próximo cantinho?</em></h2>
+    <h2>Vamos projetar <em>o seu espaço?</em></h2>
     <a class="ll-btn ll-btn-l" href="#orcamento">Quero um orçamento</a>
   </section>
 </main>
@@ -113,7 +108,7 @@
 <footer class="ll-ftr"><span>Estúdio Linha &amp; Luz · empresa fictícia</span><span>Landing page demonstrativa criada pela Vortyx</span></footer>
 
 <script src="../../../js/config.js?v=2.1"></script>
-<script src="../../../demos-kit/kit.js?v=1"></script>
+<script src="../../../demos-kit/kit.js?v=2"></script>
 <script src="app.js?v=1"></script>
 </body>
 </html>

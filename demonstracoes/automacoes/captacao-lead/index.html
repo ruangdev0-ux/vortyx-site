@@ -4,66 +4,82 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Automação de captação de leads — Demonstração Vortyx</title>
-<meta name="description" content="Demonstração Vortyx: simulação de uma automação que recebe um formulário, valida os dados, registra no CRM e notifica a equipe.">
+<meta name="description" content="Demonstração Vortyx: simulação de uma automação que recebe um formulário, confere os dados, registra o contato no CRM com prioridade e avisa a pessoa responsável.">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#05070F">
 <link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../../demos-kit/kit.css?v=1">
+<link rel="stylesheet" href="../../../demos-kit/kit.css?v=2">
 <link rel="stylesheet" href="../../../demos-kit/lab.css?v=1">
-<link rel="stylesheet" href="style.css?v=1">
+<link rel="stylesheet" href="style.css?v=2">
 </head>
 <body data-root="../../../" data-cat="automacoes" data-demo="automação de captação de leads">
 <main class="lab">
   <header class="lab-head">
     <span class="lab-eyebrow">Automação · Vendas</span>
-    <h1>Do formulário ao <em>CRM</em> em segundos</h1>
-    <p class="lab-lead">Quando alguém preenche o formulário do site, a automação confere os dados, cria o contato no CRM com uma prioridade e avisa a equipe. Teste com dados válidos e inválidos.</p>
+    <h1>Do formulário ao <em>CRM</em>, sem digitação manual</h1>
+    <p class="lab-lead">Ninguém precisa copiar contatos do site para o CRM: cada lead chega conferido, com prioridade e com uma pessoa responsável. Teste com dados válidos, inválidos ou repetidos.</p>
     <span class="sim">Simulação local · nada é enviado nem salvo fora do seu navegador</span>
   </header>
-
-  <section class="panel cl-flow" aria-label="Fluxo da automação">
-    <div class="panel-h">Fluxo <small id="flowState">aguardando envio</small></div>
-    <div id="flow"></div>
-  </section>
 
   <div class="cl-grid">
     <section class="panel" aria-label="Formulário do site">
       <div class="panel-h">Formulário do site <small>exemplo</small></div>
       <form class="panel-b cl-form" id="form" novalidate>
-        <label class="field">Nome<input class="input" name="nome" autocomplete="off"></label>
-        <label class="field">E-mail<input class="input" name="email" autocomplete="off" inputmode="email"></label>
-        <label class="field">WhatsApp<input class="input" name="tel" autocomplete="off" inputmode="tel" placeholder="(00) 00000-0000"></label>
-        <div class="cl-row">
-          <label class="field">Interesse<select class="select" name="interesse"><option>Site institucional</option><option>Loja virtual</option><option>Automação</option><option>Sistema sob medida</option></select></label>
-          <label class="field">Orçamento previsto<select class="select" name="budget"><option value="1">Ainda não sei</option><option value="2">Até R$ 5 mil</option><option value="3">Acima de R$ 5 mil</option></select></label>
+        <div class="cl-test" role="group" aria-labelledby="testT">
+          <span class="cl-test-l" id="testT">Testar com:</span>
+          <button class="btn btn-g btn-s" type="button" id="fill">Preencher exemplo</button>
+          <button class="btn btn-g btn-s" type="button" id="bad">Exemplo com erro</button>
+          <button class="btn btn-g btn-s" type="button" id="dup">Exemplo repetido</button>
+          <p class="cl-tip" id="tip" role="status"></p>
         </div>
-        <label class="field">Origem<select class="select" name="origem"><option>Google</option><option>Instagram</option><option>Indicação</option><option>Outro</option></select></label>
-        <div class="cl-actions"><button class="btn btn-p" type="submit" id="send">Enviar formulário</button><button class="btn btn-g btn-s" type="button" id="fill">Preencher exemplo</button><button class="btn btn-g btn-s" type="button" id="bad">Exemplo com erro</button></div>
-        <p class="cl-err" id="err" role="alert" hidden></p>
+        <div class="cl-fields">
+          <div class="cl-f"><label class="field">Nome<input class="input" name="nome" autocomplete="off" aria-describedby="e-nome"></label><p class="cl-fe" id="e-nome" hidden></p></div>
+          <div class="cl-f"><label class="field">E-mail<input class="input" name="email" autocomplete="off" inputmode="email" aria-describedby="e-email"></label><p class="cl-fe" id="e-email" hidden></p></div>
+          <div class="cl-f"><label class="field">WhatsApp<input class="input" name="tel" autocomplete="off" inputmode="tel" placeholder="(00) 00000-0000" aria-describedby="e-tel"></label><p class="cl-fe" id="e-tel" hidden></p></div>
+          <div class="cl-f cl-s"><label class="field">Interesse<select class="select" name="interesse"><option>Site institucional</option><option>Loja virtual</option><option>Automação</option><option>Sistema sob medida</option></select></label></div>
+          <div class="cl-f cl-s"><label class="field">Orçamento previsto<select class="select" name="budget"><option value="1">Ainda não sei</option><option value="2">Até R$ 5 mil</option><option value="3">Acima de R$ 5 mil</option></select></label></div>
+          <div class="cl-f cl-s"><label class="field">Origem<select class="select" name="origem"><option>Google</option><option>Instagram</option><option>Indicação</option><option>Outro</option></select></label></div>
+        </div>
+        <div class="cl-actions"><button class="btn btn-p" type="submit" id="send">Enviar formulário</button></div>
       </form>
     </section>
 
-    <div class="cl-side">
-      <section class="panel" aria-label="CRM">
-        <div class="panel-h">CRM · novos contatos <small id="crmCount">0</small></div>
-        <div class="panel-b"><ul class="cl-crm" id="crm"><li class="cl-empty">Nenhum contato ainda.</li></ul><button class="btn btn-g btn-s" type="button" id="clear">Limpar CRM</button></div>
-      </section>
-      <section class="panel" aria-label="Notificações">
-        <div class="panel-h">Notificações da equipe <small>simuladas</small></div>
-        <div class="panel-b"><ul class="cl-notif" id="notif"><li class="cl-empty">As notificações aparecem aqui.</li></ul></div>
-      </section>
-    </div>
+    <section class="panel cl-flow" id="flowPanel" aria-label="Fluxo da automação">
+      <div class="panel-h">Fluxo da automação <small id="flowState">aguardando envio</small></div>
+      <div id="flow"></div>
+      <div class="cl-result" id="result" aria-live="polite" hidden></div>
+    </section>
+
+    <section class="panel cl-rules" aria-labelledby="rulesT">
+      <div class="panel-h"><span id="rulesT">Como esta demonstração organiza o lead (exemplo)</span></div>
+      <div class="panel-b">
+        <ul class="cl-rl" id="rules">
+          <li><b>Base</b><span><em data-r="base">todo contato +40</em></span></li>
+          <li><b>Orçamento</b><span><em data-r="b3">acima de R$ 5 mil +30</em><em data-r="b2">até R$ 5 mil +15</em><em data-r="b1">ainda não sei +0</em></span></li>
+          <li><b>Origem</b><span><em data-r="oIndicação">indicação +20</em><em data-r="oGoogle">Google +10</em><em data-r="oInstagram">Instagram +5</em><em data-r="oOutro">outro +5</em></span></li>
+          <li><b>Interesse</b><span><em data-r="i1">automação ou sistema +10</em><em data-r="i0">outros +0</em></span></li>
+          <li><b>Prioridade</b><span><em data-r="Alta">Alta: 75 ou mais</em><em data-r="Média">Média: 55 a 74</em><em data-r="Baixa">Baixa: até 54</em></span></li>
+          <li><b>Responsável</b><span><em data-r="Lívia">Lívia</em><em data-r="Rui">Rui</em><em data-r="Paula">Paula</em><i>e recomeça</i></span></li>
+        </ul>
+        <p class="cl-note">Rodízio: cada contato novo vai para a próxima pessoa da lista. Pontuação limitada a 99. Pesos, faixas e equipe são ilustrativos, só desta demonstração.</p>
+      </div>
+    </section>
+
+    <section class="panel" aria-label="CRM">
+      <div class="panel-h">CRM · contatos <small id="crmCount">0 contatos</small></div>
+      <div class="panel-b"><ul class="cl-crm" id="crm"><li class="cl-empty">Nenhum contato ainda.</li></ul><button class="btn btn-g btn-s" type="button" id="clear">Limpar CRM</button></div>
+    </section>
   </div>
 
   <p class="foot-note">Contatos e equipe fictícios. Em um projeto real, a automação se conecta ao CRM e aos canais que a empresa já usa.</p>
 </main>
 
 <script src="../../../js/config.js?v=2.1"></script>
-<script src="../../../demos-kit/kit.js?v=1"></script>
+<script src="../../../demos-kit/kit.js?v=2"></script>
 <script src="../../../demos-kit/flow.js?v=1"></script>
-<script src="app.js?v=1"></script>
+<script src="app.js?v=2"></script>
 </body>
 </html>

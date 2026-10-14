@@ -20,6 +20,9 @@
     if(flow.running)return;const p=PRODS.find(x=>x.id===sel);
     if(data.stock[sel]<qty){K.toast('Estoque insuficiente para essa quantidade (simulação).');return}
     btn.disabled=true;state.textContent='processando…';
+    // celular: o fluxo fica logo abaixo da loja; ao finalizar, a tela desce até ele (sem animação com movimento reduzido)
+    {const fp=d.querySelector('.in-flow'),r=d.getElementById('flow').getBoundingClientRect(),top=parseFloat(getComputedStyle(fp).scrollMarginTop)||0;
+     if(r.top<top||r.bottom>innerHeight)fp.scrollIntoView({behavior:K.reduce?'auto':'smooth',block:'start'})}
     const id='PED-'+String(1001+data.orders.length).padStart(4,'0'),body={pedido:id,produto:p.id,quantidade:qty,total:+(p.p*qty).toFixed(2),canal:'site'};
     const flaky=d.getElementById('flaky').checked;
     code.innerHTML=`<span class="m">POST</span> /api/v1/pedidos\n<span class="c">// enviado pelo site</span>\n${hl(body)}`;http.textContent='enviando…';

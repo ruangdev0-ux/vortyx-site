@@ -17,7 +17,7 @@ button{font:inherit;cursor:pointer}
 .ll-link{border:0;background:none;color:var(--terra);text-decoration:underline;padding:0}
 .ll-note{font-size:13px;color:var(--mute);margin:12px 0 0}
 
-.ll-hdr{position:sticky;top:var(--kit-h,44px);z-index:40;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px clamp(16px,5vw,56px);background:rgba(243,236,227,.9);backdrop-filter:blur(8px)}
+.ll-hdr{position:sticky;top:var(--kit-h,44px);z-index:40;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px clamp(16px,5vw,56px);background:rgba(243,236,227,.9);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
 .ll-logo{font:400 24px/1 var(--fs)}
 .ll-logo i{color:var(--terra)}
 .ll-logo small{display:block;font:500 11px/1 var(--fb);letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-top:4px}
@@ -65,7 +65,6 @@ button{font:inherit;cursor:pointer}
 .ll-grid3 article{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:26px}
 .ll-grid3 h3{font-size:26px;margin-bottom:10px}
 .ll-grid3 p{margin:0;color:var(--mute)}
-.ll-benefits .ico{display:grid;place-items:center;width:46px;height:46px;border-radius:50%;background:var(--sand);color:var(--terra);font-size:20px;margin-bottom:18px}
 @media(max-width:860px){.ll-grid3{grid-template-columns:1fr}}
 
 .ll-proof{background:var(--ink);color:#F3ECE3;max-width:none;border-radius:32px;margin:0 clamp(8px,2vw,24px)}
@@ -74,18 +73,13 @@ button{font:inherit;cursor:pointer}
 .ll-proof-h{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:10px 24px}
 .ll-proof-h h2{margin-bottom:20px}
 .ll-proof-h p{margin:0 0 20px;color:#c9bcb0}
-.ll-steps{list-style:none;margin:10px auto 48px;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:0;counter-reset:s}
+.ll-steps{list-style:none;margin:10px auto 0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:0;counter-reset:s}
 .ll-steps li{padding:22px 22px 0 0;border-top:1px solid rgba(243,236,227,.25);position:relative}
 .ll-steps li::before{content:"";position:absolute;top:-5px;left:0;width:9px;height:9px;border-radius:50%;background:#E9A483}
 .ll-steps b{font:400 italic 30px/1 var(--fs);color:#E9A483}
 .ll-steps h3{font-size:24px;margin:10px 0 6px}
 .ll-steps p{margin:0;color:#c9bcb0;font-size:15px}
-.ll-quotes{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-.ll-quotes figure{margin:0;padding:26px;border-radius:var(--r);background:rgba(243,236,227,.06);border:1px solid rgba(243,236,227,.14)}
-.ll-quotes blockquote{margin:0;font:400 22px/1.35 var(--fs)}
-.ll-quotes figcaption{margin-top:14px;font-size:14px;color:#c9bcb0}
-.ll-proof .ll-note{color:#a89b8f}
-@media(max-width:860px){.ll-steps{grid-template-columns:1fr 1fr;row-gap:28px}.ll-quotes{grid-template-columns:1fr}}
+@media(max-width:860px){.ll-steps{grid-template-columns:1fr 1fr;row-gap:28px}}
 @media(max-width:460px){.ll-steps{grid-template-columns:1fr}.ll-proof{border-radius:22px}}
 
 .ll-obj h3{font-size:22px}
@@ -126,3 +120,54 @@ button{font:inherit;cursor:pointer}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.ll-room,.ll-room *{transition:none}}
 .ll-btn-s{white-space:nowrap}
 @media(max-width:380px){.ll-logo{font-size:20px}.ll-btn-s{padding:0 12px;font-size:13px}}
+
+/* ---------- refinamento ---------- */
+.ll-ctas{display:flex;flex-wrap:wrap;align-items:center;gap:12px 26px;margin:0 0 26px}
+.ll-link-2{display:inline-flex;align-items:center;min-height:44px;font-weight:700;color:var(--ink);text-decoration:none;border-bottom:1.5px solid var(--terra);padding:0 1px;transition:color .2s}
+.ll-link-2:hover{color:var(--terra)}
+.ll-hero .ll-checks{margin-bottom:0}
+#como-funciona{scroll-margin-top:calc(var(--kit-h,44px) + 70px)}
+/* por que fazer um projeto: lista editorial numerada */
+.ll-ben{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:0 clamp(24px,4vw,48px)}
+.ll-ben li{padding-top:22px;border-top:1px solid var(--ink)}
+.ll-ben .n{display:block;font:400 italic 30px/1 var(--fs);color:var(--terra);margin-bottom:14px}
+.ll-ben h3{font-size:26px;margin-bottom:8px}
+.ll-ben p{margin:0;color:var(--mute);max-width:32ch}
+@media(max-width:860px){
+  .ll-ben{grid-template-columns:1fr}
+  .ll-ben li{display:grid;grid-template-columns:44px 1fr;column-gap:8px;padding:18px 0 20px;border-top:1px solid var(--line)}
+  .ll-ben li:first-child{border-top-color:var(--ink)}
+  .ll-ben .n{grid-row:span 2;font-size:24px;margin:2px 0 0}
+  .ll-ben h3{font-size:22px;margin-bottom:4px}
+  .ll-ben p{font-size:15px}
+  /* objeções em lista compacta */
+  .ll-objs{gap:0;border-top:1px solid var(--line)}
+  .ll-objs article{background:none;border:0;border-bottom:1px solid var(--line);border-radius:0;padding:18px 0}
+  .ll-objs h3{font-size:20px;margin-bottom:4px}
+  .ll-objs p{font-size:15px}
+}
+@media(max-width:600px){
+  .ll-sec{padding-top:48px;padding-bottom:48px}
+  .ll-sec h2{margin-bottom:22px}
+  .ll-hero{padding-top:22px;padding-bottom:44px;gap:28px}
+  .ll-kick{margin-bottom:10px;font-size:13px}
+  .ll-hero h1{font-size:clamp(34px,10.4vw,42px)}
+  .ll-sub{margin:14px 0 20px;font-size:16px}
+  .ll-ctas{gap:6px 20px;margin-bottom:20px}
+  .ll-checks{gap:8px;font-size:15px}
+  .ll-steps li{padding-top:18px}
+  .ll-proof-h p{margin-bottom:14px}
+  .ll-faq summary{font-size:20px;padding:16px 0}
+  /* estilos da sala numa linha */
+  .ll-styles{flex-wrap:nowrap;gap:6px;font-size:13px}
+  .ll-styles>span{flex:none}
+  .ll-styles button{flex:1 1 0;min-width:0;min-height:40px;padding:0 6px;font-size:13.5px;white-space:nowrap}
+}
+@media(max-width:374px){.ll-styles>span{display:none}}
+/* telas baixas: botão antes dos itens marcados, já é a ordem; esconde o selo para caber */
+@media(max-width:600px) and (max-height:700px){
+  .ll-kick{display:none}
+  .ll-hero{padding-top:16px}
+  .ll-hero h1{font-size:clamp(32px,10vw,40px)}
+  .ll-sub{margin:10px 0 16px}
+}

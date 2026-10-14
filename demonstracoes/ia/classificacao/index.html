@@ -4,53 +4,67 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>IA de classificação de mensagens (simulação) — Demonstração Vortyx</title>
-<meta name="description" content="Demonstração Vortyx: simulação demonstrativa de classificação de mensagens em Comercial, Suporte, Financeiro e Outros, feita com regras em JavaScript.">
+<meta name="description" content="Demonstração Vortyx: simulação de classificação de mensagens com sinais, nível de certeza explicável, urgência e revisão humana quando há dúvida, feita com listas de termos em JavaScript.">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#07050F">
 <link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../../demos-kit/kit.css?v=1">
+<link rel="stylesheet" href="../../../demos-kit/kit.css?v=2">
 <link rel="stylesheet" href="../../../demos-kit/lab.css?v=1">
 <link rel="stylesheet" href="../ia.css?v=1">
-<link rel="stylesheet" href="style.css?v=1">
+<link rel="stylesheet" href="style.css?v=2">
 </head>
 <body data-root="../../../" data-cat="ia" data-demo="IA para classificação de mensagens (simulação)">
 <main class="lab">
   <header class="lab-head">
     <span class="lab-eyebrow">IA · Classificação</span>
-    <h1>Classificação de <em>mensagens</em></h1>
-    <p class="lab-lead">Escreva uma mensagem como se fosse um cliente. A simulação aponta o setor (Comercial, Suporte, Financeiro ou Outros), mostra as palavras que pesaram e o nível de confiança.</p>
+    <h1>Classificar mensagens e saber <em>quando não confiar</em></h1>
+    <p class="lab-lead">A demonstração identifica sinais no texto, compara as categorias e estima um nível de certeza. Quando os sinais são suficientes, a mensagem segue sozinha para a fila; quando há dúvida, vai para revisão humana.</p>
   </header>
-  <p class="ia-banner"><span><b>Simulação demonstrativa.</b> Não há inteligência artificial real nesta página: a classificação usa listas de palavras com pesos, em JavaScript, só para ilustrar a experiência. Em um projeto real, usamos um modelo de IA treinado ou configurado para o seu negócio.</span></p>
+  <p class="ia-banner"><span><b>Simulação demonstrativa.</b> Não há inteligência artificial real nesta página: a classificação usa listas de termos com pesos, em JavaScript, só para ilustrar a experiência. Em um projeto real, usamos um modelo de IA treinado ou configurado para o seu negócio.</span></p>
 
   <div class="cl-grid">
-    <section class="panel" aria-label="Mensagem">
+    <section class="panel cl-inp" aria-label="Mensagem">
       <div class="panel-h">Mensagem do cliente <small id="chars">0/300</small></div>
       <div class="panel-b cl-in">
-        <textarea class="textarea" id="txt" maxlength="300" rows="4" aria-label="Mensagem para classificar" placeholder="Ex.: Meu boleto venceu, consigo uma segunda via?"></textarea>
-        <div class="chips" id="ex" aria-label="Exemplos"></div>
+        <textarea class="textarea" id="txt" maxlength="300" rows="3" aria-label="Mensagem para classificar" placeholder="Ex.: to tentando entrar e nada"></textarea>
         <div class="cl-act"><button class="btn btn-p" type="button" id="go">Classificar</button><label class="cl-live"><input type="checkbox" id="live"> Classificar enquanto digito</label></div>
+        <div class="ic-ex" role="group" aria-labelledby="exT"><p class="ic-h" id="exT">Exemplos: formal, informal, misto, urgente e sem sinais</p><div class="chips" id="ex"></div></div>
       </div>
     </section>
 
-    <section class="panel cl-out" aria-label="Resultado" aria-live="polite">
+    <section class="panel cl-out" id="outPanel" aria-label="Resultado">
       <div class="panel-h">Resultado <small>simulação</small></div>
-      <div class="panel-b" id="out"><p class="cl-wait">O resultado aparece aqui.</p></div>
+      <div class="panel-b" id="out" aria-live="polite"><p class="cl-wait">O resultado aparece aqui: categoria, sinais, certeza, urgência e ação.</p></div>
+    </section>
+
+    <section class="panel ic-rules" aria-labelledby="rulesT">
+      <div class="panel-h"><span id="rulesT">Regras de certeza desta demonstração</span></div>
+      <div class="panel-b">
+        <ol class="ic-levels" id="levels">
+          <li data-l="Alta"><b>Alta</b><span>6+ pts e 4+ pts à frente da 2ª categoria → <em>fila automática</em></span></li>
+          <li data-l="Média"><b>Média</b><span>3+ pts e vantagem clara → <em>fila automática</em></span></li>
+          <li data-l="Baixa"><b>Baixa</b><span>menos de 3 pts → <em>revisão humana</em></span></li>
+          <li data-l="Ambígua"><b>Ambígua</b><span>empate, ou 2ª categoria com 3+ pts e pelo menos metade da 1ª → <em>revisão humana</em></span></li>
+          <li data-l="Nenhuma"><b>Nenhuma</b><span>nenhum sinal reconhecido → <em>revisão humana</em></span></li>
+        </ol>
+        <p class="ic-note2"><b>Urgência alta</b> com 3+ pts em sinais como urgente, agora, parou, bloqueado ou “!!”. Muda a prioridade, nunca a categoria.</p>
+      </div>
     </section>
   </div>
 
   <section class="panel cl-batch" aria-label="Classificação em lote">
     <div class="panel-h">Caixa de entrada · lote de exemplo <button class="btn btn-g btn-s" type="button" id="batch">Classificar todas</button></div>
-    <div class="cl-table-wrap"><table class="cl-table"><thead><tr><th>Mensagem</th><th>Setor</th><th>Confiança</th></tr></thead><tbody id="rows"></tbody></table></div>
+    <div class="cl-table-wrap"><table class="cl-table"><thead><tr><th>Mensagem</th><th><span class="d-only">Categoria</span><span class="m-only">Classificação</span></th><th class="d-col">Certeza</th><th class="d-col">Ação</th></tr></thead><tbody id="rows"></tbody></table></div>
   </section>
   <p class="foot-note">Mensagens fictícias. Nenhum texto sai do seu navegador.</p>
 </main>
 
 <script src="../../../js/config.js?v=2.1"></script>
-<script src="../../../demos-kit/kit.js?v=1"></script>
+<script src="../../../demos-kit/kit.js?v=2"></script>
 <script src="../ia-sim.js?v=1"></script>
-<script src="app.js?v=1"></script>
+<script src="app.js?v=2"></script>
 </body>
 </html>

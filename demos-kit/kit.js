@@ -65,7 +65,8 @@
 
   /* ---------- Three.js sob demanda ---------- */
   let threeP=null;
-  function webgl(){try{const c=d.createElement('canvas');return !!(window.WebGLRenderingContext&&(c.getContext('webgl')||c.getContext('experimental-webgl')))}catch(e){return false}}
+  /* WebGL só conta se for acelerado: com renderização em software (GPU bloqueada, máquina virtual) o 3D fica de fora */
+  function webgl(){try{const c=d.createElement('canvas'),o={failIfMajorPerformanceCaveat:true};const g=window.WebGLRenderingContext&&(c.getContext('webgl',o)||c.getContext('experimental-webgl',o));if(!g)return false;/* WebGL só em software (SwiftShader, llvmpipe…) não conta como acelerado */const ri=g.getExtension('WEBGL_debug_renderer_info'),rn=String(g.getParameter(ri?ri.UNMASKED_RENDERER_WEBGL:g.RENDERER)||'');const x=g.getExtension('WEBGL_lose_context');if(x)x.loseContext();return !/swiftshader|llvmpipe|softpipe|software|basic render/i.test(rn)}catch(e){return false}}
   function three(){
     if(reduce||!webgl()){html.classList.add('no-3d');return Promise.resolve(null)}
     if(window.THREE)return Promise.resolve(window.THREE);
@@ -81,14 +82,16 @@
      (nível 1: a página reduz a resolução; nível 2: o loop passa a desenhar a ~30 fps). */
   function loop(canvas,fn,opts){
     opts=opts||{};
-    let vis=true,raf=0,last=performance.now(),acc=0,n=0,level=0,skip=0,frame=0,lastDraw=performance.now();
+    let vis=true,dead=false,raf=0,last=performance.now(),acc=0,n=0,level=0,skip=0,frame=0,lastDraw=performance.now();
     const tick=t=>{raf=0;if(!vis||d.hidden)return;raf=requestAnimationFrame(tick);
       const raw=(t-last)/1000;last=t;if(raw<1){acc+=raw;n++}
-      if(acc>=1.2&&n>=8){const avg=acc/n;acc=0;n=0;if(avg>1/38&&level<2){level++;if(opts.onSlow)opts.onSlow(level);if(level===2)skip=1}}
+      if(acc>=1.2&&n>=8){const avg=acc/n;acc=0;n=0;if(avg>1/38&&level<2){level++;if(opts.onSlow)opts.onSlow(level);if(level===2)skip=1}
+        /* Último recurso: mesmo no modo leve abaixo de ~12 fps (ex.: WebGL em software que o navegador não informa) → para o 3D e mostra a versão estática */
+        else if(level===2&&avg>1/12){vis=false;dead=true;canvas.classList.remove('ready');html.classList.add('no-3d');if(opts.onFail)opts.onFail();return}}
       if(skip&&(++frame%(skip+1)))return;
       const dt=Math.min(.05,(t-lastDraw)/1000);lastDraw=t;fn(dt,t/1000)};
-    const go=()=>{if(!raf){last=lastDraw=performance.now();raf=requestAnimationFrame(tick)}};
-    if('IntersectionObserver' in window)new IntersectionObserver(es=>{vis=es[0].isIntersecting;if(vis)go()}).observe(canvas);
+    const go=()=>{if(!raf&&!dead){last=lastDraw=performance.now();raf=requestAnimationFrame(tick)}};
+    if('IntersectionObserver' in window)new IntersectionObserver(es=>{if(dead)return;vis=es[0].isIntersecting;if(vis)go()}).observe(canvas);
     d.addEventListener('visibilitychange',()=>{if(!d.hidden)go()});
     go();
   }
@@ -123,6 +126,19 @@
       <div class="vx-kit-r"><a class="vx-kit-cta" href="${wa(MSG)}" target="_blank" rel="noopener">${WA_ICON}<span class="t-long">Quero algo assim</span><span class="t-short">Quero assim</span></a></div>`;
     body.insertBefore(bar,body.firstChild);
     body.classList.add('has-kit');
+    /* Fim da demo: convite discreto para conversar (mesma faixa escura da barra, depois de todo o conteúdo) */
+    const end=d.createElement('aside');end.className='vx-end';end.setAttribute('aria-label','Fale com a Vortyx');
+    end.innerHTML=`<div class="vx-end-in"><p><b>Quer algo assim no seu negócio?</b><span>Esta é uma demonstração da Vortyx. O projeto real parte da sua marca, do seu processo e dos seus objetivos.</span></p><a class="vx-end-cta" href="${wa(MSG)}" target="_blank" rel="noopener">${WA_ICON}<span>Conversar no WhatsApp</span></a></div>`;
+    body.appendChild(end);
+    /* Se a demo tem uma barra fixa no rodapé (ex.: botão de ação no celular), o convite ganha espaço para não ficar coberto.
+       Mede pela posição declarada (bottom), não pelo estado atual, porque essas barras costumam entrar e sair com a rolagem. */
+    const padEnd=()=>{let m=0;const H=innerHeight,W=innerWidth;
+      for(const el of body.querySelectorAll('body > *:not(.vx-kit):not(.vx-end):not(.vx-toast), body > * > *')){
+        const cs=getComputedStyle(el);if(cs.position!=='fixed'||cs.display==='none'||cs.visibility==='hidden'||cs.bottom==='auto')continue;
+        const h=el.offsetHeight,w=el.offsetWidth,b=parseFloat(cs.bottom)||0;
+        if(!h||w<W*.5||h>H/3||b>40)continue;m=Math.max(m,h+b)}
+      end.style.paddingBottom=m?`calc(${Math.ceil(m+16)}px + env(safe-area-inset-bottom,0px))`:''};
+    let padT=0;const padLater=()=>{clearTimeout(padT);padT=setTimeout(padEnd,200)};addEventListener('resize',padLater);addEventListener('load',padLater);d.addEventListener('DOMContentLoaded',padLater);
   }
 
   /* Foco preso no diálogo aberto (aria-modal): Tab e Shift+Tab circulam dentro dele */
@@ -139,6 +155,8 @@
   });
 
   window.VxKit={root:ROOT,reduce,wa,msg:MSG,toast,reveal,forms,store,save,drop,three,loop,brl,num,rng};
-  const ready=()=>{reveal();forms();d.dispatchEvent(new CustomEvent('vx:ready'));setTimeout(pauseOffscreen,600)};
+  const ready=()=>{reveal();forms();d.dispatchEvent(new CustomEvent('vx:ready'));
+    /* Revela a área dinâmica quando as fontes chegarem (no máximo 400 ms), para a troca de fonte não empurrar o conteúdo já visível */
+    Promise.race([d.fonts&&d.fonts.ready||Promise.resolve(),new Promise(r=>setTimeout(r,400))]).then(()=>body.classList.add('vx-in'));setTimeout(pauseOffscreen,600)};
   if(d.readyState==='loading')d.addEventListener('DOMContentLoaded',ready);else ready();
 })();

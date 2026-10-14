@@ -19,7 +19,7 @@ section[id]{scroll-margin-top:calc(var(--kit-h,44px) + 70px)}
 .pa-btn-s{min-height:40px;padding:0 16px;font-size:15px}
 
 /* header */
-.pa-hdr{position:sticky;top:var(--kit-h,44px);z-index:50;display:flex;align-items:center;gap:20px;padding:12px clamp(16px,4vw,48px);background:rgba(10,10,10,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.pa-hdr{position:sticky;top:var(--kit-h,44px);z-index:50;display:flex;align-items:center;gap:20px;padding:12px clamp(16px,4vw,48px);background:rgba(10,10,10,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .pa-logo{display:flex;align-items:center;gap:8px;text-decoration:none;font:800 26px/1 var(--fc);letter-spacing:.08em;font-style:italic}
 .pa-nav{display:flex;gap:22px;margin-left:auto}
 .pa-nav a{font:600 15px/1 var(--fc);text-transform:uppercase;letter-spacing:.1em;text-decoration:none;color:var(--mute)}
@@ -161,9 +161,9 @@ html:not(.no-3d) .pa-hero-fb::after{opacity:.0}
 .pa-ftr{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;padding:24px clamp(16px,5vw,64px) 36px;border-top:1px solid var(--line);color:var(--mute);font-size:13px}
 
 /* modal */
-.pa-modal{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:16px;background:rgba(0,0,0,.72);backdrop-filter:blur(6px)}
+.pa-modal{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:16px;background:rgba(0,0,0,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
 .pa-modal[hidden]{display:none}
-.pa-modal-box{position:relative;width:min(480px,100%);max-height:calc(100vh - 32px);overflow:auto;background:var(--bg2);border:1px solid var(--line);border-top:3px solid var(--volt);border-radius:var(--r);padding:28px 24px;animation:pa-in .3s ease}
+.pa-modal-box{position:relative;width:min(480px,100%);max-height:calc(100vh - 32px);max-height:calc(100dvh - 32px);overflow:auto;background:var(--bg2);border:1px solid var(--line);border-top:3px solid var(--volt);border-radius:var(--r);padding:28px 24px;animation:pa-in .3s ease}
 @keyframes pa-in{from{opacity:0;transform:translateY(14px)}}
 .pa-x{position:absolute;top:10px;right:10px;width:40px;height:40px;border:0;background:none;color:var(--mute);font-size:28px;line-height:1}
 .pa-modal h3{font-size:40px;margin-bottom:18px}

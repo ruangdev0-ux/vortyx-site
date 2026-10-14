@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Página não encontrada | Vortyx</title>
+<meta name="description" content="A página que você procurou não existe ou mudou de endereço.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#04060D">
+<meta name="color-scheme" content="dark">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--void:#04060D;--ink:#F3F4FA;--mute:#9097B3;--indigo:#3626FA;--iris:#7462F5;--cyan:#19E3D6;--line:rgba(160,168,220,.18)}
+html,body{height:100%}
+body{background:var(--void);color:var(--ink);font:400 16px/1.6 "Instrument Sans","Helvetica Neue","Segoe UI",system-ui,sans-serif;-webkit-font-smoothing:antialiased;display:grid;grid-template-rows:auto 1fr auto;min-height:100vh;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(50% 45% at 78% 30%,rgba(54,38,250,.22),transparent 70%),radial-gradient(40% 40% at 10% 90%,rgba(25,227,214,.08),transparent 70%)}
+a{color:inherit}
+.wrap{position:relative;width:min(1120px,100% - 40px);margin:0 auto}
+header{padding:22px 0}
+.brand{display:inline-flex;align-items:center;gap:12px;text-decoration:none}
+.brand img:first-child{width:34px;height:auto}.brand img:last-child{width:85px;height:auto}
+main{display:grid;align-items:center;padding:32px 0 56px;overflow:hidden}
+.sym{position:absolute;right:-4%;top:50%;width:min(46vw,420px);translate:0 -50%;opacity:.16;filter:blur(.5px);pointer-events:none}
+.k{display:inline-flex;align-items:center;gap:10px;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan)}
+.k::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan)}
+h1{font:300 clamp(40px,7vw,76px)/1.04 Sora,system-ui,sans-serif;letter-spacing:-.04em;margin:18px 0 18px;max-width:14ch}
+h1 span{background:linear-gradient(100deg,var(--iris),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+p.lead{color:var(--mute);font-size:clamp(16px,1.8vw,18px);max-width:52ch}
+.acts{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 24px;border-radius:999px;font-weight:600;font-size:15.5px;text-decoration:none;transition:filter .25s,background .25s,border-color .25s}
+.btn-p{background:var(--ink);color:var(--void)}
+.btn-p:hover{filter:brightness(.92)}
+.btn-g{border:1px solid var(--line);color:var(--ink)}
+.btn-g:hover{border-color:var(--ink)}
+.btn:focus-visible,.brand:focus-visible,footer a:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+footer{padding:22px 0 calc(22px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);color:var(--mute);font-size:14px}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
+@media (max-width:560px){.btn{width:100%}.sym{right:-30%;width:80vw;opacity:.1}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><a class="brand" href="/" aria-label="Vortyx, ir para a página inicial"><img src="/images/vortyx-simbolo.webp" alt="" width="34" height="30"><img src="/images/vortyx-logotipo.webp" alt="Vortyx" width="85" height="14"></a></div></header>
+<main id="conteudo">
+  <div class="wrap">
+    <img class="sym" src="/images/vortyx-simbolo.webp" alt="" aria-hidden="true">
+    <p class="k">Erro 404</p>
+    <h1>Esta página <span>não foi encontrada.</span></h1>
+    <p class="lead">O endereço pode ter mudado ou não existe mais. Você pode voltar ao início ou explorar as demonstrações da Vortyx.</p>
+    <div class="acts">
+      <a class="btn btn-p" href="/">Voltar ao início</a>
+      <a class="btn btn-g" href="/demonstracoes/">Ver demonstrações</a>
+    </div>
+  </div>
+</main>
+<footer><div class="wrap"><span>Vortyx · Tecnologia que transforma negócios.</span><a href="https://wa.me/5535999348489" target="_blank" rel="noopener">Fale conosco no WhatsApp</a></div></footer>
+</body>
+</html>

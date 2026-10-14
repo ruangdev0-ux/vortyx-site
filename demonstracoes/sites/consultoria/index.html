@@ -4,89 +4,246 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Marino Consultoria — Demonstração Vortyx</title>
-<meta name="description" content="Demonstração Vortyx: site para consultoria fictícia com serviços, metodologia, depoimentos demonstrativos, agenda e contato.">
+<meta name="description" content="Demonstração Vortyx: site para consultoria de gestão fictícia, com raio-X da operação, frentes de trabalho, método, exemplo de entrega e agenda.">
 <meta name="robots" content="noindex">
-<meta name="theme-color" content="#F5F3EE">
+<meta name="theme-color" content="#0F1F3D">
 <link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=Instrument+Sans:wght@500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../../demos-kit/kit.css?v=1">
-<link rel="stylesheet" href="style.css?v=1">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,500;0,8..60,600;1,8..60,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../demos-kit/kit.css?v=2">
+<link rel="stylesheet" href="style.css?v=2">
 </head>
 <body data-root="../../../" data-cat="sites" data-demo="site para consultoria">
 
-<header class="mc-hdr">
-  <a class="mc-logo" href="#topo"><span class="mk" aria-hidden="true">M</span><span>Marino<small>Consultoria</small></span></a>
-  <nav class="mc-nav" aria-label="Seções"><a href="#servicos">Serviços</a><a href="#metodo">Método</a><a href="#depoimentos">Depoimentos</a><a href="#agenda">Agenda</a></nav>
-  <a class="mc-btn mc-btn-s" href="#agenda">Agendar conversa</a>
+<header class="mc-hdr" id="hdr">
+  <a class="mc-logo" href="#topo"><span class="mk" aria-hidden="true"></span><span class="nm">Marino<small>Consultoria</small></span></a>
+  <nav class="mc-nav" aria-label="Seções">
+    <a href="#sinais">Sinais</a><a href="#raio-x">Raio-X</a><a href="#frentes">Frentes</a><a href="#metodo">Método</a><a href="#exemplo">Exemplo</a><a href="#faq">Dúvidas</a>
+  </nav>
+  <a class="mc-btn mc-btn-sm mc-btn-light" href="#conversa">Agendar conversa</a>
 </header>
 
 <main id="topo">
-  <section class="mc-hero">
-    <div class="mc-hero-txt">
-      <p class="mc-eyebrow" data-reveal>Gestão e processos para pequenas e médias empresas</p>
-      <h1 data-reveal style="--d:1">Clareza para decidir.<br><em>Método para crescer.</em></h1>
-      <p class="mc-lead" data-reveal style="--d:2">Ajudamos empresas a organizar processos, indicadores e rotinas de gestão, para que o dono pare de apagar incêndios e volte a olhar para o negócio.</p>
-      <div class="mc-ctas" data-reveal style="--d:3"><a class="mc-btn" href="#agenda">Agendar diagnóstico inicial</a><a class="mc-link" href="#metodo">Conhecer o método →</a></div>
+  <!-- HERO -->
+  <section class="mc-hero" aria-labelledby="heroTitle">
+    <div class="mc-hero-in">
+      <div class="mc-hero-txt">
+        <p class="mc-tag" data-reveal><i aria-hidden="true"></i>Consultoria de gestão e processos</p>
+        <h1 id="heroTitle" data-reveal style="--d:1">Clareza para decidir. <em>Método para crescer.</em></h1>
+        <p class="mc-lead" data-reveal style="--d:2">Organizamos processos, indicadores e rotina de gestão para que a empresa funcione sem depender de tudo passar pelo dono.</p>
+        <div class="mc-ctas" data-reveal style="--d:3">
+          <a class="mc-btn mc-btn-light" href="#conversa">Agendar conversa inicial</a>
+          <a class="mc-link mc-link-light" href="#raio-x">Fazer o raio-X da operação <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <figure class="mc-flow" id="flow" role="img" aria-label="Ilustração: linhas emaranhadas, que representam gargalos, se organizam em três trilhas claras: processos, indicadores e rotina.">
+        <svg viewBox="0 0 480 360" aria-hidden="true" focusable="false">
+          <g class="grid">
+            <line x1="168" y1="40" x2="168" y2="320"/><line x1="312" y1="40" x2="312" y2="320"/><line x1="456" y1="40" x2="456" y2="320"/>
+          </g>
+          <g class="knots">
+            <circle cx="196" cy="182" r="11"/><circle cx="268" cy="132" r="11"/><circle cx="318" cy="236" r="11"/><circle cx="150" cy="248" r="11"/>
+          </g>
+          <path class="tr t1" id="tr1" d="M24 90 C 96 90 96 90 168 90 C 240 90 240 90 312 90 C 384 90 384 90 456 90">
+            <animate attributeName="d" begin="indefinite" dur="2.3s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines=".65 0 .2 1"
+              from="M24 90 C 140 20 60 330 200 250 C 330 160 120 60 300 150 C 470 250 300 330 456 200"
+              to="M24 90 C 96 90 96 90 168 90 C 240 90 240 90 312 90 C 384 90 384 90 456 90"/>
+          </path>
+          <path class="tr t2" id="tr2" d="M24 180 C 96 180 96 180 168 180 C 240 180 240 180 312 180 C 384 180 384 180 456 180">
+            <animate attributeName="d" begin="indefinite" dur="2.3s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines=".65 0 .2 1"
+              from="M24 180 C 200 330 260 10 150 120 C 60 220 380 300 330 90 C 300 20 420 140 456 300"
+              to="M24 180 C 96 180 96 180 168 180 C 240 180 240 180 312 180 C 384 180 384 180 456 180"/>
+          </path>
+          <path class="tr t3" id="tr3" d="M24 270 C 96 270 96 270 168 270 C 240 270 240 270 312 270 C 384 270 384 270 456 270">
+            <animate attributeName="d" begin="indefinite" dur="2.3s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines=".65 0 .2 1"
+              from="M24 270 C 120 300 300 230 240 140 C 180 40 80 160 260 290 C 380 360 470 30 456 110"
+              to="M24 270 C 96 270 96 270 168 270 C 240 270 240 270 312 270 C 384 270 384 270 456 270"/>
+          </path>
+          <g class="nodes">
+            <circle cx="168" cy="90" r="5"/><circle cx="312" cy="90" r="5"/><circle cx="456" cy="90" r="7"/>
+            <circle cx="168" cy="180" r="5"/><circle cx="312" cy="180" r="5"/><circle cx="456" cy="180" r="7"/>
+            <circle cx="168" cy="270" r="5"/><circle cx="312" cy="270" r="5"/><circle cx="456" cy="270" r="7"/>
+          </g>
+          <g class="labels">
+            <text x="24" y="70">Processos</text><text x="24" y="160">Indicadores</text><text x="24" y="250">Rotina</text>
+          </g>
+          <text class="cap cap-a" x="24" y="344">Hoje: gargalos e retrabalho</text>
+          <text class="cap cap-b" x="24" y="344">Com método: três trilhas claras</text>
+        </svg>
+      </figure>
     </div>
-    <aside class="mc-card" data-reveal style="--d:2" aria-label="Sobre a consultora">
-      <div class="mc-portrait" aria-hidden="true"><span>HM</span></div>
-      <div><b>Helena Marino</b><span>Consultora de gestão · perfil fictício</span></div>
-      <ul><li><b>Foco</b>Processos e indicadores</li><li><b>Formato</b>Presencial e online</li><li><b>Atendimento</b>Seg a sex, 9h–18h</li></ul>
-    </aside>
   </section>
 
-  <section class="mc-areas" aria-label="Áreas de atuação"><span>Áreas</span><ul><li>Serviços</li><li>Varejo</li><li>Saúde</li><li>Indústria leve</li><li>Educação</li></ul></section>
-
-  <section class="mc-sec" id="servicos">
-    <div class="mc-sec-h"><p class="mc-eyebrow">Serviços</p><h2 data-reveal>Como podemos <em>ajudar</em></h2></div>
-    <div class="mc-services" id="services"></div>
+  <!-- 01 SINAIS -->
+  <section class="mc-sec mc-signs" id="sinais" aria-labelledby="signsTitle">
+    <div class="mc-sec-h">
+      <p class="mc-num" data-reveal>01 · Sinais</p>
+      <h2 id="signsTitle" data-reveal style="--d:1">Se isso soa familiar, <em>falta estrutura, não esforço.</em></h2>
+    </div>
+    <ol class="mc-signs-list">
+      <li data-reveal><b>Tudo passa pelo dono.</b><span>Até decisões pequenas esperam por ele.</span></li>
+      <li data-reveal style="--d:1"><b>Cada pessoa faz do próprio jeito.</b><span>O resultado depende de quem está no dia.</span></li>
+      <li data-reveal style="--d:2"><b>Os números chegam tarde.</b><span>Quando o mês fecha, já não dá para corrigir.</span></li>
+      <li data-reveal><b>O retrabalho é rotina.</b><span>Os mesmos erros voltam toda semana.</span></li>
+      <li data-reveal style="--d:1"><b>A empresa cresceu sem estrutura.</b><span>O que funcionava com cinco pessoas não funciona com trinta.</span></li>
+      <li data-reveal style="--d:2"><b>O plano não vira execução.</b><span>A meta existe; o caminho até ela, não.</span></li>
+    </ol>
   </section>
 
-  <section class="mc-sec mc-method" id="metodo">
-    <div class="mc-sec-h"><p class="mc-eyebrow">Metodologia</p><h2 data-reveal>Quatro etapas, <em>sem atalhos</em></h2></div>
-    <div class="mc-steps">
-      <div class="mc-step-tabs" role="tablist" aria-label="Etapas do método" id="stepTabs"></div>
-      <div class="mc-step-panel" role="tabpanel" id="stepPanel" aria-live="polite"></div>
+  <!-- 02 RAIO-X -->
+  <section class="mc-xray" id="raio-x" aria-labelledby="xTitle">
+    <div class="mc-xray-in">
+      <div class="mc-sec-h">
+        <p class="mc-num" data-reveal>02 · Raio-X da operação</p>
+        <h2 id="xTitle" data-reveal style="--d:1">Seis perguntas. <em>Um ponto de partida.</em></h2>
+        <p class="mc-sub" data-reveal style="--d:2">Escolha a frase que mais se parece com a sua empresa hoje. Leva cerca de um minuto.</p>
+      </div>
+      <div class="mc-x-grid">
+        <div class="mc-x-card" id="xCard">
+          <div class="mc-x-top">
+            <span class="mc-x-step" id="xStep" aria-live="polite">1 de 6</span>
+            <span class="mc-x-prog" id="xProg" aria-hidden="true"></span>
+          </div>
+          <fieldset class="mc-x-q" id="xQ">
+            <legend id="xLegend" tabindex="-1"><span class="fr" id="xFront"></span><span class="qq" id="xAsk"></span></legend>
+            <div class="mc-x-opts" id="xOpts"></div>
+          </fieldset>
+          <div class="mc-x-done" id="xDone" hidden>
+            <p class="fr">Raio-X concluído</p>
+            <p>Veja o mapa e por onde começar. Você pode revisar qualquer resposta.</p>
+          </div>
+          <div class="mc-x-nav">
+            <button type="button" class="mc-link mc-link-light" id="xBack">Voltar</button>
+            <button type="button" class="mc-btn mc-btn-light" id="xNext" disabled>Próxima</button>
+          </div>
+        </div>
+        <aside class="mc-x-map" id="xMap" aria-labelledby="xMapTitle">
+          <h3 id="xMapTitle">Mapa de maturidade</h3>
+          <ol class="mc-bars" id="xBars"></ol>
+          <p class="mc-x-scale"><span>Inicial</span><span>Em formação</span><span>Estruturado</span><span>Consolidado</span></p>
+        </aside>
+      </div>
+      <div class="mc-x-res" id="xRes" hidden tabindex="-1" aria-labelledby="xResTitle">
+        <h3 id="xResTitle">Por onde começar</h3>
+        <p class="mc-x-sum" id="xSum"></p>
+        <div class="mc-x-start" id="xStart"></div>
+        <div class="mc-x-act">
+          <button type="button" class="mc-btn mc-btn-light" id="xTake">Levar este resultado para a conversa</button>
+          <button type="button" class="mc-link mc-link-light" id="xRedo">Refazer o raio-X</button>
+        </div>
+      </div>
+      <p class="mc-x-note">Autoavaliação ilustrativa. Não é uma pontuação oficial nem comparação com outras empresas. Nenhuma resposta é enviada.</p>
     </div>
   </section>
 
-  <section class="mc-sec" id="depoimentos">
-    <div class="mc-sec-h"><p class="mc-eyebrow">Depoimentos</p><h2 data-reveal>O que dizem <em>os clientes</em></h2><p class="mc-note">Depoimentos demonstrativos: pessoas e empresas fictícias, escritos para ilustrar o layout.</p></div>
-    <div class="mc-quotes">
-      <div class="mc-quote-track" id="quotes" aria-live="polite"></div>
-      <div class="mc-quote-nav"><button type="button" id="qPrev" aria-label="Depoimento anterior">←</button><span id="qPos">1 / 3</span><button type="button" id="qNext" aria-label="Próximo depoimento">→</button></div>
+  <!-- 03 FRENTES -->
+  <section class="mc-sec" id="frentes" aria-labelledby="frTitle">
+    <div class="mc-sec-h">
+      <p class="mc-num" data-reveal>03 · Frentes de trabalho</p>
+      <h2 id="frTitle" data-reveal style="--d:1">Quatro frentes, <em>cada uma com entrega clara.</em></h2>
     </div>
+    <div class="mc-fronts" id="fronts"></div>
   </section>
 
-  <section class="mc-sec mc-agenda" id="agenda">
-    <div class="mc-sec-h"><p class="mc-eyebrow">Agenda</p><h2 data-reveal>Diagnóstico inicial <em>de 30 minutos</em></h2><p class="mc-sub">Escolha um horário. Conversa sem custo para entender o momento da empresa.</p></div>
-    <div class="mc-agenda-grid">
+  <!-- 04 MÉTODO -->
+  <section class="mc-sec" id="metodo" aria-labelledby="mtTitle">
+    <div class="mc-sec-h">
+      <p class="mc-num" data-reveal>04 · Método</p>
+      <h2 id="mtTitle" data-reveal style="--d:1">Do diagnóstico <em>à rotina funcionando.</em></h2>
+    </div>
+    <ol class="mc-time" id="timeline"></ol>
+    <p class="mc-foot">Prazos típicos, que variam com o porte da empresa e a disponibilidade da equipe.</p>
+  </section>
+
+  <!-- 05 EXEMPLO -->
+  <section class="mc-sec" id="exemplo" aria-labelledby="exTitle">
+    <div class="mc-sec-h">
+      <p class="mc-num" data-reveal>05 · Exemplo de entrega</p>
+      <h2 id="exTitle" data-reveal style="--d:1">O plano <em>em uma página.</em></h2>
+      <p class="mc-sub" data-reveal style="--d:2">Ao fim do diagnóstico, tudo cabe em um documento que a equipe consegue ler e seguir.</p>
+    </div>
+    <article class="mc-doc" data-reveal aria-labelledby="docTitle">
+      <header class="mc-doc-h">
+        <div><p class="mc-doc-k">Exemplo fictício de entrega</p><h3 id="docTitle">Plano em uma página</h3></div>
+        <p class="mc-doc-meta">Empresa fictícia de distribuição<br>Horizonte: próximos 90 dias</p>
+      </header>
+      <div class="mc-doc-g">
+        <section class="b b-sit"><h4>Situação</h4><p>As vendas cresceram, mas pedidos, estoque e cobrança dependem de duas pessoas e da memória do dono. Os números do mês só aparecem na semana seguinte ao fechamento.</p></section>
+        <section class="b b-gar"><h4>Principais gargalos</h4><ul><li>Pedido entra por vários canais e sem padrão de conferência.</li><li>Decisões de compra concentradas no dono.</li><li>Nenhuma reunião fixa para olhar números e pendências.</li></ul></section>
+        <section class="b b-pri"><h4>Prioridades</h4><ol><li>Padronizar o fluxo de pedido, da entrada à entrega.</li><li>Definir quem decide compras e até que limite.</li><li>Criar a rotina semanal com cinco indicadores.</li></ol></section>
+        <section class="b b-plan"><h4>Plano de 90 dias</h4>
+          <div class="mc-gantt" role="table" aria-label="Plano de 90 dias por mês">
+            <div class="gh" role="row"><span role="columnheader">Ação</span><span role="columnheader">Mês 1</span><span role="columnheader">Mês 2</span><span role="columnheader">Mês 3</span></div>
+            <div class="gr" role="row"><span role="cell">Mapear e padronizar pedidos</span><span role="cell" class="on"><i class="vx-sr">sim</i></span><span role="cell" class="on"><i class="vx-sr">sim</i></span><span role="cell"><i class="vx-sr">não</i></span></div>
+            <div class="gr" role="row"><span role="cell">Alçadas de compra</span><span role="cell" class="on"><i class="vx-sr">sim</i></span><span role="cell"><i class="vx-sr">não</i></span><span role="cell"><i class="vx-sr">não</i></span></div>
+            <div class="gr" role="row"><span role="cell">Indicadores e reunião semanal</span><span role="cell"><i class="vx-sr">não</i></span><span role="cell" class="on"><i class="vx-sr">sim</i></span><span role="cell" class="on"><i class="vx-sr">sim</i></span></div>
+            <div class="gr" role="row"><span role="cell">Revisão com a diretoria</span><span role="cell"><i class="vx-sr">não</i></span><span role="cell"><i class="vx-sr">não</i></span><span role="cell" class="on"><i class="vx-sr">sim</i></span></div>
+          </div>
+        </section>
+        <section class="b b-next"><h4>Próximos passos</h4><ul class="chk"><li>Validar o fluxo de pedido com a equipe comercial.</li><li>Nomear responsáveis por compra e estoque.</li><li>Marcar a primeira reunião semanal.</li></ul></section>
+      </div>
+      <p class="mc-doc-foot">Conteúdo ilustrativo, criado para mostrar a estrutura do documento. Não representa um cliente nem resultados reais.</p>
+    </article>
+  </section>
+
+  <!-- 06 CONVERSA -->
+  <section class="mc-sec mc-talk" id="conversa" aria-labelledby="tkTitle">
+    <div class="mc-sec-h">
+      <p class="mc-num" data-reveal>06 · Conversa inicial</p>
+      <h2 id="tkTitle" data-reveal style="--d:1">Trinta minutos <em>para entender o momento da empresa.</em></h2>
+      <p class="mc-sub" data-reveal style="--d:2">Escolha um dia e um horário. Sem custo e sem compromisso.</p>
+    </div>
+    <div class="mc-talk-g">
       <div class="mc-cal">
-        <div class="mc-cal-days" id="calDays" role="group" aria-label="Escolha o dia"></div>
-        <div class="mc-cal-slots" id="calSlots" role="group" aria-label="Escolha o horário"></div>
-        <p class="mc-note">Agenda fictícia · horários indisponíveis gerados para demonstração.</p>
+        <p class="mc-lbl" id="dayLbl">Dia</p>
+        <div class="mc-cal-days" id="calDays" role="group" aria-labelledby="dayLbl"></div>
+        <p class="mc-lbl" id="hourLbl">Horário</p>
+        <div class="mc-cal-slots" id="calSlots" role="group" aria-labelledby="hourLbl"></div>
+        <p class="mc-note">Agenda fictícia: os horários indisponíveis são gerados para demonstração.</p>
       </div>
       <form class="mc-form" id="contact" data-demo-form>
-        <div class="mc-picked" id="picked">Nenhum horário escolhido.</div>
+        <div class="mc-picked" id="picked" aria-live="polite">Nenhum horário escolhido.</div>
+        <p class="mc-from" id="fromX" hidden>Tema preenchido a partir do seu raio-X.</p>
         <label>Nome<input name="nome" required autocomplete="off"></label>
         <label>Empresa<input name="empresa" required autocomplete="off"></label>
-        <label>Principal desafio hoje<select name="desafio"><option>Organizar processos</option><option>Definir indicadores</option><option>Planejamento do ano</option><option>Montar ou treinar a equipe</option><option>Outro</option></select></label>
-        <label>Mensagem (opcional)<textarea name="msg" rows="3"></textarea></label>
+        <label>Tema principal<select name="desafio" id="desafio"><option>Organizar processos</option><option>Indicadores e rotina de gestão</option><option>Papéis e responsabilidades</option><option>Custos, margem e caixa</option><option>Planejamento e execução</option><option>Outro</option></select></label>
+        <label>Mensagem <span class="opt">(opcional)</span><textarea name="msg" id="msg" rows="3"></textarea></label>
         <input type="hidden" name="slot" id="slot">
-        <button class="mc-btn" type="submit">Confirmar agendamento (simulação)</button>
+        <button class="mc-btn" type="submit">Confirmar conversa (simulação)</button>
         <p class="mc-note">Simulação: nenhum dado é enviado.</p>
       </form>
-      <div class="mc-ok" id="ok" hidden tabindex="-1"><span class="mc-ok-ico" aria-hidden="true">✓</span><h3>Conversa agendada <small>(simulação)</small></h3><p id="okTxt"></p><button class="mc-link" type="button" id="again">Agendar outro horário</button></div>
+      <div class="mc-ok" id="ok" hidden tabindex="-1"><p class="mc-num">Agendamento simulado</p><h3>Conversa marcada.</h3><p id="okTxt"></p><button class="mc-link" type="button" id="again">Escolher outro horário</button></div>
+    </div>
+  </section>
+
+  <!-- 07 FAQ -->
+  <section class="mc-sec mc-faq" id="faq" aria-labelledby="faqTitle">
+    <div class="mc-sec-h">
+      <p class="mc-num" data-reveal>07 · Perguntas frequentes</p>
+      <h2 id="faqTitle" data-reveal style="--d:1">Antes <em>da conversa.</em></h2>
+    </div>
+    <div class="mc-faq-l">
+      <details><summary>Quanto tempo dura um trabalho?</summary><p>Depende da frente. Um diagnóstico costuma levar de 2 a 4 semanas; a implantação, de 1 a 3 meses. O prazo é combinado depois da conversa inicial.</p></details>
+      <details><summary>Pode ser online?</summary><p>Sim. Entrevistas e reuniões funcionam bem online. Visitas presenciais entram quando ajudam a entender a operação.</p></details>
+      <details><summary>Para que porte de empresa serve?</summary><p>Pequenas e médias empresas em que o dono ainda concentra decisões e a operação cresceu mais rápido que a organização.</p></details>
+      <details><summary>Precisa ter algum sistema?</summary><p>Não. Começamos com o que a empresa já usa, inclusive planilhas. Um sistema só entra se resolver um problema identificado.</p></details>
+      <details><summary>O que preparar para a conversa inicial?</summary><p>Nada formal. Ajuda chegar com os dois ou três incômodos principais e, se houver, um relatório recente de vendas ou financeiro.</p></details>
     </div>
   </section>
 </main>
 
-<footer class="mc-ftr"><div><b>Marino Consultoria</b><span>Empresa fictícia · Av. Exemplo, 1000, sala 42 · Cidade Exemplo</span></div><span>Site demonstrativo criado pela Vortyx</span></footer>
+<footer class="mc-ftr">
+  <div class="mc-ftr-in">
+    <div><p class="mc-logo mc-logo-f"><span class="mk" aria-hidden="true"></span><span class="nm">Marino<small>Consultoria</small></span></p>
+      <p>Av. Exemplo, 1000, sala 42 · Cidade Exemplo<br>Segunda a sexta, das 9h às 18h</p></div>
+    <nav aria-label="Rodapé"><a href="#raio-x">Raio-X</a><a href="#frentes">Frentes</a><a href="#metodo">Método</a><a href="#conversa">Conversa inicial</a></nav>
+  </div>
+  <p class="mc-ftr-note">Empresa fictícia. Serviços, prazos, exemplos e endereço são ilustrativos. Site demonstrativo criado pela Vortyx.</p>
+</footer>
 
 <script src="../../../js/config.js?v=2.1"></script>
-<script src="../../../demos-kit/kit.js?v=1"></script>
-<script src="app.js?v=1"></script>
+<script src="../../../demos-kit/kit.js?v=2"></script>
+<script src="app.js?v=2"></script>
 </body>
 </html>

@@ -1,25 +1,96 @@
-/* Captação de lead — acento verde, CRM + notificações */
+/* Captação de lead — acento verde · entrada → validação → registro → encaminhamento */
 :root{--accent:#3EE08F}
 .input:focus,.select:focus{box-shadow:0 0 0 3px rgba(62,224,143,.15)}
 .vxf-node.on{background:rgba(62,224,143,.07);box-shadow:0 0 0 4px rgba(62,224,143,.08),0 18px 40px -24px rgba(62,224,143,.6)}
-.cl-flow{margin-bottom:16px}
-.cl-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:16px}
-@media(max-width:900px){.cl-grid{grid-template-columns:1fr}}
-.cl-form{display:grid;gap:12px}
-.cl-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-@media(max-width:460px){.cl-row{grid-template-columns:1fr}}
+
+.cl-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
+@media(min-width:760px){.cl-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+@media(min-width:1100px){.cl-grid{grid-template-columns:minmax(0,11fr) minmax(0,10fr)}}
+
+/* Formulário */
+.cl-form{display:grid;gap:14px}
+.cl-test{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.cl-test-l{font-size:13px;color:var(--mute);margin-right:2px}
+.cl-tip{flex-basis:100%;font-size:12.5px;color:var(--mute)}
+.cl-tip:empty{display:none}
+.cl-fields{display:grid;gap:12px}
+@media(min-width:1000px){.cl-fields{grid-template-columns:1fr 1fr;gap:12px 14px}}
+.cl-f{display:grid;gap:6px;align-content:start;min-width:0}
+.cl-fe{font-size:12.5px;line-height:1.35;color:#ffb3c1}
+.cl-fe::before{content:"✗ ";font-weight:700}
 .cl-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-.cl-err{padding:10px 12px;border-radius:12px;background:rgba(255,92,122,.08);border:1px solid rgba(255,92,122,.4);color:#ffb3c1;font-size:13.5px}
-.cl-side{display:grid;gap:16px;align-content:start}
-.cl-crm,.cl-notif{list-style:none;display:grid;gap:8px;max-height:260px;overflow:auto;margin-bottom:12px}
-.cl-notif{margin-bottom:0;max-height:200px}
-.cl-crm li{display:grid;grid-template-columns:1fr auto;gap:4px 10px;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:rgba(4,6,13,.45);animation:cl-in .4s ease}
-.cl-crm li.new{border-color:rgba(62,224,143,.6)}
+
+/* Fluxo sempre em coluna, só nesta demo (o componente compartilhado não muda) */
+.cl-flow{scroll-margin-top:calc(var(--kit-h,0px) + 12px)}
+.cl-flow .vxf{flex-direction:column;padding:14px 16px}
+.cl-flow .vxf-node{grid-template-columns:40px minmax(0,1fr);justify-items:start;text-align:left;align-items:center;column-gap:12px;row-gap:1px;padding:9px 12px;border-radius:14px}
+.cl-flow .vxf-ico{grid-row:span 2;width:40px;height:40px;border-radius:12px}
+.cl-flow .vxf-ico svg{width:20px;height:20px}
+.cl-flow .vxf-t{min-height:0}
+.cl-flow .vxf-link{flex:0 0 14px;width:2px;height:auto;align-self:auto;margin-left:31px}
+.cl-flow .vxf-link i{left:50%;top:0;margin:0 0 0 -5px}
+.cl-flow .vxf-link.go i{animation-name:vxf-y;animation-duration:.3s}
+.cl-flow .vxf-link.done{background:linear-gradient(180deg,var(--iris),var(--accent))}
+
+/* Resultado */
+.cl-result{display:grid;gap:10px;margin:0 16px 16px;padding:14px;border-radius:14px;border:1px solid var(--line2);background:rgba(4,6,13,.5);animation:cl-in .4s ease}
+.cl-result .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:13.5px;color:var(--mute)}
+.cl-result .row b{color:var(--ink);font-weight:600}
+.cl-checks{list-style:none;display:grid;gap:4px;font-size:13.5px}
+.cl-checks li{display:grid;grid-template-columns:20px 1fr;column-gap:6px}
+.cl-checks .ck{font-weight:700;text-align:center}
+.cl-checks .ok .ck{color:var(--ok)}
+.cl-checks .bad .ck,.cl-checks .bad small{color:#ffb3c1}
+.cl-checks .na{color:var(--mute2)}
+.cl-checks small{grid-column:2;font-size:12px;color:var(--mute2)}
+.cl-ok{font-size:12.5px;color:var(--mute)}
+.cl-why{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:13px;padding-top:10px;border-top:1px solid var(--line)}
+.cl-why dt{color:var(--mute)}
+.cl-why dd{font-family:var(--mono);font-size:12px;line-height:1.5;color:var(--ink);overflow-wrap:anywhere}
+.cl-alert{justify-self:start;max-width:100%;padding:10px 14px;border-radius:14px 14px 14px 4px;background:rgba(62,224,143,.07);border:1px solid rgba(62,224,143,.3);font-size:13.5px}
+.cl-alert small{display:block;font:400 11px var(--mono);color:var(--mute);margin-bottom:3px}
+@keyframes cl-in{from{opacity:0;transform:translateY(-6px)}}
+
+/* Regras */
+.cl-rl{list-style:none;display:grid;gap:10px}
+.cl-rl li{display:grid;grid-template-columns:96px minmax(0,1fr);gap:8px;align-items:baseline}
+.cl-rl b{font:500 13.5px var(--display)}
+.cl-rl span{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.cl-rl em{font-style:normal;font-size:12.5px;padding:3px 9px;border-radius:999px;border:1px solid var(--line);color:var(--mute);transition:border-color .3s,background .3s,color .3s}
+.cl-rl em.on{border-color:var(--accent);background:rgba(62,224,143,.1);color:var(--ink)}
+.cl-rl em.on::before{content:"✓ ";color:var(--accent)}
+.cl-rl i{font-style:normal;font-size:12.5px;color:var(--mute2)}
+.cl-note{margin-top:12px;font-size:12.5px;color:var(--mute2)}
+
+/* CRM */
+.cl-crm{list-style:none;display:grid;gap:8px;max-height:320px;overflow:auto;margin-bottom:12px}
+.cl-crm li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:rgba(4,6,13,.45)}
+.cl-crm li.new{border-color:rgba(62,224,143,.6);animation:cl-in .4s ease}
 .cl-crm b{font:500 14px var(--display)}
 .cl-crm small{grid-column:1/-1;font:400 11.5px var(--mono);color:var(--mute2);overflow-wrap:anywhere}
-.cl-notif li{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:12px;background:rgba(62,224,143,.06);border:1px solid rgba(62,224,143,.25);font-size:13px;animation:cl-in .4s ease}
-.cl-notif li::before{content:"";flex:none;width:8px;height:8px;margin-top:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent)}
-.cl-notif small{display:block;color:var(--mute2);font:400 11px var(--mono)}
-.cl-empty{display:block!important;text-align:center;color:var(--mute2);font-size:13px;padding:16px;border:1px dashed var(--line);border-radius:12px;background:none!important}
-.cl-empty::before{display:none}
-@keyframes cl-in{from{opacity:0;transform:translateY(-6px)}}
+.cl-crm .cl-av{grid-column:1/-1;display:flex;align-items:center;gap:7px;font-size:12px;color:var(--mute)}
+.cl-crm .cl-av::before{content:"";flex:none;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.cl-empty{display:block!important;text-align:center;color:var(--mute2);font-size:13px;padding:16px;border:1px dashed var(--line)!important;border-radius:12px;background:none!important}
+
+@media(pointer:coarse){.cl-grid .btn-s{min-height:40px}}
+
+/* Celular */
+@media(max-width:600px){
+  .cl-flow .vxf{padding:10px 12px}
+  .cl-flow .vxf-node{grid-template-columns:30px minmax(0,1fr);column-gap:10px;row-gap:0;padding:6px 10px;border-radius:12px}
+  .cl-flow .vxf-ico{width:30px;height:30px;border-radius:9px}
+  .cl-flow .vxf-ico svg{width:16px;height:16px}
+  .cl-flow .vxf-l{font-size:13px;line-height:1.2}
+  .cl-flow .vxf-t{font-size:11px;line-height:1.3}
+  .cl-flow .vxf-link{flex-basis:8px;margin-left:24px}
+  .cl-result{margin:0 12px 12px;padding:12px}
+  .cl-rl{gap:8px}
+  .cl-rl li{grid-template-columns:96px minmax(0,1fr);gap:8px}
+  .cl-rl b{font-size:13px}
+  .cl-rl span{gap:5px}
+  .cl-rl em{font-size:12px;padding:2px 8px}
+  /* Interesse, orçamento e origem: rótulo ao lado do campo */
+  .cl-s .field{grid-template-columns:96px minmax(0,1fr);align-items:center;gap:10px}
+}
+@media(max-width:359px){.cl-s .field{grid-template-columns:1fr;gap:6px}}
+@media(max-width:400px){.cl-grid .panel-h{flex-wrap:wrap;row-gap:2px}}

@@ -11,8 +11,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;700&family=Instrument+Sans:wght@500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../../demos-kit/kit.css?v=1">
-<link rel="stylesheet" href="style.css?v=1">
+<link rel="stylesheet" href="../../../demos-kit/kit.css?v=2">
+<link rel="stylesheet" href="style.css?v=2">
 </head>
 <body data-root="../../../" data-cat="landing-pages" data-demo="landing page de produto digital">
 
@@ -23,9 +23,9 @@
     <div class="cc-hero-txt">
       <p class="cc-pill" data-reveal>Curso online · 100% pelo celular</p>
       <h1 data-reveal style="--d:1">Fotos bonitas com o celular que <span class="hl">já está no seu bolso.</span></h1>
-      <p class="cc-sub" data-reveal style="--d:2">Um curso direto ao ponto sobre luz, enquadramento e edição, pensado para quem quer fotografar produtos, viagens e a própria rotina sem comprar equipamento.</p>
+      <p class="cc-sub" data-reveal style="--d:2">Luz, enquadramento e edição em aulas curtas, sem comprar equipamento.</p>
       <div class="cc-ctas" data-reveal style="--d:3"><a class="cc-btn" href="#oferta">Quero aprender</a><a class="cc-ghost" href="#conteudo">Ver o conteúdo</a></div>
-      <ul class="cc-facts" data-reveal style="--d:4"><li><b>6</b> módulos</li><li><b>30</b> aulas curtas</li><li><b>Acesso</b> por 1 ano</li></ul>
+      <ul class="cc-facts" data-reveal style="--d:4"><li><b>6</b> módulos</li><li><b>30</b> aulas</li><li>acesso por <b>1 ano</b></li></ul>
     </div>
     <div class="cc-phone-wrap" data-reveal style="--d:2">
       <div class="cc-phone" aria-hidden="true">
@@ -43,13 +43,13 @@
     </div>
   </section>
 
-  <section class="cc-sec cc-benefits">
-    <h2 data-reveal>O que muda <span class="hl">depois do curso</span></h2>
-    <div class="cc-cards">
-      <article data-reveal><span>01</span><h3>Você entende a luz</h3><p>Sabe onde posicionar a pessoa ou o produto antes de apertar o botão.</p></article>
-      <article data-reveal style="--d:1"><span>02</span><h3>Enquadra com intenção</h3><p>Composição, ângulo e fundo deixam de ser sorte.</p></article>
-      <article data-reveal style="--d:2"><span>03</span><h3>Edita em minutos</h3><p>Um fluxo simples em apps gratuitos para padronizar suas fotos.</p></article>
-    </div>
+  <section class="cc-sec cc-benefits" aria-labelledby="benT">
+    <h2 id="benT" data-reveal>O que muda <span class="hl">depois do curso</span></h2>
+    <ol class="cc-ben">
+      <li data-reveal><span class="n" aria-hidden="true">01</span><h3>Você entende a luz</h3><p>Sabe onde posicionar a pessoa ou o produto antes de apertar o botão.</p></li>
+      <li data-reveal style="--d:1"><span class="n" aria-hidden="true">02</span><h3>Enquadra com intenção</h3><p>Composição, ângulo e fundo deixam de ser sorte.</p></li>
+      <li data-reveal style="--d:2"><span class="n" aria-hidden="true">03</span><h3>Edita em minutos</h3><p>Um fluxo simples em apps gratuitos para padronizar suas fotos.</p></li>
+    </ol>
   </section>
 
   <section class="cc-sec" id="conteudo">
@@ -63,26 +63,14 @@
     <div class="cc-no" data-reveal style="--d:1"><h3>Não é para você se…</h3><ul><li>já trabalha com fotografia profissional</li><li>procura um curso de câmera manual avançada</li></ul></div>
   </section>
 
-  <section class="cc-sec cc-proof">
-    <div class="cc-teacher" data-reveal>
-      <div class="ph" aria-hidden="true"><span>BA</span></div>
-      <div><p class="cc-pill">Quem ensina</p><h3>Bia Arantes</h3><p>Fotógrafa e criadora de conteúdo (personagem fictícia). Ensina técnicas simples que funcionam em qualquer celular recente.</p></div>
-    </div>
-    <div class="cc-quotes">
-      <figure data-reveal><blockquote>Parei de fotografar tudo no meio do quadro. Parece pouco, mas mudou o meu feed.</blockquote><figcaption>Aluna fictícia · loja de acessórios</figcaption></figure>
-      <figure data-reveal style="--d:1"><blockquote>As aulas curtas cabem no intervalo do trabalho. Assisti tudo pelo celular.</blockquote><figcaption>Aluno fictício · viagens</figcaption></figure>
-    </div>
-    <p class="cc-note">Depoimentos demonstrativos, escritos para ilustrar o layout.</p>
-  </section>
-
   <section class="cc-sec cc-offer" id="oferta">
     <div class="cc-price" data-reveal>
       <p class="cc-pill">Inscrição</p>
       <h2>Curso Clique Certo</h2>
-      <ul><li>6 módulos · 30 aulas</li><li>Material de apoio em PDF</li><li>Acesso por 1 ano</li><li>Atualizações durante o período</li></ul>
+      <ul class="cc-incl" aria-label="O que está incluído"><li>6 módulos · 30 aulas</li><li>Material de apoio em PDF</li><li>Acesso por 1 ano</li><li>Atualizações durante o período</li></ul>
       <div class="cc-amount"><small>Valor ilustrativo</small><b>R$ 197</b><span>ou 12x no cartão (exemplo)</span></div>
       <button class="cc-btn cc-btn-l" type="button" id="buy">Quero me inscrever</button>
-      <p class="cc-guar"><b>7 dias</b> para pedir reembolso, sem precisar explicar o motivo.</p>
+      <p class="cc-guar"><span><b>Garantia de 7 dias</b> para pedir reembolso, sem precisar explicar o motivo.</span></p>
       <p class="cc-note">Preço e condições fictícios. Esta página não processa pagamentos.</p>
     </div>
   </section>
@@ -118,7 +106,7 @@
 </div>
 
 <script src="../../../js/config.js?v=2.1"></script>
-<script src="../../../demos-kit/kit.js?v=1"></script>
+<script src="../../../demos-kit/kit.js?v=2"></script>
 <script src="app.js?v=1"></script>
 </body>
 </html>

@@ -3,53 +3,69 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>IA de triagem de atendimento (simulação) — Demonstração Vortyx</title>
-<meta name="description" content="Demonstração Vortyx: simulação demonstrativa de triagem com etapas Recebida, Analisada, Classificada e Direcionada, com urgência e destino.">
+<title>IA de triagem: da mensagem à ficha pronta (simulação) — Demonstração Vortyx</title>
+<meta name="description" content="Demonstração Vortyx: simulação que interpreta a intenção da mensagem, extrai dados, identifica o que falta e só encaminha quando a ficha está pronta. Sem IA real: padrões e regras locais.">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#07050F">
 <link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../../demos-kit/kit.css?v=1">
+<link rel="stylesheet" href="../../../demos-kit/kit.css?v=2">
 <link rel="stylesheet" href="../../../demos-kit/lab.css?v=1">
 <link rel="stylesheet" href="../ia.css?v=1">
-<link rel="stylesheet" href="style.css?v=1">
+<link rel="stylesheet" href="style.css?v=2">
 </head>
 <body data-root="../../../" data-cat="ia" data-demo="IA para triagem de atendimento (simulação)">
 <main class="lab">
   <header class="lab-head">
     <span class="lab-eyebrow">IA · Triagem</span>
-    <h1>Triagem inteligente, <em>etapa por etapa</em></h1>
-    <p class="lab-lead">Cada mensagem passa por quatro etapas: é recebida, analisada, classificada por assunto e urgência e, por fim, direcionada à fila certa. Veja o caminho acontecer.</p>
+    <h1>Da mensagem solta à <em>ficha pronta</em></h1>
+    <p class="lab-lead">A demonstração interpreta a intenção, extrai os dados da mensagem e percebe o que falta. Só encaminha quando já dá para resolver; se faltar algo, pede o complemento certo.</p>
   </header>
-  <p class="ia-banner"><span><b>Simulação demonstrativa.</b> Esta página não usa IA real: a análise é feita com regras simples em JavaScript para mostrar como a triagem funcionaria. Nenhuma mensagem sai do seu navegador.</span></p>
+  <p class="ia-banner"><span><b>Simulação demonstrativa.</b> Não há IA real nesta página: a interpretação e a extração usam padrões de texto e regras locais, em JavaScript. Nenhuma mensagem sai do seu navegador e nada é enviado a ninguém.</span></p>
 
-  <section class="panel tg-ctrl" aria-label="Controles">
+  <section class="panel tg-ctrl" aria-label="Entrada de mensagens">
     <div class="panel-b tg-ctrl-b">
-      <button class="btn btn-p" type="button" id="feed">Receber 4 mensagens</button>
-      <form class="tg-own" id="own"><input class="input" id="ownTxt" maxlength="200" placeholder="Ou escreva uma mensagem…" aria-label="Escreva uma mensagem"><button class="btn btn-g" type="submit">Enviar</button></form>
-      <button class="btn btn-g btn-s" type="button" id="clear">Limpar</button>
+      <form class="tg-own" id="own"><label class="vx-sr" for="ownTxt">Mensagem do cliente</label><input class="input" id="ownTxt" maxlength="200" placeholder="Escreva uma mensagem de cliente…" autocomplete="off"><button class="btn btn-g" type="submit">Enviar</button></form>
+      <div class="tg-row"><button class="btn btn-p" type="button" id="feed">Receber 4 mensagens</button><button class="btn btn-g btn-s" type="button" id="clear">Limpar</button></div>
+      <div class="tg-ex" role="group" aria-labelledby="exT"><span class="tg-ex-l" id="exT">Exemplos:</span><div class="chips" id="ex"></div></div>
     </div>
   </section>
 
-  <section class="tg-board" aria-label="Etapas da triagem">
-    <div class="tg-col" data-s="0"><h2><span>1</span>Recebida</h2><div class="tg-list"></div></div>
-    <div class="tg-col" data-s="1"><h2><span>2</span>Analisada</h2><div class="tg-list"></div></div>
-    <div class="tg-col" data-s="2"><h2><span>3</span>Classificada</h2><div class="tg-list"></div></div>
-    <div class="tg-col" data-s="3"><h2><span>4</span>Direcionada</h2><div class="tg-list"></div></div>
-  </section>
+  <div class="tg-main">
+    <section class="tg-track-w" aria-label="Etapas da triagem">
+      <ol class="tg-track" id="track">
+        <li data-s="0"><span class="n">1</span><b>Recebida</b><small></small></li>
+        <li data-s="1"><span class="n">2</span><b>Interpretada</b><small></small></li>
+        <li data-s="2"><span class="n">3</span><b><span class="d-only">Dados conferidos</span><span class="m-only">Dados</span></b><small></small></li>
+        <li data-s="3"><span class="n">4</span><b>Decisão</b><small></small></li>
+      </ol>
+      <p class="tg-now" id="now">Aguardando mensagem.</p>
+    </section>
 
-  <div class="tg-grid">
-    <section class="panel" aria-label="Filas"><div class="panel-h">Filas de destino <small>simulação</small></div><div class="panel-b tg-queues" id="queues"></div></section>
-    <section class="panel" aria-label="Decisões"><div class="panel-h">Por que cada decisão</div><div class="log tg-log" id="log" role="log"><span>— as explicações aparecem aqui —</span></div></section>
+    <section class="panel tg-ficha" id="fichaPanel" aria-labelledby="fichaT">
+      <div class="panel-h"><span id="fichaT">Ficha do atendimento</span><small id="fichaId">—</small></div>
+      <div class="panel-b" id="ficha"><p class="tg-wait">Envie ou escolha uma mensagem. A ficha mostra intenção, dados encontrados, dados faltando, decisão e próximo passo.</p></div>
+      <p class="vx-sr" id="announce" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="panel tg-msgs" aria-labelledby="msgT">
+      <div class="panel-h"><span id="msgT">Esteira de mensagens</span><small id="msgCount">0 mensagens</small></div>
+      <div class="panel-b"><ul class="tg-list" id="list"><li class="tg-empty">As mensagens aparecem aqui. Toque em uma para abrir a ficha.</li></ul></div>
+    </section>
+
+    <section class="panel tg-qp" aria-labelledby="qT">
+      <div class="panel-h"><span id="qT">Filas</span><small>prazos de exemplo</small></div>
+      <div class="panel-b tg-queues" id="queues"></div>
+    </section>
   </div>
-  <p class="foot-note">Mensagens, filas e prazos fictícios.</p>
+  <p class="foot-note">Mensagens, pedidos, filas e prazos fictícios. Nenhuma ação desta página envia mensagens reais.</p>
 </main>
 
 <script src="../../../js/config.js?v=2.1"></script>
-<script src="../../../demos-kit/kit.js?v=1"></script>
+<script src="../../../demos-kit/kit.js?v=2"></script>
 <script src="../ia-sim.js?v=1"></script>
-<script src="app.js?v=1"></script>
+<script src="app.js?v=2"></script>
 </body>
 </html>

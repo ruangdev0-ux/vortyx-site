@@ -1,29 +1,96 @@
+/* IA Triagem — da mensagem solta à ficha pronta (simulação) */
 .tg-ctrl{margin-bottom:16px}
-.tg-ctrl-b{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
-.tg-own{display:flex;gap:8px;flex:1;min-width:240px}
+.tg-ctrl-b{display:grid;gap:12px}
+.tg-own{display:flex;gap:8px;width:100%}
 .tg-own .input{flex:1;min-width:0}
-.tg-board{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
-.tg-col{min-width:0;border-radius:18px;border:1px solid var(--line);background:rgba(10,8,22,.6);padding:10px;min-height:260px;display:flex;flex-direction:column}
-.tg-col h2{display:flex;align-items:center;gap:8px;font:500 13.5px var(--display);padding:4px 4px 10px}
-.tg-col h2 span{width:22px;height:22px;border-radius:7px;display:grid;place-items:center;background:rgba(232,121,249,.14);color:var(--accent);font:600 11px var(--mono)}
-.tg-col.pulse{border-color:rgba(232,121,249,.55)}
-.tg-list{display:grid;gap:8px;align-content:start}
-.tg-card{padding:10px 12px;border-radius:12px;border:1px solid var(--line2);background:rgba(4,4,12,.85);font-size:13px;animation:tg-in .45s cubic-bezier(.16,1,.3,1)}
-.tg-card p{line-height:1.45;overflow-wrap:anywhere}
-.tg-card .meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
-.tg-card .tag{font-size:10px}
-.tg-card.urg{border-color:rgba(255,92,122,.6)}
-.tg-card small{display:block;font:400 10.5px var(--mono);color:var(--mute2);margin-bottom:4px}
-@keyframes tg-in{from{opacity:0;transform:translateX(-14px) scale(.98)}}
-@media(max-width:980px){.tg-board{grid-template-columns:1fr 1fr}}
-@media(max-width:560px){.tg-board{grid-template-columns:1fr}.tg-col{min-height:0}.tg-col .tg-list:empty::after{content:"—";color:var(--mute2);font-size:12px;padding:0 6px}}
-.tg-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:16px}
-@media(max-width:860px){.tg-grid{grid-template-columns:1fr}}
-.tg-queues{display:grid;gap:10px}
-.tg-q{display:grid;grid-template-columns:1fr auto;gap:6px 10px;align-items:center;font-size:13.5px}
+.tg-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.tg-ex{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding-top:12px;border-top:1px solid var(--line)}
+.tg-ex-l{font:500 11.5px var(--mono);letter-spacing:.04em;text-transform:uppercase;color:var(--mute2)}
+.tg-ex .chips{gap:6px}
+@media(min-width:861px){.tg-ctrl-b{grid-template-columns:minmax(0,1fr) auto}.tg-ex{grid-column:1/-1}}
+
+/* Esteira: etapas */
+.tg-main{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;grid-template-areas:"track" "ficha" "msgs" "queues"}
+@media(min-width:861px){.tg-main{grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);grid-template-areas:"track track" "msgs ficha" "queues ficha";align-items:start}}
+.tg-track-w{grid-area:track}.tg-ficha{grid-area:ficha;scroll-margin-top:calc(var(--kit-h,0px) + 12px)}.tg-msgs{grid-area:msgs}.tg-qp{grid-area:queues}
+.tg-track{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.tg-track li{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:8px;align-items:center;padding:10px 12px;border-radius:14px;border:1px solid var(--line);background:rgba(10,8,22,.6);transition:border-color .3s,background .3s}
+.tg-track .n{grid-row:span 2;width:24px;height:24px;border-radius:8px;display:grid;place-items:center;background:rgba(232,121,249,.12);color:var(--accent);font:600 11px var(--mono)}
+.tg-track b{font:500 13.5px var(--display)}
+.tg-track small{font:400 11.5px var(--mono);color:var(--mute);min-height:1.3em;overflow-wrap:anywhere}
+.tg-track li:not(:last-child)::after{content:"→";position:absolute;right:-8px;top:50%;transform:translate(50%,-50%);color:var(--mute2);font-size:12px}
+.tg-track li.on{border-color:var(--accent);background:rgba(232,121,249,.08)}
+.tg-track li.done .n{background:var(--accent);color:#1a0820}
+.tg-now{margin-top:8px;font:400 12.5px var(--mono);color:var(--mute)}
+.m-only{display:none}
+
+/* Esteira: mensagens */
+.tg-list{list-style:none;display:grid;gap:8px}
+.tg-empty{color:var(--mute2);font-size:13px;text-align:center;padding:18px;border:1px dashed var(--line);border-radius:12px}
+.tg-card{display:grid;gap:6px;width:100%;text-align:left;padding:10px 12px;border-radius:12px;border:1px solid var(--line2);background:rgba(4,4,12,.85);font-size:13.5px;line-height:1.45;color:var(--ink);transition:border-color .2s,background .2s}
+.tg-card.new{animation:tg-in .35s ease}
+.tg-card:hover{border-color:rgba(232,121,249,.5)}
+.tg-card.sel{border-color:var(--accent);background:rgba(232,121,249,.07)}
+.tg-c-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px;align-items:center;font-size:11.5px;color:var(--mute2)}
+.tg-c-txt{overflow-wrap:anywhere}
+.tg-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
+.tg-steps i{height:3px;border-radius:3px;background:rgba(255,255,255,.08)}
+.tg-steps i.on{background:var(--accent)}
+@keyframes tg-in{from{opacity:0;transform:translateY(-6px)}}
+
+/* Status (ícone + texto, nunca só cor) */
+.st{display:inline-flex;align-items:center;gap:5px;font:600 11.5px var(--body);padding:3px 8px;border-radius:999px;background:rgba(255,255,255,.06);color:var(--mute)}
+.st-pronta{color:var(--ok);background:rgba(62,224,143,.1)}
+.st-comp{color:var(--warn);background:rgba(255,194,75,.1)}
+.st-prio{color:#FF8DA3;background:rgba(255,92,122,.12)}
+.st-rev{color:#C9CDE0;background:rgba(160,168,220,.12)}
+
+/* Marcações no texto */
+mark.tg-d{background:rgba(62,224,143,.16);box-shadow:inset 0 -2px 0 var(--ok)}
+mark.tg-i{background:rgba(167,139,250,.18);box-shadow:inset 0 -2px 0 #A78BFA}
+
+/* Ficha */
+.tg-wait{color:var(--mute2);font-size:14px;text-align:center;padding:32px 8px}
+.tg-f{display:grid;gap:12px;animation:tg-in .35s ease}
+.tg-f-st{justify-self:start;font-size:13px;padding:6px 12px}
+.tg-quote{padding:10px 12px;border-radius:12px;background:rgba(4,6,13,.5);border:1px solid var(--line);font-size:14px;line-height:1.65;overflow-wrap:anywhere}
+.tg-hist{font-size:12.5px;color:var(--mute)}
+.tg-dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px 14px;align-items:baseline;font-size:13.5px}
+.tg-dl dt{font:500 11px var(--mono);letter-spacing:.04em;text-transform:uppercase;color:var(--mute2)}
+.tg-dl dd{min-width:0}
+.tg-ck{list-style:none;display:grid;gap:3px}
+.tg-ck li{display:grid;grid-template-columns:16px 1fr;column-gap:4px}
+.tg-ck li>span[aria-hidden]{font-weight:700}
+.tg-ck .ok>span[aria-hidden]{color:var(--ok)}
+.tg-ck .bad{color:#FFD59A}.tg-ck .bad>span[aria-hidden]{color:var(--warn)}
+.tg-ask{display:grid;gap:8px;padding:12px;border-radius:12px;border:1px dashed rgba(255,194,75,.5);background:rgba(255,194,75,.05)}
+.tg-ask-h{font:500 11px var(--mono);letter-spacing:.04em;text-transform:uppercase;color:var(--warn)}
+.tg-ask-t{font-size:14px}
+.tg-ask-b{display:flex;flex-wrap:wrap;gap:8px}
+.tg-ask-n{font-size:12px;color:var(--mute)}
+
+/* Filas */
+.tg-queues{display:grid;gap:8px}
+.tg-q{display:grid;grid-template-columns:1fr auto;gap:2px 10px;align-items:center;padding:8px 10px;border-radius:10px;border:1px solid var(--line);font-size:13.5px}
 .tg-q b{font:500 13px var(--mono)}
 .tg-q small{grid-column:1/-1;font:400 11.5px var(--mono);color:var(--mute2)}
-.tg-q i{grid-column:1/-1;height:6px;border-radius:6px;background:rgba(255,255,255,.06);overflow:hidden}
-.tg-q i::after{content:"";display:block;height:100%;width:var(--w);background:var(--c);border-radius:6px;transition:width .5s ease}
-.tg-log{max-height:300px}
-.tg-log div{padding:4px 0;border-bottom:1px dashed var(--line)}
+.tg-q.q-prio{border-color:rgba(255,92,122,.35)}
+.tg-q.q-comp{border-color:rgba(255,194,75,.35)}
+
+@media(pointer:coarse){.tg-ctrl .btn-s,.tg-ask .btn-s{min-height:40px}}
+@media(max-width:860px){
+  .tg-track{gap:4px}
+  .tg-track li{grid-template-columns:1fr;justify-items:center;text-align:center;padding:8px 4px;row-gap:4px;border-radius:10px}
+  .tg-track .n{grid-row:auto;width:20px;height:20px;font-size:10px}
+  .tg-track b{font-size:12px}
+  .tg-track small{display:none}
+  .tg-track li:not(:last-child)::after{right:-2px;font-size:10px}
+}
+@media(max-width:600px){
+  .tg-dl{grid-template-columns:1fr;gap:2px}
+  .tg-dl dd{margin-bottom:6px}
+  .d-only{display:none}.m-only{display:inline}
+  .tg-ex .chip{min-height:36px;font-size:12.5px;padding:0 10px}
+}
+@media(max-width:400px){.tg-main .panel-h{flex-wrap:wrap;row-gap:2px}}
+@media(max-width:600px){.tg-ctrl-b{display:flex;flex-wrap:wrap;gap:10px}.tg-own,.tg-row{display:contents}.tg-own .input{flex:1 1 100%}.tg-ex{flex:1 1 100%}}

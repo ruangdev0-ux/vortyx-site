@@ -75,28 +75,44 @@
     items.forEach((li,i)=>{li.innerHTML=`<button type="button" aria-label="Mostrar ${SC[i].name.replace(/&amp;/g,'&')}"></button>`});
     const bars=items.map(li=>li.firstChild);d.getElementById('scProg').removeAttribute('aria-hidden');
     const nowEl=vit.querySelector('.sc-now'),typeEl=d.getElementById('scType'),nameEl=d.getElementById('scName'),kindEl=d.getElementById('scKind'),open=d.getElementById('scOpen'),openT=d.getElementById('scOpenT'),pause=d.getElementById('scPause');
-    let cur=0,timer=0,paused=false,visible=false,started=false;
+    let cur=0,timer=0,paused=false,visible=false,started=false,preAll=false;
     const isTablet=()=>getComputedStyle(stage.querySelector('.sc-tablet')).display!=='none';
     function fit(img,box){const h=img.naturalHeight*box.clientWidth/img.naturalWidth;if(!h)return;img.style.setProperty('--sy',(-Math.max(0,Math.min(.5,1-box.clientHeight/h))*100).toFixed(1)+'%')}
+    // Imagens decodificadas antes de entrar na tela: a cena atual só sai quando a próxima está 100% pronta (sem piscada no celular)
+    const cache=new Map();
+    function load(u){
+      if(!cache.has(u)){const im=new Image();im.decoding='async';im.src=u;
+        cache.set(u,(im.decode?im.decode():Promise.reject()).then(()=>im,()=>new Promise(r=>{if(im.complete&&im.naturalWidth)r(im);else{im.onload=()=>r(im);im.onerror=()=>r(null)}})))}
+      return cache.get(u);
+    }
+    DEV.forEach(dv=>{const im=dv.el&&dv.el.querySelector(':scope > img');if(im)dv.cur=im.src});
     function put(dev,i){
-      if(dev.kind==='t'&&!isTablet())return;
-      const box=dev.el,old=[...box.querySelectorAll('.sc-shot, :scope > img')];
-      const shot=d.createElement('span');shot.className='sc-shot';const img=new Image();img.alt='';img.decoding='async';
-      img.onload=()=>{fit(img,box);old.forEach(o=>{o.classList.remove('on');o.classList.add('out');setTimeout(()=>o.remove(),1200)});box.appendChild(shot);requestAnimationFrame(()=>shot.classList.add('on'))};
-      img.src=src(i+dev.off,dev.kind);shot.appendChild(img);
+      if(dev.kind==='t'&&!isTablet())return Promise.resolve();
+      const box=dev.el,u=new URL(src(i+dev.off,dev.kind),location.href).href,tok=dev.tok=(dev.tok||0)+1;
+      return load(u).then(ready=>new Promise(res=>{
+        if(!ready||tok!==dev.tok)return res();
+        const same=dev.cur===u,old=[...box.querySelectorAll('.sc-shot, :scope > img')];
+        const shot=d.createElement('span');shot.className='sc-shot'+(same?' still':'');const img=new Image();img.alt='';img.decoding='sync';img.src=u;shot.appendChild(img);
+        const swap=()=>{res();if(tok!==dev.tok)return;fit(img,box);box.appendChild(shot);dev.cur=u;
+          requestAnimationFrame(()=>{shot.classList.add('on');old.forEach(o=>{o.classList.remove('on');o.classList.add('out');setTimeout(()=>o.remove(),same?50:1200)})})};
+        (img.decode?img.decode():Promise.resolve()).then(swap,swap);
+      }));
     }
     function show(n,user){
       cur=(n+SC.length)%SC.length;
-      DEV.forEach(dv=>put(dv,cur));
+      const shown=cur,ready=Promise.all(DEV.map(dv=>put(dv,cur))),t0=performance.now();
       if(!reduce){const rig=d.getElementById('scRig');rig.classList.toggle('cam-a',cur%2===0);rig.classList.toggle('cam-b',cur%2===1)}
       const sc=SC[cur],plain=sc.name.replace(/&amp;/g,'&');
-      nowEl.classList.add('swap');setTimeout(()=>{typeEl.textContent=sc.type;nameEl.innerHTML=sc.name;kindEl.textContent=sc.concept?'Conceito Vortyx':'Demonstração';nowEl.classList.remove('swap')},260);
+      // rótulo e indicadores trocam junto com as telas (no máximo 700 ms de espera)
+      nowEl.classList.add('swap');
+      Promise.race([ready,new Promise(r=>setTimeout(r,700))]).then(()=>setTimeout(()=>{if(shown!==cur)return;typeEl.textContent=sc.type;nameEl.innerHTML=sc.name;kindEl.textContent=sc.concept?'Conceito Vortyx':'Demonstração';nowEl.classList.remove('swap')},Math.max(0,260-(performance.now()-t0))));
       // demonstração abre a demo; conceito (sem demo publicada) leva à conversa no WhatsApp
       if(sc.concept){open.href=waLink(sc.msg);open.target='_blank';open.rel='noopener';openT.textContent='Conversar sobre algo assim';open.setAttribute('aria-label','Conversar sobre algo assim: '+plain+' (conceito, abre o WhatsApp)')}
       else{open.href=sc.href;open.removeAttribute('target');open.removeAttribute('rel');openT.textContent='Abrir esta demonstração';open.setAttribute('aria-label','Abrir esta demonstração: '+plain)}
       bars.forEach((b,i)=>{b.classList.toggle('done',i<cur);if(i===cur){b.removeAttribute('aria-current');void b.offsetWidth;b.setAttribute('aria-current','true')}else b.removeAttribute('aria-current')});
       // pré-carrega a próxima cena
-      [src(cur+1,'d'),src(cur+1,'m'),src(cur+1,'t')].forEach(u=>{const im=new Image();im.src=u});
+      DEV.forEach(dv=>{if(dv.kind!=='t'||isTablet())load(new URL(src(cur+1,dv.kind),location.href).href)});
+      if(!preAll){preAll=true;const all=()=>SC.forEach((_,i)=>DEV.forEach(dv=>{if(dv.kind!=='t'||isTablet())load(new URL(src(i,dv.kind),location.href).href)}));('requestIdleCallback' in window)?requestIdleCallback(all,{timeout:3000}):setTimeout(all,1500)}
       if(user)setPaused(true);
       scheduleNext();
     }
@@ -108,7 +124,7 @@
     new IntersectionObserver(es=>{visible=es[0].isIntersecting;if(visible&&!started){started=true;show(0)}else if(visible)scheduleNext();else clearTimeout(timer)},{threshold:.2}).observe(stage);
     d.addEventListener('visibilitychange',scheduleNext);
     // profundidade: cada aparelho acompanha a rolagem em velocidade diferente
-    if(!reduce){let tk=false;addEventListener('scroll',()=>{if(tk||!visible)return;tk=true;requestAnimationFrame(()=>{tk=false;const r=stage.getBoundingClientRect();stage.style.setProperty('--par',Math.max(-1,Math.min(1,(r.top+r.height/2-innerHeight/2)/innerHeight)).toFixed(3))})},{passive:true})}
+    if(!reduce){let tk=false;addEventListener('scroll',()=>{if(tk||!visible||innerWidth<=760)return;tk=true;requestAnimationFrame(()=>{tk=false;const r=stage.getBoundingClientRect();stage.style.setProperty('--par',Math.max(-1,Math.min(1,(r.top+r.height/2-innerHeight/2)/innerHeight)).toFixed(3))})},{passive:true})}
   }
 
   /* ---------- Reveal + stagger ---------- */

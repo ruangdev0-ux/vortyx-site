@@ -1,0 +1,4 @@
+# Configuração do GitHub Pages (Jekyll).
+# O README é documentação do repositório e não deve ser publicado no site.
+exclude:
+  - README.md

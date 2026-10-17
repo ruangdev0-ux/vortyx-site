@@ -18,7 +18,7 @@ funciona antes de propor uma ferramenta e, depois, desenvolve a solução digita
 4. Automações e Integrações
 5. Soluções Web para Negócios (sistemas, plataformas, áreas logadas, dashboards, portais e produtos SaaS)
 6. Manutenção e Evolução
-7. Automações e soluções simples com IA, quando fizer sentido
+7. Automações e soluções com IA, quando fizer sentido
 
 ## Tecnologias
 
@@ -36,6 +36,9 @@ funciona antes de propor uma ferramenta e, depois, desenvolve a solução digita
 vortyx-site/
 ├── index.html                  # Home (one-page)
 ├── 404.html                    # página de erro personalizada (GitHub Pages)
+├── politica-de-privacidade/    # Política de Privacidade
+├── favicon.ico                 # ícone padrão do navegador
+├── _config.yml                 # GitHub Pages: impede que este README seja publicado
 ├── css/
 │   ├── styles.css              # estilos da Home
 │   └── demos.css               # estilos do hub de demonstrações

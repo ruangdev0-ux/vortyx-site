@@ -151,7 +151,7 @@ section{position:relative;padding:clamp(60px,11vw,150px) 0}
 .scroll-hint{position:absolute;left:50%;bottom:calc(28px + env(safe-area-inset-bottom,0px));translate:-50% 0;width:1px;height:48px;background:linear-gradient(var(--line-strong),transparent);overflow:hidden;opacity:0;transition:opacity 1s 1.4s}
 .loaded .scroll-hint{opacity:1}
 .scroll-hint::after{content:"";position:absolute;left:0;top:-12px;width:1px;height:12px;background:var(--ink);animation:drip 2.4s var(--ease) infinite}
-@keyframes drip{to{top:48px}}
+@keyframes drip{to{transform:translateY(60px)}}
 @media (max-width:767px){.hero{align-items:flex-end;padding-bottom:64px}.hero h1{font-size:clamp(36px,10.2vw,46px)}.hero .lead{margin-bottom:30px}.scroll-hint{display:none}.hero-ctas .btn{flex:1 1 auto}.hero{min-height:100svh}}
 
 /* ============ PRESENÇA + PROCESSOS ============ */
@@ -469,7 +469,7 @@ section{position:relative;padding:clamp(60px,11vw,150px) 0}
 /* Botão flutuante WhatsApp */
 .fab-wa{position:fixed;right:calc(18px + env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:41;width:56px;height:56px;border-radius:50%;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,var(--indigo),var(--iris));box-shadow:0 14px 34px -10px rgba(54,38,250,.85),inset 0 0 0 1px rgba(255,255,255,.14);overflow:hidden;isolation:isolate;opacity:0;visibility:hidden;transform:translateY(14px) scale(.9);transition:opacity .5s var(--ease),transform .5s var(--ease),visibility .5s,box-shadow .4s;-webkit-tap-highlight-color:transparent}
 .fab-wa.show{opacity:1;visibility:visible;transform:none}
-.fab-wa::after{content:"";position:absolute;inset:0;border-radius:50%;box-shadow:0 0 0 0 rgba(25,227,214,.5);animation:ping 3.2s var(--ease) infinite}
+.fab-wa::after{content:"";position:absolute;inset:0;border-radius:50%} /* o "ping" ficava recortado pelo overflow:hidden do botão (invisível) e repintava a tela sem parar; removido */
 .fab-wa:hover{box-shadow:0 16px 40px -8px rgba(116,98,245,.95),inset 0 0 0 1px rgba(255,255,255,.25)}
 .fab-wa:active{transform:scale(.94)}
 /* Voltar ao topo (empilhado acima do WhatsApp) */

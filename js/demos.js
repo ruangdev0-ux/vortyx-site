@@ -16,7 +16,7 @@ const DEMO_CATS = [
   {id:"automacoes",     n:"03", name:"Automações e Integrações",    short:"Automações",     lead:"Veja, passo a passo, como uma informação percorre um fluxo automático."},
   {id:"solucoes-web",   n:"04", name:"Soluções Web para Negócios",  short:"Soluções Web",   lead:"Sistemas que funcionam no navegador, com dados de exemplo para você testar."},
   {id:"manutencao",     n:"05", name:"Manutenção e Evolução",       short:"Manutenção",     lead:"Compare antes e depois e acompanhe como um projeto evolui por versões."},
-  {id:"ia",             n:"06", name:"Automações simples com IA",   short:"IA",             lead:"Exemplos realistas de IA apoiando triagem, organização e atendimento."}
+  {id:"ia",             n:"06", name:"Automações e soluções com IA",short:"IA",             lead:"Exemplos realistas de IA apoiando triagem, organização e atendimento."}
 ];
 
 const DEMOS = [

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Prateleira · Pedidos &amp; Estoque — Demonstração Vortyx</title>
+<meta name="description" content="Demonstração Vortyx: SaaS de gestão de pedidos e estoque com várias unidades, perfis de usuário, alertas automáticos e relatórios. Empresa, usuários e números fictícios.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#05070F">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../demos-kit/kit.css?v=2">
+<link rel="stylesheet" href="../../../demos-kit/lab.css?v=1">
+<link rel="stylesheet" href="style.css?v=1">
+</head>
+<body data-root="../../../" data-cat="saas" data-demo="SaaS de pedidos e estoque" data-msg="Olá! Vi a demonstração Prateleira · Pedidos & Estoque da Vortyx e gostaria de conversar sobre um sistema parecido para o meu negócio.">
+<main class="lab pt">
+  <header class="pt-head">
+    <span class="lab-eyebrow">SaaS demonstrativo</span>
+    <h1>Prateleira · <em>Pedidos &amp; Estoque</em></h1>
+    <p class="lab-lead">Pedidos, estoque e unidades em um só sistema, com alertas automáticos e relatórios para decidir com dados.</p>
+    <p class="sim pt-seal" id="seal">SaaS demonstrativo · Empresa, unidades, usuários, produtos e números são fictícios. Não é um cliente real da Vortyx.</p>
+  </header>
+
+  <section class="panel pt-login" id="login" aria-labelledby="loginTitle">
+    <div class="pt-login-in">
+      <h2 id="loginTitle">Entrar na demonstração</h2>
+      <p class="muted">Escolha um perfil. Cada um vê telas e ações diferentes. Não é preciso senha.</p>
+      <div class="pt-profiles">
+        <button class="pt-prof" type="button" data-profile="admin"><span class="pt-av a" aria-hidden="true">HD</span><span><b>Administrador</b><small>Helena Duarte · todas as unidades, relatórios e usuários</small></span></button>
+        <button class="pt-prof" type="button" data-profile="gerente"><span class="pt-av g" aria-hidden="true">RN</span><span><b>Gerente de unidade</b><small>Rafael Nunes · Unidade Norte, estoque e relatórios da unidade</small></span></button>
+        <button class="pt-prof" type="button" data-profile="operador"><span class="pt-av o" aria-hidden="true">JC</span><span><b>Operador</b><small>Júlia Campos · Unidade Centro, pedidos e estoque do dia a dia</small></span></button>
+      </div>
+      <p class="pt-org"><span class="pt-logo" aria-hidden="true"></span>Conta de exemplo: <b>Rede Grão Fino (fictícia)</b> · 3 unidades</p>
+    </div>
+  </section>
+
+  <section class="pt-app" id="app" hidden aria-label="Prateleira, pedidos e estoque">
+    <div class="pt-bar">
+      <div class="pt-brand"><span class="pt-logo" aria-hidden="true"></span><b>Prateleira</b><small>Rede Grão Fino (fictícia)</small></div>
+      <div class="pt-ctx">
+        <label class="pt-unit" id="unitWrap">Unidade<select class="select" id="unit"></select></label>
+        <span class="pt-me" id="me"></span>
+        <button class="btn btn-g btn-s" type="button" id="switch">Trocar perfil</button>
+      </div>
+    </div>
+    <div class="pt-shell">
+      <nav class="pt-nav" id="nav" aria-label="Seções do sistema"></nav>
+      <div class="pt-main" id="main" tabindex="-1"></div>
+    </div>
+  </section>
+
+  <footer class="pt-foot">
+    <button class="btn btn-g btn-s" type="button" id="reset">Restaurar dados de exemplo</button>
+    <p class="foot-note">Rede, unidades, pessoas, produtos e valores fictícios. Os dados ficam só neste navegador. Em um projeto real, o sistema usa banco de dados, login seguro e integrações com loja virtual, ERP e nota fiscal.</p>
+  </footer>
+</main>
+
+<div class="pt-dlg" id="dlg" role="dialog" aria-modal="true" aria-labelledby="dlgTitle" hidden>
+  <div class="pt-dlg-box"><button class="pt-x" type="button" data-close aria-label="Fechar">×</button><div id="dlgBody"></div></div>
+</div>
+
+<script src="../../../js/config.js?v=2.2"></script>
+<script src="../../../demos-kit/kit.js?v=2"></script>
+<script src="../../../demos-kit/charts.js?v=1"></script>
+<script src="app.js?v=1"></script>
+</body>
+</html>

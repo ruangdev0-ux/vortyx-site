@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ordena · Central de Atendimento — Demonstração Vortyx</title>
+<meta name="description" content="Demonstração Vortyx: SaaS de central de atendimento com caixa de entrada unificada, classificação de mensagens por IA (simulada), respostas sugeridas e indicadores. Empresa, pessoas e dados fictícios.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#05070F">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../demos-kit/kit.css?v=2">
+<link rel="stylesheet" href="../../../demos-kit/lab.css?v=1">
+<link rel="stylesheet" href="style.css?v=1">
+</head>
+<body data-root="../../../" data-cat="saas" data-demo="SaaS de central de atendimento com IA" data-msg="Olá! Vi a demonstração Ordena · Central de Atendimento da Vortyx e gostaria de conversar sobre uma plataforma parecida para o meu negócio.">
+<main class="lab od">
+  <header class="od-head">
+    <span class="lab-eyebrow">SaaS demonstrativo</span>
+    <h1>Ordena · <em>Central de Atendimento</em></h1>
+    <p class="lab-lead">Todas as mensagens em uma só caixa de entrada, classificadas por IA, com respostas sugeridas e indicadores para a equipe atender mais rápido.</p>
+    <p class="sim od-seal" id="seal">SaaS demonstrativo · IA simulada no navegador. Empresa, pessoas, mensagens e dados são fictícios. Não é um cliente real da Vortyx.</p>
+  </header>
+
+  <section class="panel od-login" id="login" aria-labelledby="loginTitle">
+    <div class="od-login-in">
+      <h2 id="loginTitle">Entrar na demonstração</h2>
+      <p class="muted">Escolha um perfil. Não é preciso senha e nada sai do seu navegador.</p>
+      <div class="od-profiles">
+        <button class="od-prof" type="button" data-profile="atendente">
+          <span class="od-av" aria-hidden="true">BL</span>
+          <span><b>Atendente</b><small>Bruna Lima · responde a fila de mensagens</small></span>
+        </button>
+        <button class="od-prof" type="button" data-profile="supervisor">
+          <span class="od-av sup" aria-hidden="true">CP</span>
+          <span><b>Supervisor</b><small>Carlos Prado · vê a equipe, indicadores e configurações</small></span>
+        </button>
+      </div>
+      <p class="od-org"><span class="od-logo" aria-hidden="true"></span>Conta de exemplo: <b>Clínica Vale Claro (fictícia)</b></p>
+    </div>
+  </section>
+
+  <section class="od-app" id="app" hidden aria-label="Ordena, central de atendimento">
+    <div class="od-bar">
+      <div class="od-brand"><span class="od-logo" aria-hidden="true"></span><b>Ordena</b><small>Clínica Vale Claro (fictícia)</small></div>
+      <nav class="od-nav" aria-label="Seções do sistema" id="nav">
+        <button type="button" data-view="inbox" aria-current="page"><span class="t-l">Caixa de entrada</span><span class="t-s" aria-hidden="true">Entrada</span> <em id="navCount"></em></button>
+        <button type="button" data-view="panel">Painel</button>
+        <button type="button" data-view="config" id="navConfig"><span class="t-l">Configurações</span><span class="t-s" aria-hidden="true">Ajustes</span></button>
+      </nav>
+      <div class="od-user">
+        <button class="btn btn-p btn-s" type="button" id="simulate">+ Simular nova mensagem</button>
+        <span class="od-me" id="me"></span>
+        <button class="btn btn-g btn-s" type="button" id="switch">Trocar perfil</button>
+      </div>
+    </div>
+
+    <!-- Caixa de entrada -->
+    <div class="od-view" id="vInbox">
+      <div class="od-inbox" id="inbox">
+        <section class="panel od-list" aria-label="Conversas">
+          <div class="od-filters">
+            <input class="input" type="search" id="q" placeholder="Buscar por nome ou texto" aria-label="Buscar conversas">
+            <div class="od-fgrid">
+              <label class="field">Canal<select class="select" id="fCh"><option value="">Todos</option></select></label>
+              <label class="field">Categoria<select class="select" id="fCat"><option value="">Todas</option></select></label>
+              <label class="field">Prioridade<select class="select" id="fPr"><option value="">Todas</option><option value="alta">Alta</option><option value="media">Média</option><option value="baixa">Baixa</option></select></label>
+              <label class="field">Status<select class="select" id="fSt"><option value="abertas">Em aberto</option><option value="">Todos</option><option value="aberta">Nova</option><option value="atendimento">Em atendimento</option><option value="resolvida">Resolvida</option></select></label>
+              <label class="field od-fown">Responsável<select class="select" id="fOw"></select></label>
+            </div>
+          </div>
+          <p class="od-lcount" id="lcount" aria-live="polite"></p>
+          <ul class="od-items" id="items"></ul>
+        </section>
+
+        <section class="panel od-conv" id="conv" aria-label="Conversa selecionada"></section>
+        <aside class="panel od-ai" id="ai" aria-label="Análise da IA"></aside>
+      </div>
+    </div>
+
+    <!-- Painel -->
+    <div class="od-view" id="vPanel" hidden>
+      <section class="od-kpis" id="kpis" aria-label="Indicadores"></section>
+      <div class="od-pgrid">
+        <section class="panel"><div class="panel-h">Mensagens por canal <small>hoje</small></div><div class="panel-b"><div class="vxc" id="chCh" data-label="Gráfico de barras: mensagens por canal (dados fictícios)"></div></div></section>
+        <section class="panel"><div class="panel-h">Categorias <small>classificadas pela IA</small></div><div class="panel-b od-donut"><div class="vxc" id="chCat" data-label="Gráfico de rosca: conversas por categoria (dados fictícios)"></div><ul id="catLeg"></ul></div></section>
+        <section class="panel od-wide"><div class="panel-h">Mensagens recebidas <small>últimas 12 horas</small></div><div class="panel-b"><div class="vxc" id="chHour" data-label="Gráfico de linha: mensagens recebidas por hora (dados fictícios)"></div></div></section>
+        <section class="panel od-wide"><div class="panel-h" id="teamTitle">Desempenho por atendente</div><div class="panel-b od-tablewrap" tabindex="0" role="region" aria-labelledby="teamTitle"><table class="od-table"><caption class="vx-sr">Desempenho da equipe (dados fictícios)</caption><thead><tr><th scope="col">Atendente</th><th scope="col">Atribuídas</th><th scope="col">Em aberto</th><th scope="col">Resolvidas</th><th scope="col">1ª resposta média</th></tr></thead><tbody id="team"></tbody></table></div></section>
+      </div>
+    </div>
+
+    <!-- Configurações (Supervisor) -->
+    <div class="od-view" id="vConfig" hidden>
+      <div class="od-cgrid">
+        <section class="panel"><div class="panel-h">Categorias e sinais da IA <small>simulação</small></div><div class="panel-b"><p class="muted od-help">Cada categoria tem sinais (palavras e expressões) que a classificação simulada procura na mensagem. Desative uma categoria e reclassifique para ver o efeito.</p><ul class="od-cats" id="cfgCats"></ul><button class="btn btn-g btn-s" type="button" id="reclass">Reclassificar conversas em aberto</button></div></section>
+        <section class="panel"><div class="panel-h">Respostas-modelo</div><div class="panel-b"><p class="muted od-help">Base das respostas sugeridas. Use {nome}, {servico} e {data}; a IA preenche com o que encontrou na mensagem.</p><form id="cfgTpl" class="od-tpls"></form></div></section>
+        <section class="panel"><div class="panel-h">Distribuição de conversas</div><div class="panel-b"><label class="field">Regra para novas mensagens<select class="select" id="cfgRule"><option value="rodizio">Rodízio entre atendentes online</option><option value="manual">Manual (fica sem responsável)</option></select></label><p class="muted od-help" id="ruleHelp"></p></div></section>
+        <section class="panel"><div class="panel-h">Equipe</div><div class="panel-b"><ul class="od-teamcfg" id="cfgTeam"></ul></div></section>
+      </div>
+    </div>
+  </section>
+
+  <footer class="od-foot">
+    <button class="btn btn-g btn-s" type="button" id="reset">Restaurar dados de exemplo</button>
+    <p class="foot-note">Clínica, pessoas, mensagens e números fictícios. Em um projeto real, as mensagens chegam pelas APIs dos canais e a classificação é feita por um modelo de IA, com revisão humana.</p>
+  </footer>
+</main>
+
+<script src="../../../js/config.js?v=2.2"></script>
+<script src="../../../demos-kit/kit.js?v=2"></script>
+<script src="../../../demos-kit/charts.js?v=1"></script>
+<script src="app.js?v=1"></script>
+</body>
+</html>

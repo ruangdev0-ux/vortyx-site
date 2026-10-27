@@ -12,13 +12,14 @@ funciona antes de propor uma ferramenta e, depois, desenvolve a solução digita
 
 ## Serviços apresentados no site
 
-1. Sites
-2. Landing Pages
-3. E-commerce / Lojas Virtuais
-4. Automações e Integrações
-5. Soluções Web para Negócios (sistemas, plataformas, áreas logadas, dashboards, portais e produtos SaaS)
-6. Manutenção e Evolução
-7. Automações e soluções com IA, quando fizer sentido
+1. Sites institucionais
+2. Landing pages
+3. Soluções com Inteligência Artificial
+4. Automações e Integrações com APIs
+5. Sistemas web sob medida
+6. SaaS e Plataformas Digitais
+7. E-commerce / Lojas virtuais
+8. Manutenção e Evolução
 
 ## Tecnologias
 
@@ -60,11 +61,12 @@ vortyx-site/
 │   ├── automacoes/             # triagem, captacao-lead, integracao
 │   ├── solucoes-web/           # mini-crm, controle-de-vendas, dashboard
 │   ├── manutencao/             # antes-e-depois
-│   └── ia/                     # classificacao, triagem, leads (+ ia-sim.js e ia.css, comuns às 3)
+│   ├── ia/                     # classificacao, triagem, leads (+ ia-sim.js e ia.css, comuns às 3)
+│   └── saas/                   # central-atendimento (Ordena), pedidos-estoque (Prateleira)
 ├── images/
 │   ├── demos/                  # miniaturas do hub e dos cards da Home (960×600, WebP)
 │   ├── vitrine/                # telas da vitrine animada: {cena}-d (notebook), -t (tablet), -m (celular)
-│   ├── og-vortyx-v3.jpg        # imagem de compartilhamento (1200×630)
+│   ├── og-vortyx-v4.jpg        # imagem de compartilhamento (1200×630)
 │   ├── vortyx-logotipo.webp / vortyx-simbolo.webp
 │   └── favicons e ícones
 ├── robots.txt

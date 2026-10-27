@@ -255,6 +255,28 @@
     if(mm.classList.contains('open')){setMenu(false);setTimeout(()=>goTo(el,key,after),reduce?0:260)}else goTo(el,key,after);
     return true;
   }
+  /* Atalho para um serviço (rodapé, Problemas, Processo): o card abre enquanto outro fecha, e os dois
+     painéis animam a altura por ~0,6 s. A posição só é confiável quando a grade para de mudar; até lá,
+     a página acompanha o card a cada quadro e termina com ele logo abaixo do cabeçalho. */
+  let follow=0;
+  const stopFollow=()=>{if(follow){cancelAnimationFrame(follow);follow=0;root.style.scrollBehavior=''}};
+  // qualquer ação do visitante ou nova navegação interrompe o acompanhamento
+  ['wheel','touchstart','keydown','pointerdown','vx:nav'].forEach(ev=>addEventListener(ev,stopFollow,{passive:true}));
+  function followCard(id){
+    const c=d.getElementById(id);if(!c)return;
+    if(follow)cancelAnimationFrame(follow);
+    const off=(parseFloat(getComputedStyle(root).scrollPaddingTop)||80)+10,t0=performance.now();let last=null,still=0;
+    root.style.scrollBehavior='auto';
+    const end=()=>{follow=0;root.style.scrollBehavior='';c.querySelector('.svc-top').focus({preventScroll:true})};
+    const tick=now=>{
+      const top=c.getBoundingClientRect().top,to=Math.max(0,Math.min(scrollY+top-off,root.scrollHeight-innerHeight));
+      if(Math.abs(to-scrollY)>1)scrollTo(0,to);
+      const h=c.offsetHeight+'|'+Math.round(top+scrollY);still=h===last?still+1:0;last=h;
+      if((still>=6&&now-t0>700)||now-t0>3000){end();return}
+      follow=requestAnimationFrame(tick);
+    };
+    follow=requestAnimationFrame(tick);
+  }
   d.addEventListener('click',e=>{
     if(e.defaultPrevented||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;
     const a=e.target.closest&&e.target.closest('a[href^="#"]');
@@ -263,7 +285,7 @@
     if(!id||!d.getElementById(id))return;
     e.preventDefault();
     const card=a.dataset.open;
-    if(card)navigate(id,true,()=>{openCard(card,false);const c=d.getElementById(card);if(c)setTimeout(()=>{const r=c.getBoundingClientRect();scrollTo({top:scrollY+r.top-90,behavior:reduce?'auto':'smooth'});c.querySelector('.svc-top').focus({preventScroll:true})},60)});
+    if(card)navigate(id,true,()=>{openCard(card,false);followCard(card)});
     else navigate(id,true);
   });
   addEventListener('popstate',()=>{const id=location.hash.slice(1);navigate(id||'inicio',false)});

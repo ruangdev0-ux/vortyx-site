@@ -8,6 +8,7 @@
   d.querySelectorAll('.js-wa').forEach(a=>{a.href=K.wa(a.dataset.msg)});
   d.getElementById('year').textContent=new Date().getFullYear();
   d.getElementById('statDemos').textContent=DEMOS.length;
+  const sc=d.getElementById('statCats');if(sc)sc.textContent=DEMO_CATS.length;
 
   /* ---------- Abas ---------- */
   const tabs=d.getElementById('tabs'),panel=d.getElementById('panel'),grid=d.getElementById('grid'),head=d.getElementById('catHead');

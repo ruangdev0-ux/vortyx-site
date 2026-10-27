@@ -3,7 +3,7 @@
    Cada item vira um card no hub (demonstracoes/index.html).
    Para adicionar uma demo: crie a pasta em demonstracoes/<cat>/<slug>/
    e acrescente um objeto abaixo.
-     cat    : sites | landing-pages | automacoes | solucoes-web | manutencao | ia
+     cat    : sites | landing-pages | automacoes | solucoes-web | manutencao | ia | saas
      path   : caminho relativo à pasta demonstracoes/
      thumb  : captura em images/demos/ (gerada a partir da própria demo)
      tags   : até 4 recursos em destaque
@@ -14,9 +14,10 @@ const DEMO_CATS = [
   {id:"sites",          n:"01", name:"Sites",                       short:"Sites",          lead:"Sites completos para segmentos diferentes, cada um com identidade própria."},
   {id:"landing-pages",  n:"02", name:"Landing Pages",               short:"Landing Pages",  lead:"Páginas de um objetivo só, construídas com estrutura real de conversão."},
   {id:"automacoes",     n:"03", name:"Automações e Integrações",    short:"Automações",     lead:"Veja, passo a passo, como uma informação percorre um fluxo automático."},
-  {id:"solucoes-web",   n:"04", name:"Soluções Web para Negócios",  short:"Soluções Web",   lead:"Sistemas que funcionam no navegador, com dados de exemplo para você testar."},
+  {id:"solucoes-web",   n:"04", name:"Sistemas web sob medida",     short:"Sistemas Web",   lead:"Sistemas que funcionam no navegador, com dados de exemplo para você testar."},
   {id:"manutencao",     n:"05", name:"Manutenção e Evolução",       short:"Manutenção",     lead:"Compare antes e depois e acompanhe como um projeto evolui por versões."},
-  {id:"ia",             n:"06", name:"Automações e soluções com IA",short:"IA",             lead:"Exemplos realistas de IA apoiando triagem, organização e atendimento."}
+  {id:"ia",             n:"06", name:"Soluções com Inteligência Artificial",short:"IA",     lead:"Exemplos realistas de IA apoiando triagem, organização e atendimento."},
+  {id:"saas",           n:"07", name:"SaaS e Plataformas Digitais", short:"SaaS",           lead:"Plataformas completas com perfis de acesso, painéis e dados de exemplo. Empresas, usuários e números são fictícios."}
 ];
 
 const DEMOS = [
@@ -66,5 +67,11 @@ const DEMOS = [
   {id:"ia-triagem", cat:"ia", title:"Triagem inteligente", segment:"Atendimento", path:"ia/triagem/", thumb:"ia-triagem.webp", fx:"Simulação",
    desc:"Triagem demonstrativa que extrai dados da mensagem, percebe o que falta e só encaminha quando a ficha está pronta.", tags:["Extração","Complemento","Ficha"]},
   {id:"ia-leads", cat:"ia", title:"Organização de leads", segment:"Comercial", path:"ia/leads/", thumb:"ia-leads.webp", fx:"Simulação",
-   desc:"Leads organizados por interesse e prioridade, com o motivo de cada decisão.", tags:["Prioridade","Interesse","Motivos"]}
+   desc:"Leads organizados por interesse e prioridade, com o motivo de cada decisão.", tags:["Prioridade","Interesse","Motivos"]},
+
+  /* ---------- SaaS e Plataformas Digitais ---------- */
+  {id:"saas-atendimento", cat:"saas", title:"Ordena · Central de Atendimento", segment:"SaaS demonstrativo · IA simulada", path:"saas/central-atendimento/", thumb:"saas-atendimento.webp", fx:"Simulação",
+   desc:"Caixa de entrada unificada, classificação de mensagens por IA, respostas sugeridas, perfis de acesso e indicadores.", tags:["Caixa unificada","IA simulada","Respostas sugeridas","Indicadores"]},
+  {id:"saas-estoque", cat:"saas", title:"Prateleira · Pedidos & Estoque", segment:"SaaS demonstrativo · Multiunidade", path:"saas/pedidos-estoque/", thumb:"saas-estoque.webp", fx:"Interativo",
+   desc:"Pedidos, estoque e três unidades em um só sistema, com perfis de usuário, alertas automáticos e relatórios.", tags:["Multiunidade","Perfis","Alertas","Relatórios"]}
 ];
